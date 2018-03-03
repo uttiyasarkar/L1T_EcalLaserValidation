@@ -13,6 +13,7 @@ sqlite1=303573
 sqlite2=303835
 curdir=$PWD
 username=$USER
+pids=""
 
 file=/store/data/Run2017F/ZeroBias/RAW/v1/000/306/091/00000/3E688D2E-FEBF-E711-9DBD-02163E019C1E.root
 xrdcp -f root://cms-xrd-global.cern.ch/$file /tmp/$username.root
@@ -44,19 +45,19 @@ echo running $GT
 cmsDriver.py l1Ntuple -s RAW2DIGI --era=Run2_2017  \
   --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
   --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWCalouGT \
-  --conditions=$GT -n -1 --data --no_exec --no_output \
+  --conditions=$GT -n -1 --data --no_exec --no_output  \
   --filein=file:/tmp/$username.root \
-  --fileout=${GT}.root \
   --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloStage2Params_2017_v1_8_2_updateHFSF_v6MET \
   --python_filename=l1Ntuple_${GT}.py
 
 for sq in $sqlite1 $sqlite2; do
-  if [! -f EcalTPG_${sq}_moved_to_1.db]; then
+  if [ ! -f EcalTPG_${sq}_moved_to_1.db ]; then
     wget http://cern.ch/ecaltrg/EcalLin/EcalTPG_${sq}_moved_to_1.db
   fi
   python ${curdir}/ModifyL1Ntuple.py --globalTag $GT --sqlite $sq
-  cmsRun l1Ntuple_${GT}_${sq}.py >& l1Ntuple_${GT}_${sq}.py &
-  #mv L1Ntuple.root l1Ntuple_${GT}_${sq}.root
+  cmsRun l1Ntuple_${GT}_${sq}.py >& l1Ntuple_${GT}_${sq}.log 
+  mv L1Ntuple.root L1Ntuple_${GT}_${sq}.root
+  #pids="$pids $!"
 done
 ################################
 
@@ -66,17 +67,25 @@ done
 #----------------------------------------------------------------------------#
 git clone -b EcalVal_940 https://github.com/cms-l1-dpg/L1Menu.git L1TriggerDPG/L1Menu
 cd L1TriggerDPG/L1Menu/macros
+cp $curdir/CompL1Rate.py  .
 cp $curdir/menulib.cc .
 cp $curdir/menulib.hh .
-cp $curdir/Prescale_Sets_RUN_306091_col_1.5.txt menu
-cp $curdir/Selected_Seed.txt menu
-make -j 8
+cp $curdir/Prescale_Sets_RUN_306091_col_1.5.txt menu/
+cp $curdir/Selected_Seed.txt menu/
+make -j $((`nproc`/2))
 
 #----------------------------------------------------------------------------#
 #                                 Run L1Menu                                 #
 #----------------------------------------------------------------------------#
+#echo "Waiting for Ntuple production to finish......"
+#wait $pids
 for sq in $sqlite1 $sqlite2; do
-  ./testMenu2016 -m menu/Prescale_Sets_RUN_306091_col_1.5.txt -l ${CMSSW_BASE}/src/l1Ntuple_${GT}_${sq}.root -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
-  ./testMenu2016 -m menu/Selected_Seed.txt -l ${CMSSW_BASE}/src/l1Ntuple_${GT}_${sq}.root -o L1Seed_${GT}_${sq}_emu >& L1Seed_${GT}_${sq}_emu.log &
+  ./testMenu2016 -m menu/Prescale_Sets_RUN_306091_col_1.5.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
+  pids="$pids $!"
+  ./testMenu2016 -m menu/Selected_Seed.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Seed_${GT}_${sq}_emu >& L1Seed_${GT}_${sq}_emu.log &
+  pids="$pids $!"
 done
-wait
+echo "Waiting for menu rate estimation to finish......"
+wait $pids
+
+python CompL1Rate.py --globalTag $GT --sqlite1 $sqlite1 --sqlite2 $sqlite2
