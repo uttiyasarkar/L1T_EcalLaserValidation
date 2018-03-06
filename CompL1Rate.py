@@ -6,7 +6,7 @@
 # Contact     : zhenbin.wu@gmail.com
 # Date        : 2018 Mar 02
 #
-# Description : 
+# Description :
 
 
 import pandas
@@ -22,7 +22,7 @@ def ParseCSV(GT, SQ):
     colname = [SQ if x == "rate0" else x for x in list(df_comp.columns)  ]
     df_comp.columns=colname
     return df_comp
-    
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process some integers.')
@@ -34,6 +34,6 @@ if __name__ == "__main__":
     df_comp1 = ParseCSV(args.GT, args.SQ1)
     df_comp2 = ParseCSV(args.GT, args.SQ2)
     comp = df_comp1.merge(df_comp2)
-    comp.loc[:, "diff"]= comp[args.SQ1] / comp[args.SQ2]
+    comp.loc[:, "diff"]= (comp[args.SQ1] / comp[args.SQ2]) -1
     print(comp)
 

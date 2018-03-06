@@ -8,7 +8,7 @@ echo " "
 ARCH=slc6_amd64_gcc630
 CMSREL=CMSSW_9_4_0_pre3 
 L1TTag=l1t-integration-v97.1
-GT=94X_dataRun2_v2
+GT=94X_dataRun2_v4
 sqlite1=303573
 sqlite2=303835
 curdir=$PWD
@@ -56,8 +56,7 @@ for sq in $sqlite1 $sqlite2; do
   fi
   python ${curdir}/ModifyL1Ntuple.py --globalTag $GT --sqlite $sq
   cmsRun l1Ntuple_${GT}_${sq}.py >& l1Ntuple_${GT}_${sq}.log 
-  mv L1Ntuple.root L1Ntuple_${GT}_${sq}.root
-  #pids="$pids $!"
+  pids="$pids $!"
 done
 ################################
 
@@ -77,8 +76,8 @@ make -j $((`nproc`/2))
 #----------------------------------------------------------------------------#
 #                                 Run L1Menu                                 #
 #----------------------------------------------------------------------------#
-#echo "Waiting for Ntuple production to finish......"
-#wait $pids
+echo "Waiting for Ntuple production to finish......"
+wait $pids
 for sq in $sqlite1 $sqlite2; do
   ./testMenu2016 -m menu/Prescale_Sets_RUN_306091_col_1.5.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
   pids="$pids $!"

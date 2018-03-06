@@ -33,3 +33,5 @@ if __name__ == "__main__":
             outfile.write('            ),\n')
             outfile.write(')\n')
             # outfile.wirte('process.MessageLogger.cerr.FwkReport.reportEvery = 1000\n')
+
+    outfile.write("process.TFileService.fileName= cms.string('L1Ntuple_%s_%s.root')\n" % (args.GT, args.SQ) )
