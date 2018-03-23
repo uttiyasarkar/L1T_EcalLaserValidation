@@ -11,8 +11,8 @@ echo ToRun/$file
 mv ToRun/$file RunFiles/.
 echo "./L1RateValidation.sh $sqlite1 $sqlite2 $week $year"
 ./L1RateValidation.sh $sqlite1 $sqlite2 $week $year 
-#git commit -a -m "clean ToRun files"
-#git push
+git commit -a -m "clean ToRun files"
+git push
 else
 echo "No new files"
 fi
