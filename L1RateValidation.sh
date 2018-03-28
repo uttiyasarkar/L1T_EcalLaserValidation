@@ -9,15 +9,33 @@ ARCH=slc6_amd64_gcc630
 CMSREL=CMSSW_9_4_0_pre3 
 L1TTag=l1t-integration-v97.1
 GT=94X_dataRun2_v4
-sqlite1=303573
-sqlite2=303835
+sqlite1=$1 ##ref
+sqlite2=$2
+week=$3
+year=$4
 curdir=$PWD
 username=$USER
 pids=""
+hasref=false
 
 file=/store/data/Run2017F/ZeroBias/RAW/v1/000/306/091/00000/3E688D2E-FEBF-E711-9DBD-02163E019C1E.root
 xrdcp -f root://cms-xrd-global.cern.ch/$file /tmp/$username.root
 
+#----------------------------------------------------------------------------#
+#                            Getting the reference                           #
+#----------------------------------------------------------------------------#
+#it may be gzipped infact ...
+## prevent exit from failed wget
+set +e 
+wget --no-check-certificate https://cmssdt.cern.ch/SDT/public/EcalLaserValidation/L1T_EcalLaserValidation/${1}/L1Menu_${GT}_${sqlite1}_emu.csv \
+  https://cmssdt.cern.ch/SDT/public/EcalLaserValidation/L1T_EcalLaserValidation/${1}/L1Menu_${GT}_${sqlite1}_emu.csv
+if [ $? -ne 0 ]; then
+  sqs="$sqlite1 $sqlite2"
+else
+  sqs=$sqlite2
+  hasref=true
+fi
+echo $sqs
 
 #----------------------------------------------------------------------------#
 #                            Checkout L1 Emulator                            #
@@ -50,7 +68,7 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --era=Run2_2017  \
   --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloStage2Params_2017_v1_8_2_updateHFSF_v6MET \
   --python_filename=l1Ntuple_${GT}.py
 
-for sq in $sqlite1 $sqlite2; do
+for sq in $sqs; do
   if [ ! -f EcalTPG_${sq}_moved_to_1.db ]; then
     wget http://cern.ch/ecaltrg/EcalLin/EcalTPG_${sq}_moved_to_1.db
   fi
@@ -78,7 +96,8 @@ make -j $((`nproc`/2))
 #----------------------------------------------------------------------------#
 echo "Waiting for Ntuple production to finish......"
 wait $pids
-for sq in $sqlite1 $sqlite2; do
+
+for sq in $sqs; do
   ./testMenu2016 -m menu/Prescale_Sets_RUN_306091_col_1.5.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
   pids="$pids $!"
   ./testMenu2016 -m menu/Selected_Seed.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Seed_${GT}_${sq}_emu >& L1Seed_${GT}_${sq}_emu.log &
@@ -87,4 +106,29 @@ done
 echo "Waiting for menu rate estimation to finish......"
 wait $pids
 
+#----------------------------------------------------------------------------#
+#                                Compare rate                                #
+#----------------------------------------------------------------------------#
+
+if $hasref; then
+  mv $curdir/L1Menu_${GT}_${sqlite1}_emu.csv results/
+  mv $curdir/L1Seed_${GT}_${sqlite1}_emu.csv results/
+fi
+
 python CompL1Rate.py --globalTag $GT --sqlite1 $sqlite1 --sqlite2 $sqlite2
+
+#----------------------------------------------------------------------------#
+#                                 Upload Ref                                 #
+#----------------------------------------------------------------------------#
+if [-f ${WORKSPACE}/upload/$2 ]
+then
+  echo "dir is already existing"
+  touch ${WORKSPACE}/upload/$2/.jenkins-upload
+else
+  mkdir ${WORKSPACE}/upload/$2
+  touch ${WORKSPACE}/upload/$2/.jenkins-upload
+fi
+
+#we need to make a tar gz of this one
+cp L1Menu_${GT}_${sqlite2}_emu.csv ${WORKSPACE}/upload/${2}/
+cp L1Seed_${GT}_${sqlite2}_emu.csv ${WORKSPACE}/upload/${2}/
