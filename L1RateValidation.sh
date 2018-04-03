@@ -18,9 +18,6 @@ username=$USER
 pids=""
 hasref=false
 
-file=/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/00502E87-FBBF-E711-A0E8-02163E01A2A6.root
-xrdcp -f root://cms-xrd-global.cern.ch/$file /tmp/$username.root
-
 #----------------------------------------------------------------------------#
 #                            Getting the reference                           #
 #----------------------------------------------------------------------------#
@@ -64,7 +61,7 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --era=Run2_2017  \
   --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
   --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWCalouGT \
   --conditions=$GT -n -1 --data --no_exec --no_output  \
-  --filein=file:/tmp/$username.root \
+  --filein=/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/00502E87-FBBF-E711-A0E8-02163E01A2A6.root \
   --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloStage2Params_2017_v1_8_2_updateHFSF_v6MET \
   --python_filename=l1Ntuple_${GT}.py
 
