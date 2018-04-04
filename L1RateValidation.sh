@@ -24,8 +24,7 @@ hasref=false
 #it may be gzipped infact ...
 ## prevent exit from failed wget
 set +e 
-wget --no-check-certificate https://cmssdt.cern.ch/SDT/public/EcalLaserValidation/L1T_EcalLaserValidation/${1}/L1Menu_${GT}_${sqlite1}_emu.csv \
-  https://cmssdt.cern.ch/SDT/public/EcalLaserValidation/L1T_EcalLaserValidation/${1}/L1Menu_${GT}_${sqlite1}_emu.csv
+wget --no-check-certificate https://cmssdt.cern.ch/SDT/public/EcalLaserValidation/L1T_EcalLaserValidation/L1TEcalValidation_${year}_${week}_${sqlite1}.tgz 
 if [ $? -ne 0 ]; then
   sqs="$sqlite1 $sqlite2"
 else
@@ -87,6 +86,7 @@ cp $curdir/menulib.hh .
 cp $curdir/Prescale_Sets_RUN_306091_col_1.5.txt menu/
 cp $curdir/Selected_Seed.txt menu/
 make -j $((`nproc`/2))
+make comparePlots
 
 #----------------------------------------------------------------------------#
 #                                 Run L1Menu                                 #
@@ -97,7 +97,7 @@ wait $pids
 for sq in $sqs; do
   ./testMenu2016 -m menu/Prescale_Sets_RUN_306091_col_1.5.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
   pids="$pids $!"
-  ./testMenu2016 -m menu/Selected_Seed.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Seed_${GT}_${sq}_emu >& L1Seed_${GT}_${sq}_emu.log &
+  ./testMenu2016 --doPlotRate -m menu/Selected_Seed.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Seed_${GT}_${sq}_emu >& L1Seed_${GT}_${sq}_emu.log &
   pids="$pids $!"
 done
 echo "Waiting for menu rate estimation to finish......"
@@ -108,25 +108,33 @@ wait $pids
 #----------------------------------------------------------------------------#
 
 if $hasref; then
-  mv $curdir/L1Menu_${GT}_${sqlite1}_emu.csv results/
-  mv $curdir/L1Seed_${GT}_${sqlite1}_emu.csv results/
+  tar -xzvf $curdir/L1T_EcalLaserValidation/L1TEcalValidation_${year}_${week}_${sqlite1}.tgz -C results/
 fi
 
 python CompL1Rate.py --globalTag $GT --sqlite1 $sqlite1 --sqlite2 $sqlite2  | tee ${sqlite2}.log
+./comparePlots results/L1Seed*root
 
 #----------------------------------------------------------------------------#
 #                                 Upload Ref                                 #
 #----------------------------------------------------------------------------#
+#WORKSPACE=${curdir} #local test
 if [ -f ${WORKSPACE}/upload/$2 ]
 then
   echo "dir is already existing"
   touch ${WORKSPACE}/upload/$2/.jenkins-upload
 else
-  mkdir ${WORKSPACE}/upload/$2
+  mkdir -p ${WORKSPACE}/upload/$2
   touch ${WORKSPACE}/upload/$2/.jenkins-upload
 fi
 
 #we need to make a tar gz of this one
 cp results/L1Menu_${GT}_${sqlite2}_emu.csv ${WORKSPACE}/upload/${2}/
 cp results/L1Seed_${GT}_${sqlite2}_emu.csv ${WORKSPACE}/upload/${2}/
+cp results/L1Seed_${GT}_${sqlite2}_emu.root ${WORKSPACE}/upload/${2}/
 cp ${sqlite2}.log ${WORKSPACE}/upload/${2}/
+
+for i in nDiEGVsPt.gif nEGVsEta.gif nEGVsPt.gif nETMVsETM.gif nIsoEGVsPt.gif nJetVsPt.gif nQuadCenJetVsPt.gif nTauVsPt.gif; do
+  cp  results/comparePlots/Rate/${i}  ${WORKSPACE}/upload/${2}/
+done
+cd ${WORKSPACE}/upload/${2}
+tar -czvf ${WORKSPACE}/upload/L1TEcalValidation_${year}_${week}_${sqlite2}.tgz *
