@@ -3,8 +3,16 @@
 #============================================================================#
 #-------------------------------     Menu     -------------------------------#
 #============================================================================#
-# L1Seed                            Bit  Prescale     POG     PAG
-L1_SingleEG38                         1     1         EG
-L1_SingleIsoEG32                      2     1         EG
-L1_DoubleEG_24_17                     3     1         EG
-L1_SingleMu22                         4     1         Mu
+# L1Seed                                     Bit  Prescale     POG     PAG
+L1_SingleMu22                                1  1 Mu ECAL #( should be constant)
+L1_SingleJet180                              2  1 JT ECAL #( should likewise be very close to constant)
+L1_SingleJet60                               3  1 JT ECAL #( monitor for dramatic changes)
+L1_SingleEG40                                4  1 EG ECAL #( will change to SingleEG40er2p5 when the new menu is deployed)
+L1_SingleIsoEG32                             5  1 EG ECAL #( will change to SingleIsoEG32er2p5 in the new menu)
+L1_DoubleEG_25_14                            7  1 EG ECAL #( will change to L1_DoubleEG_25_14_er2p5 in the new menu)
+L1_ETMHF110_HTT60er                          8  1 EM ECAL #( monitor for dramatic changes)
+L1_ETMHF120                                  9  1 EM ECAL #( monitor for dramatic changes)
+L1_ETM120                                    10 1 EM ECAL #( monitor for dramatic changes)
+L1_DoubleJet_115_40_DoubleJet40_Mass_Min620  11 1 JT ECAL #( monitor for dramatic changes)
+L1_SingleEG38                                12 1 EG
+#L1_SingleIsoEG28er1p5                        6  1 EG ECAL #( new seed, only when the new menu is deployed)

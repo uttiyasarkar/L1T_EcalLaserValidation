@@ -17,7 +17,9 @@ curdir=$PWD
 username=$USER
 pids=""
 hasref=false
-
+filelist=('/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/0C719606-00C0-E711-AB01-02163E01A4FC.root'
+'/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/4A8E5749-00C0-E711-8018-02163E01A59E.root'
+'/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/241701F2-FFBF-E711-B118-02163E0143E4.root')
 #----------------------------------------------------------------------------#
 #                            Getting the reference                           #
 #----------------------------------------------------------------------------#
@@ -58,9 +60,9 @@ scram b -j $((`nproc`/2))
 echo running $GT
 cmsDriver.py l1Ntuple -s RAW2DIGI --era=Run2_2017  \
   --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
-  --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWCalouGT \
+  --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWsimEcalTP \
   --conditions=$GT -n -1 --data --no_exec --no_output  \
-  --filein=/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/00502E87-FBBF-E711-A0E8-02163E01A2A6.root \
+  --filein=`echo $(IFS=, ; echo "${filelist[*]}")` \
   --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloStage2Params_2017_v1_8_2_updateHFSF_v6MET \
   --python_filename=l1Ntuple_${GT}.py
 
@@ -69,7 +71,7 @@ for sq in $sqs; do
     wget http://cern.ch/ecaltrg/EcalLin/EcalTPG_${sq}_moved_to_1.db
   fi
   python ${curdir}/ModifyL1Ntuple.py --globalTag $GT --sqlite $sq
-  cmsRun l1Ntuple_${GT}_${sq}.py >& l1Ntuple_${GT}_${sq}.log 
+  cmsRun l1Ntuple_${GT}_${sq}.py >& l1Ntuple_${GT}_${sq}.log  &
   pids="$pids $!"
 done
 ################################
