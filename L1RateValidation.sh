@@ -62,11 +62,11 @@ echo "Running ECal validtion with ", $sqs
 #----------------------------------------------------------------------------#
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 export SCRAM_ARCH=$ARCH
+export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
 scramv1 project CMSSW $CMSREL
 cd $CMSREL/src
 eval `scramv1 runtime -sh`
 git-cms-init
-export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
 git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
 git fetch cms-l1t-offline
 git cms-merge-topic -u cms-l1t-offline:$L1TTag
@@ -100,8 +100,6 @@ for sq in $sqs; do
 done
 ################################
 
-dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
-printf "Execution time to L1Ntuple production: %.6f minutes" $dur
 
 #----------------------------------------------------------------------------#
 #                            Check out L1Menu code                           #
@@ -116,11 +114,16 @@ cp $curdir/Selected_Seed.txt menu/
 make -j $((`nproc`/2))
 make comparePlots
 
+dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
+printf "Execution time to checkout and compile code: %.6f minutes" $dur
 #----------------------------------------------------------------------------#
 #                                 Run L1Menu                                 #
 #----------------------------------------------------------------------------#
 echo "Waiting for Ntuple production to finish......"
 wait $pids
+
+dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
+printf "Execution time to L1Ntuple production: %.6f minutes" $dur
 
 for sq in $sqs; do
   ./testMenu2016 -m menu/Prescale_Sets_RUN_306091_col_1.5.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
@@ -130,6 +133,8 @@ for sq in $sqs; do
 done
 echo "Waiting for menu rate estimation to finish......"
 wait $pids
+dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
+printf "Execution time to L1Ntuple production: %.6f minutes" $dur
 
 #----------------------------------------------------------------------------#
 #                                Compare rate                                #
