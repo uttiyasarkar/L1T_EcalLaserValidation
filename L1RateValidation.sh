@@ -5,6 +5,7 @@ echo "reference and test GTs"
 echo " "
 
 ###############################
+starttime=$(date +%s.%N)
 ARCH=slc6_amd64_gcc630
 CMSREL=CMSSW_10_0_0
 L1TTag=l1t-integration-v97.17-v2
@@ -17,9 +18,30 @@ curdir=$PWD
 username=$USER
 pids=""
 hasref=false
-filelist=('/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/0C719606-00C0-E711-AB01-02163E01A4FC.root'
+filelist=('/store/data/Run2017F/ZeroBias1/RAW/v1/000/306/091/00000/D050FAEF-FFBF-E711-928B-02163E019C6C.root'
+'/store/data/Run2017F/ZeroBias2/RAW/v1/000/306/091/00000/B4E9FAEF-FFBF-E711-928B-02163E019C6C.root'
+'/store/data/Run2017F/ZeroBias3/RAW/v1/000/306/091/00000/803A9506-00C0-E711-AB01-02163E01A4FC.root'
+'/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/0C719606-00C0-E711-AB01-02163E01A4FC.root'
+'/store/data/Run2017F/ZeroBias5/RAW/v1/000/306/091/00000/D075606D-01C0-E711-999A-02163E0133B4.root'
+'/store/data/Run2017F/ZeroBias6/RAW/v1/000/306/091/00000/96406B6D-01C0-E711-999A-02163E0133B4.root'
+'/store/data/Run2017F/ZeroBias7/RAW/v1/000/306/091/00000/2480F615-00C0-E711-BD6F-02163E0129DD.root'
+'/store/data/Run2017F/ZeroBias8/RAW/v1/000/306/091/00000/18C38216-00C0-E711-BD6F-02163E0129DD.root'
+'/store/data/Run2017F/ZeroBias1/RAW/v1/000/306/091/00000/E6E98AF1-FFBF-E711-B2D3-02163E019DA3.root'
+'/store/data/Run2017F/ZeroBias2/RAW/v1/000/306/091/00000/EE768CF1-FFBF-E711-B2D3-02163E019DA3.root'
+'/store/data/Run2017F/ZeroBias3/RAW/v1/000/306/091/00000/4A224649-00C0-E711-8018-02163E01A59E.root'
 '/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/4A8E5749-00C0-E711-8018-02163E01A59E.root'
-'/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/241701F2-FFBF-E711-B118-02163E0143E4.root')
+'/store/data/Run2017F/ZeroBias5/RAW/v1/000/306/091/00000/BC32EB7F-01C0-E711-9F4B-02163E011E9C.root'
+'/store/data/Run2017F/ZeroBias6/RAW/v1/000/306/091/00000/E629BF80-01C0-E711-9F4B-02163E011E9C.root'
+'/store/data/Run2017F/ZeroBias7/RAW/v1/000/306/091/00000/0039A9F6-FFBF-E711-B46B-02163E01472B.root'
+'/store/data/Run2017F/ZeroBias8/RAW/v1/000/306/091/00000/3CDAADF6-FFBF-E711-B46B-02163E01472B.root'
+'/store/data/Run2017F/ZeroBias1/RAW/v1/000/306/091/00000/28CF6607-00C0-E711-9A44-02163E019D02.root'
+'/store/data/Run2017F/ZeroBias2/RAW/v1/000/306/091/00000/88127307-00C0-E711-9A44-02163E019D02.root'
+'/store/data/Run2017F/ZeroBias3/RAW/v1/000/306/091/00000/3426DDF1-FFBF-E711-B118-02163E0143E4.root'
+'/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/241701F2-FFBF-E711-B118-02163E0143E4.root'
+'/store/data/Run2017F/ZeroBias5/RAW/v1/000/306/091/00000/7ED3F5CB-01C0-E711-8BE8-02163E01A223.root'
+'/store/data/Run2017F/ZeroBias6/RAW/v1/000/306/091/00000/6440F8CB-01C0-E711-8BE8-02163E01A223.root'
+'/store/data/Run2017F/ZeroBias7/RAW/v1/000/306/091/00000/C402BF0C-00C0-E711-99CE-02163E01A607.root'
+'/store/data/Run2017F/ZeroBias8/RAW/v1/000/306/091/00000/F018C30C-00C0-E711-99CE-02163E01A607.root' )
 #----------------------------------------------------------------------------#
 #                            Getting the reference                           #
 #----------------------------------------------------------------------------#
@@ -54,6 +76,8 @@ git clone https://github.com/cms-l1t-offline/L1Trigger-L1TMuon.git L1Trigger/L1T
 
 scram b -j $((`nproc`/2))
 
+dur=$(echo "$(date +%s.%N) - $starttime" | bc)
+printf "Execution time to L1T checkout: %.6f seconds" $dur
 #----------------------------------------------------------------------------#
 #                          Running the TP emulation                          #
 #----------------------------------------------------------------------------#
@@ -76,6 +100,8 @@ for sq in $sqs; do
 done
 ################################
 
+dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
+printf "Execution time to L1Ntuple production: %.6f minutes" $dur
 
 #----------------------------------------------------------------------------#
 #                            Check out L1Menu code                           #
@@ -134,9 +160,13 @@ cp results/L1Menu_${GT}_${sqlite2}_emu.csv ${WORKSPACE}/upload/${2}/
 cp results/L1Seed_${GT}_${sqlite2}_emu.csv ${WORKSPACE}/upload/${2}/
 cp results/L1Seed_${GT}_${sqlite2}_emu.root ${WORKSPACE}/upload/${2}/
 cp ${sqlite2}.log ${WORKSPACE}/upload/${2}/
+cp compRate.csv ${WORKSPACE}/upload/${2}/
 
-for i in nDiEGVsPt.gif nEGVsEta.gif nEGVsPt.gif nETMVsETM.gif nIsoEGVsPt.gif nJetVsPt.gif nQuadCenJetVsPt.gif nTauVsPt.gif; do
+for i in nDiEGVsPt.gif nEGVsEta.gif nEGVsPt.gif nETMVsETM.gif nIsoEGVsPt.gif nJetVsPt.gif nETMVsETMHF.gif nQuadCenJetVsPt.gif nTauVsPt.gif; do
   cp  results/comparePlots/Rate/${i}  ${WORKSPACE}/upload/${2}/
 done
 cd ${WORKSPACE}/upload/${2}
 tar -czvf ${WORKSPACE}/upload/L1TEcalValidation_${year}_${week}_${sqlite2}.tgz *
+
+dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
+printf "Execution time of workflow: %.6f minutes" $dur
