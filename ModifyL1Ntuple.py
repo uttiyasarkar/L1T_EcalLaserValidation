@@ -32,6 +32,6 @@ if __name__ == "__main__":
             outfile.write('            connect =cms.string("sqlite_file:%s/EcalTPG_%s_moved_to_1.db"),\n' % (os.getcwd(), args.SQ))
             outfile.write('            ),\n')
             outfile.write(')\n')
-            # outfile.wirte('process.MessageLogger.cerr.FwkReport.reportEvery = 1000\n')
+            outfile.wirte('process.MessageLogger.cerr.FwkReport.reportEvery = 10000\n')
 
     outfile.write("process.TFileService.fileName= cms.string('L1Ntuple_%s_%s.root')\n" % (args.GT, args.SQ) )

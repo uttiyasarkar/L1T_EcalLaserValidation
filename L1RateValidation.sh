@@ -18,30 +18,30 @@ curdir=$PWD
 username=$USER
 pids=""
 hasref=false
-filelist=('/store/data/Run2017F/ZeroBias1/RAW/v1/000/306/091/00000/D050FAEF-FFBF-E711-928B-02163E019C6C.root'
-'/store/data/Run2017F/ZeroBias2/RAW/v1/000/306/091/00000/B4E9FAEF-FFBF-E711-928B-02163E019C6C.root'
-'/store/data/Run2017F/ZeroBias3/RAW/v1/000/306/091/00000/803A9506-00C0-E711-AB01-02163E01A4FC.root'
-'/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/0C719606-00C0-E711-AB01-02163E01A4FC.root'
-'/store/data/Run2017F/ZeroBias5/RAW/v1/000/306/091/00000/D075606D-01C0-E711-999A-02163E0133B4.root'
-'/store/data/Run2017F/ZeroBias6/RAW/v1/000/306/091/00000/96406B6D-01C0-E711-999A-02163E0133B4.root'
-'/store/data/Run2017F/ZeroBias7/RAW/v1/000/306/091/00000/2480F615-00C0-E711-BD6F-02163E0129DD.root'
-'/store/data/Run2017F/ZeroBias8/RAW/v1/000/306/091/00000/18C38216-00C0-E711-BD6F-02163E0129DD.root'
-'/store/data/Run2017F/ZeroBias1/RAW/v1/000/306/091/00000/E6E98AF1-FFBF-E711-B2D3-02163E019DA3.root'
-'/store/data/Run2017F/ZeroBias2/RAW/v1/000/306/091/00000/EE768CF1-FFBF-E711-B2D3-02163E019DA3.root'
-'/store/data/Run2017F/ZeroBias3/RAW/v1/000/306/091/00000/4A224649-00C0-E711-8018-02163E01A59E.root'
-'/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/4A8E5749-00C0-E711-8018-02163E01A59E.root'
-'/store/data/Run2017F/ZeroBias5/RAW/v1/000/306/091/00000/BC32EB7F-01C0-E711-9F4B-02163E011E9C.root'
-'/store/data/Run2017F/ZeroBias6/RAW/v1/000/306/091/00000/E629BF80-01C0-E711-9F4B-02163E011E9C.root'
-'/store/data/Run2017F/ZeroBias7/RAW/v1/000/306/091/00000/0039A9F6-FFBF-E711-B46B-02163E01472B.root'
-'/store/data/Run2017F/ZeroBias8/RAW/v1/000/306/091/00000/3CDAADF6-FFBF-E711-B46B-02163E01472B.root'
-'/store/data/Run2017F/ZeroBias1/RAW/v1/000/306/091/00000/28CF6607-00C0-E711-9A44-02163E019D02.root'
-'/store/data/Run2017F/ZeroBias2/RAW/v1/000/306/091/00000/88127307-00C0-E711-9A44-02163E019D02.root'
-'/store/data/Run2017F/ZeroBias3/RAW/v1/000/306/091/00000/3426DDF1-FFBF-E711-B118-02163E0143E4.root'
-'/store/data/Run2017F/ZeroBias4/RAW/v1/000/306/091/00000/241701F2-FFBF-E711-B118-02163E0143E4.root'
-'/store/data/Run2017F/ZeroBias5/RAW/v1/000/306/091/00000/7ED3F5CB-01C0-E711-8BE8-02163E01A223.root'
-'/store/data/Run2017F/ZeroBias6/RAW/v1/000/306/091/00000/6440F8CB-01C0-E711-8BE8-02163E01A223.root'
-'/store/data/Run2017F/ZeroBias7/RAW/v1/000/306/091/00000/C402BF0C-00C0-E711-99CE-02163E01A607.root'
-'/store/data/Run2017F/ZeroBias8/RAW/v1/000/306/091/00000/F018C30C-00C0-E711-99CE-02163E01A607.root' )
+filelist=('/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/0039A9F6-FFBF-E711-B46B-02163E01472B.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/0C719606-00C0-E711-AB01-02163E01A4FC.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/18C38216-00C0-E711-BD6F-02163E0129DD.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/241701F2-FFBF-E711-B118-02163E0143E4.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/2480F615-00C0-E711-BD6F-02163E0129DD.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/28CF6607-00C0-E711-9A44-02163E019D02.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/3426DDF1-FFBF-E711-B118-02163E0143E4.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/3CDAADF6-FFBF-E711-B46B-02163E01472B.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/4A224649-00C0-E711-8018-02163E01A59E.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/4A8E5749-00C0-E711-8018-02163E01A59E.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/6440F8CB-01C0-E711-8BE8-02163E01A223.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/7ED3F5CB-01C0-E711-8BE8-02163E01A223.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/803A9506-00C0-E711-AB01-02163E01A4FC.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/88127307-00C0-E711-9A44-02163E019D02.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/96406B6D-01C0-E711-999A-02163E0133B4.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/B4E9FAEF-FFBF-E711-928B-02163E019C6C.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/BC32EB7F-01C0-E711-9F4B-02163E011E9C.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/C402BF0C-00C0-E711-99CE-02163E01A607.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/D050FAEF-FFBF-E711-928B-02163E019C6C.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/D075606D-01C0-E711-999A-02163E0133B4.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/E629BF80-01C0-E711-9F4B-02163E011E9C.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/E6E98AF1-FFBF-E711-B2D3-02163E019DA3.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/EE768CF1-FFBF-E711-B2D3-02163E019DA3.root'
+'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run306091_LS4419_421/F018C30C-00C0-E711-99CE-02163E01A607.root' )
 #----------------------------------------------------------------------------#
 #                            Getting the reference                           #
 #----------------------------------------------------------------------------#
@@ -74,7 +74,7 @@ git cms-addpkg L1Trigger/L1TCommon
 git cms-addpkg L1Trigger/L1TMuon
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TMuon.git L1Trigger/L1TMuon/data
 
-scram b -j $((`nproc`/2))
+scram b -j 8
 
 dur=$(echo "$(date +%s.%N) - $starttime" | bc)
 printf "Execution time to L1T checkout: %.6f seconds" $dur
@@ -111,7 +111,7 @@ cp $curdir/menulib.cc .
 cp $curdir/menulib.hh .
 cp $curdir/Prescale_Sets_RUN_306091_col_1.5.txt menu/
 cp $curdir/Selected_Seed.txt menu/
-make -j $((`nproc`/2))
+make -j 8
 make comparePlots
 
 dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
