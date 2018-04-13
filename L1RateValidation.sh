@@ -86,17 +86,34 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --era=Run2_2017  \
   --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
   --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWsimEcalTP \
   --conditions=$GT -n -1 --data --no_exec --no_output  \
-  --filein=`echo $(IFS=, ; echo "${filelist[*]}")` \
+  --filein=inputFiles \
   --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloStage2Params_2017_v1_8_2_updateHFSF_v6MET \
   --python_filename=l1Ntuple_${GT}.py
 
+Nsq=`echo $sqs | awk -F ' ' '{print NF}'`
+Nfiles=${#filelist[@]}
+NfpJ=`echo "${Nfiles} *${Nsq}/8" | bc`
+NJ=`echo "${Nfiles}/${NfpJ}" | bc`
 for sq in $sqs; do
   if [ ! -f EcalTPG_${sq}_moved_to_1.db ]; then
     wget http://cern.ch/ecaltrg/EcalLin/EcalTPG_${sq}_moved_to_1.db
   fi
   python ${curdir}/ModifyL1Ntuple.py --globalTag $GT --sqlite $sq
-  cmsRun l1Ntuple_${GT}_${sq}.py >& l1Ntuple_${GT}_${sq}.log  &
-  pids="$pids $!"
+  for ((i = 0; i < $NJ; i++)); do
+    let cnt1=$(($i*$NfpJ))
+    args=`printf "inputFiles=%s " "${filelist[@]:$cnt1:$NfpJ}"`
+    args+=`echo outputFile=L1Ntuple_${GT}_${sq}_${i}.root`
+    cmsRun l1Ntuple_${GT}_${sq}.py `echo $args` >& l1Ntuple_${GT}_${sq}_${i}.log  &
+    pids="$pids $!"
+  done
+done
+echo "Waiting for Ntuple production to finish......"
+wait $pids
+dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
+printf "Execution time to L1Ntuple production: %.6f minutes" $dur
+
+for sq in $sqs; do
+  ls $PWD/L1Ntuple_${GT}_${sq}_*.root >! L1Ntuple_${GT}_${sq}.list
 done
 ################################
 
@@ -119,16 +136,11 @@ printf "Execution time to checkout and compile code: %.6f minutes" $dur
 #----------------------------------------------------------------------------#
 #                                 Run L1Menu                                 #
 #----------------------------------------------------------------------------#
-echo "Waiting for Ntuple production to finish......"
-wait $pids
-
-dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
-printf "Execution time to L1Ntuple production: %.6f minutes" $dur
 
 for sq in $sqs; do
-  ./testMenu2016 -m menu/Prescale_Sets_RUN_306091_col_1.5.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
+  ./testMenu2016 -m menu/Prescale_Sets_RUN_306091_col_1.5.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.list -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
   pids="$pids $!"
-  ./testMenu2016 --doPlotRate -m menu/Selected_Seed.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.root -o L1Seed_${GT}_${sq}_emu >& L1Seed_${GT}_${sq}_emu.log &
+  ./testMenu2016 --doPlotRate -m menu/Selected_Seed.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.list -o L1Seed_${GT}_${sq}_emu >& L1Seed_${GT}_${sq}_emu.log &
   pids="$pids $!"
 done
 echo "Waiting for menu rate estimation to finish......"
