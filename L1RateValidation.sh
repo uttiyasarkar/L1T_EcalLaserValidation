@@ -113,7 +113,7 @@ dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
 printf "Execution time to L1Ntuple production: %.6f minutes" $dur
 
 for sq in $sqs; do
-  ls $PWD/L1Ntuple_${GT}_${sq}_*.root >! L1Ntuple_${GT}_${sq}.list
+  ls $PWD/L1Ntuple_${GT}_${sq}_*.root > L1Ntuple_${GT}_${sq}.list
 done
 ################################
 
