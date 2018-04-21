@@ -10,6 +10,7 @@ ARCH=slc6_amd64_gcc630
 CMSREL=CMSSW_10_0_0
 L1TTag=l1t-integration-v97.17-v2
 GT=100X_dataRun2_v1
+nproc=16
 sqlite1=$1 ##ref
 sqlite2=$2
 week=$3
@@ -48,7 +49,7 @@ filelist=('/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Ra
 #it may be gzipped infact ...
 ## prevent exit from failed wget
 set +e 
-wget --no-check-certificate https://cmssdt.cern.ch/SDT/public/EcalLaserValidation/L1T_EcalLaserValidation/L1TEcalValidation_${year}_${week}_${sqlite1}.tgz 
+wget --no-check-certificate https://cmssdt.cern.ch/SDT/public/EcalLaserValidation/L1T_EcalLaserValidation/${sqlite1}/L1TEcalValidation_${year}_${week}_${sqlite1}.tgz 
 if [ $? -ne 0 ]; then
   sqs="$sqlite1 $sqlite2"
 else
@@ -74,7 +75,7 @@ git cms-addpkg L1Trigger/L1TCommon
 git cms-addpkg L1Trigger/L1TMuon
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TMuon.git L1Trigger/L1TMuon/data
 
-scram b -j 8
+scram b -j ${nproc}
 
 dur=$(echo "$(date +%s.%N) - $starttime" | bc)
 printf "Execution time to L1T checkout: %.6f seconds" $dur
@@ -92,7 +93,7 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --era=Run2_2017  \
 
 Nsq=`echo $sqs | awk -F ' ' '{print NF}'`
 Nfiles=${#filelist[@]}
-NfpJ=`echo "${Nfiles} *${Nsq}/8" | bc`
+NfpJ=`echo "${Nfiles} *${Nsq}/${nproc}" | bc`
 NJ=`echo "${Nfiles}/${NfpJ}" | bc`
 for sq in $sqs; do
   if [ ! -f EcalTPG_${sq}_moved_to_1.db ]; then
@@ -128,7 +129,7 @@ cp $curdir/menulib.cc .
 cp $curdir/menulib.hh .
 cp $curdir/Prescale_Sets_RUN_306091_col_1.5.txt menu/
 cp $curdir/Selected_Seed.txt menu/
-make -j 8
+make -j ${nproc}
 make comparePlots
 
 dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
