@@ -154,7 +154,7 @@ printf "Execution time to L1Ntuple production: %.6f minutes" $dur
 #----------------------------------------------------------------------------#
 
 if $hasref; then
-  tar -xzvf $curdir/L1T_EcalLaserValidation/L1TEcalValidation_${year}_${week}_${sqlite1}.tgz -C results/
+  tar -xzvf $curdir/L1TEcalValidation_${year}_${week}_${sqlite1}.tgz -C results/
 fi
 
 python CompL1Rate.py --globalTag $GT --sqlite1 $sqlite1 --sqlite2 $sqlite2  | tee ${sqlite2}.log
