@@ -34,7 +34,7 @@ if __name__ == "__main__":
     df_comp1 = ParseCSV(args.GT, args.SQ1)
     df_comp2 = ParseCSV(args.GT, args.SQ2)
     comp = df_comp1.merge(df_comp2)
-    comp.loc[:, "diff"]= (comp[args.SQ1] / comp[args.SQ2]) -1
+    comp.loc[:, "diff"]= (comp[args.SQ2] / comp[args.SQ1]) -1
     comp.to_csv("compRate.csv")
     pandas.set_option('display.expand_frame_repr', False)
     pandas.options.display.float_format = '{:.4f}'.format
