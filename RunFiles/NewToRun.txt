@@ -1,6 +1,5 @@
-#retry
 week 34
 year 2018
-run1 321504
-run2 321727
+run1 321727
+run2 321780
 type laser
