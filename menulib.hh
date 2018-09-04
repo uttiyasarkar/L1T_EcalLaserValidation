@@ -1,6 +1,6 @@
 #ifndef menulib_hh
 #define menulib_hh
-/* automatically generated from L1Menu_Collisions2018_v1_0_0 with menu2lib.py */
+/* automatically generated from L1Menu_Collisions2018_v2_0_0 with menu2lib.py */
 /* https://gitlab.cern.ch/cms-l1t-utm/scripts */
 
 #include <string>
@@ -157,6 +157,10 @@ L1_DoubleEG_LooseIso22_12_er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1An
 bool
 L1_DoubleEG_LooseIso25_12_er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
+L1_DoubleIsoTau28er2p1_Mass_Max80(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
+L1_DoubleIsoTau28er2p1_Mass_Max90(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
 L1_DoubleIsoTau32er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_DoubleIsoTau34er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
@@ -239,8 +243,6 @@ L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1
 bool
 L1_DoubleMu0er2p0_SQ_dR_Max1p4(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
-L1_DoubleMu10_SQ(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
-bool
 L1_DoubleMu18er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_DoubleMu3_OS_DoubleEG7p5Upsilon(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
@@ -275,9 +277,13 @@ L1_DoubleMu4p5er2p0_SQ_OS(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis
 bool
 L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
+L1_DoubleMu4p5er2p0_SQ_OS_Mass_Min7(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
 L1_DoubleMu5Upsilon_OS_DoubleEG3(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_DoubleMu5_SQ_EG9er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
+L1_DoubleMu8_SQ(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_DoubleMu9_SQ(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
@@ -379,7 +385,7 @@ L1_IsoTau40er2p1_ETMHF100(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis
 bool
 L1_IsoTau40er2p1_ETMHF110(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
-L1_IsoTau40er2p1_ETMHF120(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+L1_IsoTau40er2p1_ETMHF80(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_IsoTau40er2p1_ETMHF90(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
@@ -467,6 +473,8 @@ L1_Mu6_HTT240er(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1Analys
 bool
 L1_Mu6_HTT250er(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
+L1_Mu7_EG20er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
 L1_Mu7_EG23er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_Mu7_LooseIsoEG20er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
@@ -497,6 +505,14 @@ L1_SingleEG15er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1Ana
 bool
 L1_SingleEG26er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
+L1_SingleEG28_FWD2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
+L1_SingleEG28er1p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
+L1_SingleEG28er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
+L1_SingleEG28er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
 L1_SingleEG34er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_SingleEG36er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
@@ -525,6 +541,8 @@ L1_SingleIsoEG26er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1
 bool
 L1_SingleIsoEG26er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
+L1_SingleIsoEG28_FWD2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
 L1_SingleIsoEG28er1p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_SingleIsoEG28er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
@@ -552,6 +570,8 @@ bool
 L1_SingleJet12erHE(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_SingleJet140er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
+L1_SingleJet140er2p5_ETMHF70(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_SingleJet140er2p5_ETMHF80(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
@@ -593,9 +613,21 @@ L1_SingleJet90_FWD3p0(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1
 bool
 L1_SingleJet90er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
+L1_SingleLooseIsoEG26er1p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
+L1_SingleLooseIsoEG26er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
+L1_SingleLooseIsoEG28_FWD2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
 L1_SingleLooseIsoEG28er1p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
+L1_SingleLooseIsoEG28er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
+L1_SingleLooseIsoEG28er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
 L1_SingleLooseIsoEG30er1p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
+bool
+L1_SingleLooseIsoEG30er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool
 L1_SingleMu0_BMTF(L1Analysis::L1AnalysisL1UpgradeDataFormat*, L1Analysis::L1AnalysisL1CaloTowerDataFormat*);
 bool

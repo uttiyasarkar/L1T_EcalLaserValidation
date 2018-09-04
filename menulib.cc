@@ -1,4 +1,4 @@
-/* automatically generated from L1Menu_Collisions2018_v1_0_0 with menu2lib.py */
+/* automatically generated from L1Menu_Collisions2018_v2_0_0 with menu2lib.py */
 /* https://gitlab.cern.ch/cms-l1t-utm/scripts */
 
 #include <algorithm>
@@ -3496,65 +3496,6 @@ DoubleJET_7223798148075572843
 
 
 bool
-DoubleMU_12394181525097886766
-(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
-{
-  size_t nobj = 0;
-  std::vector<int> candidates;
-  for (size_t ii = 0; ii < data->muonBx.size(); ii++)
-  {
-    if (not (data->muonBx.at(ii) == 0)) continue;
-    nobj++;
-               candidates.push_back(ii);
-  }
-
-  bool pass = false;
-  if (candidates.size() < 2) return pass;
-
-  std::vector<std::vector<int> > combination;
-  getCombination(candidates.size(), 2, combination);
-  std::vector<std::vector<int> > permutation;
-  getPermutation(2, permutation);
-
-  for (size_t ii = 0; ii < combination.size(); ii++)
-  {
-    const std::vector<int>& set = combination.at(ii);
-    for (size_t jj = 0; jj < permutation.size(); jj++)
-    {
-      const std::vector<int>& indicies = permutation.at(jj);
-      int idx = -1;
-      
-            idx = candidates.at(set.at(indicies.at(0)));
-                                // MU10: ET >= 21 at BX = 0
-      if (not (data->muonIEt.at(idx) >= 21)) continue;
-
-                        // quality : 0xf000
-      if (not ((61440 >> data->muonQual.at(idx)) & 1)) continue;
-
-          
-            idx = candidates.at(set.at(indicies.at(1)));
-                                // MU10: ET >= 21 at BX = 0
-      if (not (data->muonIEt.at(idx) >= 21)) continue;
-
-                        // quality : 0xf000
-      if (not ((61440 >> data->muonQual.at(idx)) & 1)) continue;
-
-          
-            
-      pass = true;
-      break;
-    }
-
-    if (pass) break;
-  }
-
-  return pass;
-}
-
-      
-
-
-bool
 DoubleMU_13627348644483379947
 (L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
 {
@@ -3977,6 +3918,65 @@ DoubleMU_14585792012884824895
             idx = candidates.at(set.at(indicies.at(1)));
                                 // MU5: ET >= 11 at BX = 0
       if (not (data->muonIEt.at(idx) >= 11)) continue;
+
+                        // quality : 0xf000
+      if (not ((61440 >> data->muonQual.at(idx)) & 1)) continue;
+
+          
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
+DoubleMU_14585800259222033215
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->muonBx.size(); ii++)
+  {
+    if (not (data->muonBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 2) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 2, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(2, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // MU8: ET >= 17 at BX = 0
+      if (not (data->muonIEt.at(idx) >= 17)) continue;
+
+                        // quality : 0xf000
+      if (not ((61440 >> data->muonQual.at(idx)) & 1)) continue;
+
+          
+            idx = candidates.at(set.at(indicies.at(1)));
+                                // MU8: ET >= 17 at BX = 0
+      if (not (data->muonIEt.at(idx) >= 17)) continue;
 
                         // quality : 0xf000
       if (not ((61440 >> data->muonQual.at(idx)) & 1)) continue;
@@ -5687,6 +5687,109 @@ InvariantMass_14031539093892099211
   long long mass2 = pt0*pt1*(coshDeltaEta - cosDeltaPhi);
     minimum = (long long)(192200.0 * POW10[5]);
   maximum = (long long)(11549264162.0 * POW10[5]);
+  if (not ((minimum <= mass2) and (mass2 <= maximum))) continue;
+
+    
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+
+    
+                    
+
+
+
+
+
+bool
+InvariantMass_15189938385114320317
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+    size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->muonBx.size(); ii++)
+  {
+    if (not (data->muonBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 2) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 2, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(2, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      bool etaWindow1;
+      const int idx0 = candidates.at(set.at(indicies.at(0)));
+      const int idx1 = candidates.at(set.at(indicies.at(1)));
+                                // MU4p5: ET >= 10 at BX = 0
+      if (not (data->muonIEt.at(idx0) >= 10)) continue;
+
+                        // quality : 0xf000
+      if (not ((61440 >> data->muonQual.at(idx0)) & 1)) continue;
+
+                        // -2.0064375 <= eta <= 2.0064375
+              etaWindow1 = ((-184 <= data->muonIEtaAtVtx.at(idx0)) and (data->muonIEtaAtVtx.at(idx0) <= 184));
+            
+          if (not etaWindow1) continue;
+                                // MU4p5: ET >= 10 at BX = 0
+      if (not (data->muonIEt.at(idx1) >= 10)) continue;
+
+                        // quality : 0xf000
+      if (not ((61440 >> data->muonQual.at(idx1)) & 1)) continue;
+
+                        // -2.0064375 <= eta <= 2.0064375
+              etaWindow1 = ((-184 <= data->muonIEtaAtVtx.at(idx1)) and (data->muonIEtaAtVtx.at(idx1) <= 184));
+            
+          if (not etaWindow1) continue;
+          long long minimum;
+  long long maximum;
+
+  int iEta = -9999999; unsigned int deltaIEta = 9999999;
+        const std::string OS = "os";
+    const std::string SS = "ls";
+    if (data->muonChg.at(idx0) == 0) continue;  // charge valid bit not set
+    if (data->muonChg.at(idx1) == 0) continue;  // charge valid bit not set
+    if ("os" == OS)
+    {
+      if (not (data->muonChg.at(idx0) != data->muonChg.at(idx1))) continue;
+    }
+    else if ("os" == SS)
+    {
+      if (not (data->muonChg.at(idx0) == data->muonChg.at(idx1))) continue;
+    }
+          // 7.0 <= mass <= 151982.0
+      iEta = data->muonIEtaAtVtx.at(idx0);
+    deltaIEta = abs(iEta - data->muonIEtaAtVtx.at(idx1));
+  
+    int iPhi = data->muonIPhiAtVtx.at(idx0);
+  
+  unsigned int deltaIPhi = abs(iPhi - data->muonIPhiAtVtx.at(idx1));
+  if (deltaIPhi >= 288) deltaIPhi = 2*288 - deltaIPhi;
+  
+  long long coshDeltaEta = LUT_COSH_DETA_MU_MU[deltaIEta];
+  long long cosDeltaPhi = LUT_COS_DPHI_MU_MU[deltaIPhi];
+  long long pt0 = LUT_MU_ET[data->muonIEt.at(idx0)];
+  long long pt1 = LUT_MU_ET[data->muonIEt.at(idx1)];
+  long long mass2 = pt0*pt1*(coshDeltaEta - cosDeltaPhi);
+    minimum = (long long)(24.5 * POW10[6]);
+  maximum = (long long)(11549264162.0 * POW10[6]);
   if (not ((minimum <= mass2) and (mass2 <= maximum))) continue;
 
     
@@ -7933,6 +8036,190 @@ InvariantMass_7789845660996549812
 
 
 bool
+InvariantMass_8076519572854956826
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+    size_t nobj0 = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->tauBx.size(); ii++)
+  {
+    if (not (data->tauBx.at(ii) == 0)) continue;
+    nobj0++;
+        if (nobj0 > 12) break;
+                   candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 2) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 2, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(2, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      bool etaWindow1;
+      const int idx0 = candidates.at(set.at(indicies.at(0)));
+      const int idx1 = candidates.at(set.at(indicies.at(1)));
+                                // TAU28: ET >= 56 at BX = 0
+      if (not (data->tauIEt.at(idx0) >= 56)) continue;
+
+                        // -2.1315 <= eta <= 2.1315
+              etaWindow1 = ((-49 <= data->tauIEta.at(idx0)) and (data->tauIEta.at(idx0) <= 48));
+            
+                        // isolation : 0xe
+      if (not ((14 >> data->tauIso.at(idx0)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+                                // TAU28: ET >= 56 at BX = 0
+      if (not (data->tauIEt.at(idx1) >= 56)) continue;
+
+                        // -2.1315 <= eta <= 2.1315
+              etaWindow1 = ((-49 <= data->tauIEta.at(idx1)) and (data->tauIEta.at(idx1) <= 48));
+            
+                        // isolation : 0xe
+      if (not ((14 >> data->tauIso.at(idx1)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+          long long minimum;
+  long long maximum;
+
+  int iEta = -9999999; unsigned int deltaIEta = 9999999;
+        // 0.0 <= mass <= 80.0
+      iEta = data->tauIEta.at(idx0);
+    deltaIEta = abs(iEta - data->tauIEta.at(idx1));
+  
+    int iPhi = data->tauIPhi.at(idx0);
+  
+  unsigned int deltaIPhi = abs(iPhi - data->tauIPhi.at(idx1));
+  if (deltaIPhi >= 72) deltaIPhi = 2*72 - deltaIPhi;
+  
+  long long coshDeltaEta = LUT_COSH_DETA_TAU_TAU[deltaIEta];
+  long long cosDeltaPhi = LUT_COS_DPHI_TAU_TAU[deltaIPhi];
+  long long pt0 = LUT_TAU_ET[data->tauIEt.at(idx0)];
+  long long pt1 = LUT_TAU_ET[data->tauIEt.at(idx1)];
+  long long mass2 = pt0*pt1*(coshDeltaEta - cosDeltaPhi);
+    minimum = (long long)(0.0 * POW10[5]);
+  maximum = (long long)(3200.0 * POW10[5]);
+  if (not ((minimum <= mass2) and (mass2 <= maximum))) continue;
+
+    
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+
+    
+                    
+
+
+
+
+
+bool
+InvariantMass_8076519572854973210
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+    size_t nobj0 = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->tauBx.size(); ii++)
+  {
+    if (not (data->tauBx.at(ii) == 0)) continue;
+    nobj0++;
+        if (nobj0 > 12) break;
+                   candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 2) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 2, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(2, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      bool etaWindow1;
+      const int idx0 = candidates.at(set.at(indicies.at(0)));
+      const int idx1 = candidates.at(set.at(indicies.at(1)));
+                                // TAU28: ET >= 56 at BX = 0
+      if (not (data->tauIEt.at(idx0) >= 56)) continue;
+
+                        // -2.1315 <= eta <= 2.1315
+              etaWindow1 = ((-49 <= data->tauIEta.at(idx0)) and (data->tauIEta.at(idx0) <= 48));
+            
+                        // isolation : 0xe
+      if (not ((14 >> data->tauIso.at(idx0)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+                                // TAU28: ET >= 56 at BX = 0
+      if (not (data->tauIEt.at(idx1) >= 56)) continue;
+
+                        // -2.1315 <= eta <= 2.1315
+              etaWindow1 = ((-49 <= data->tauIEta.at(idx1)) and (data->tauIEta.at(idx1) <= 48));
+            
+                        // isolation : 0xe
+      if (not ((14 >> data->tauIso.at(idx1)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+          long long minimum;
+  long long maximum;
+
+  int iEta = -9999999; unsigned int deltaIEta = 9999999;
+        // 0.0 <= mass <= 90.0
+      iEta = data->tauIEta.at(idx0);
+    deltaIEta = abs(iEta - data->tauIEta.at(idx1));
+  
+    int iPhi = data->tauIPhi.at(idx0);
+  
+  unsigned int deltaIPhi = abs(iPhi - data->tauIPhi.at(idx1));
+  if (deltaIPhi >= 72) deltaIPhi = 2*72 - deltaIPhi;
+  
+  long long coshDeltaEta = LUT_COSH_DETA_TAU_TAU[deltaIEta];
+  long long cosDeltaPhi = LUT_COS_DPHI_TAU_TAU[deltaIPhi];
+  long long pt0 = LUT_TAU_ET[data->tauIEt.at(idx0)];
+  long long pt1 = LUT_TAU_ET[data->tauIEt.at(idx1)];
+  long long mass2 = pt0*pt1*(coshDeltaEta - cosDeltaPhi);
+    minimum = (long long)(0.0 * POW10[5]);
+  maximum = (long long)(4050.0 * POW10[5]);
+  if (not ((minimum <= mass2) and (mass2 <= maximum))) continue;
+
+    
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+
+    
+                    
+
+
+
+
+
+bool
 InvariantMass_9620562409477107818
 (L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
 {
@@ -9862,6 +10149,60 @@ SingleEG_10104274582658947339
 
 
 bool
+SingleEG_10104274582658947595
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG26: ET >= 52 at BX = 0
+      if (not (data->egIEt.at(idx) >= 52)) continue;
+
+                        // -1.5225 <= eta <= 1.5225
+              etaWindow1 = ((-35 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 34));
+            
+                        // isolation : 0xc
+      if (not ((12 >> data->egIso.at(idx)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
 SingleEG_10104274591248881931
 (L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
 {
@@ -10228,6 +10569,57 @@ SingleEG_14262501725482388275
 
 
 bool
+SingleEG_14262501741991168819
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG20: ET >= 40 at BX = 0
+      if (not (data->egIEt.at(idx) >= 40)) continue;
+
+                        // -2.523 <= eta <= 2.523
+              etaWindow1 = ((-58 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 57));
+            
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
 SingleEG_14262501742393822003
 (L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
 {
@@ -10310,6 +10702,108 @@ SingleEG_14262501742796475187
             idx = candidates.at(set.at(indicies.at(0)));
                                 // EG26: ET >= 52 at BX = 0
       if (not (data->egIEt.at(idx) >= 52)) continue;
+
+                        // -2.523 <= eta <= 2.523
+              etaWindow1 = ((-58 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 57));
+            
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
+SingleEG_14262501743064845235
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG28: ET >= 56 at BX = 0
+      if (not (data->egIEt.at(idx) >= 56)) continue;
+
+                        // -2.1315 <= eta <= 2.1315
+              etaWindow1 = ((-49 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 48));
+            
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
+SingleEG_14262501743064910643
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG28: ET >= 56 at BX = 0
+      if (not (data->egIEt.at(idx) >= 56)) continue;
 
                         // -2.523 <= eta <= 2.523
               etaWindow1 = ((-58 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 57));
@@ -10732,6 +11226,57 @@ SingleEG_145873712
 
 
 bool
+SingleEG_3915586522446180968
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG28: ET >= 56 at BX = 0
+      if (not (data->egIEt.at(idx) >= 56)) continue;
+
+                        // -1.5225 <= eta <= 1.5225
+              etaWindow1 = ((-35 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 34));
+            
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
 SingleEG_9244734408399686654
 (L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
 {
@@ -11110,6 +11655,60 @@ SingleEG_9244741005469453054
 
 
 bool
+SingleEG_9244741005469453310
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG26: ET >= 52 at BX = 0
+      if (not (data->egIEt.at(idx) >= 52)) continue;
+
+                        // -2.523 <= eta <= 2.523
+              etaWindow1 = ((-58 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 57));
+            
+                        // isolation : 0xc
+      if (not ((12 >> data->egIso.at(idx)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
 SingleEG_9244743203956886270
 (L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
 {
@@ -11255,6 +11854,60 @@ SingleEG_9244743204492708606
             
                         // isolation : 0xa
       if (not ((10 >> data->egIso.at(idx)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
+SingleEG_9244743204492708862
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG28: ET >= 56 at BX = 0
+      if (not (data->egIEt.at(idx) >= 56)) continue;
+
+                        // -2.523 <= eta <= 2.523
+              etaWindow1 = ((-58 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 57));
+            
+                        // isolation : 0xc
+      if (not ((12 >> data->egIso.at(idx)) & 1)) continue;
 
           if (not etaWindow1) continue;
             
@@ -11434,6 +12087,60 @@ SingleEG_9244875145888041726
 
 
 bool
+SingleEG_9244875145888041982
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG30: ET >= 60 at BX = 0
+      if (not (data->egIEt.at(idx) >= 60)) continue;
+
+                        // -2.523 <= eta <= 2.523
+              etaWindow1 = ((-58 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 57));
+            
+                        // isolation : 0xc
+      if (not ((12 >> data->egIso.at(idx)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
 SingleEG_9244877344375474942
 (L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
 {
@@ -11593,6 +12300,324 @@ SingleEG_9244879543934552830
 }
 
       
+
+
+bool
+SingleEG_9662691245927949173
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG28: ET >= 56 at BX = 0
+      if (not (data->egIEt.at(idx) >= 56)) continue;
+
+                        // -5.0 <= eta <= -2.523
+              etaWindow1 = ((-115 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= -59));
+            
+                        // isolation : 0xa
+      if (not ((10 >> data->egIso.at(idx)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
+SingleEG_9662691245927949429
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG28: ET >= 56 at BX = 0
+      if (not (data->egIEt.at(idx) >= 56)) continue;
+
+                        // -5.0 <= eta <= -2.523
+              etaWindow1 = ((-115 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= -59));
+            
+                        // isolation : 0xc
+      if (not ((12 >> data->egIso.at(idx)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
+SingleEG_9662691281642447733
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG28: ET >= 56 at BX = 0
+      if (not (data->egIEt.at(idx) >= 56)) continue;
+
+                        // 2.523 <= eta <= 5.0
+              etaWindow1 = ((58 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 114));
+            
+                        // isolation : 0xa
+      if (not ((10 >> data->egIso.at(idx)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
+SingleEG_9662691281642447989
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG28: ET >= 56 at BX = 0
+      if (not (data->egIEt.at(idx) >= 56)) continue;
+
+                        // 2.523 <= eta <= 5.0
+              etaWindow1 = ((58 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 114));
+            
+                        // isolation : 0xc
+      if (not ((12 >> data->egIso.at(idx)) & 1)) continue;
+
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
+SingleEG_9918830921514094014
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG28: ET >= 56 at BX = 0
+      if (not (data->egIEt.at(idx) >= 56)) continue;
+
+                        // -5.0 <= eta <= -2.523
+              etaWindow1 = ((-115 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= -59));
+            
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
+
+
+bool
+SingleEG_9918830921518453694
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  size_t nobj = 0;
+  std::vector<int> candidates;
+  for (size_t ii = 0; ii < data->egBx.size(); ii++)
+  {
+    if (not (data->egBx.at(ii) == 0)) continue;
+    nobj++;
+               candidates.push_back(ii);
+  }
+
+  bool pass = false;
+  if (candidates.size() < 1) return pass;
+
+  std::vector<std::vector<int> > combination;
+  getCombination(candidates.size(), 1, combination);
+  std::vector<std::vector<int> > permutation;
+  getPermutation(1, permutation);
+
+  for (size_t ii = 0; ii < combination.size(); ii++)
+  {
+    const std::vector<int>& set = combination.at(ii);
+    for (size_t jj = 0; jj < permutation.size(); jj++)
+    {
+      const std::vector<int>& indicies = permutation.at(jj);
+      int idx = -1;
+      bool etaWindow1;
+            idx = candidates.at(set.at(indicies.at(0)));
+                                // EG28: ET >= 56 at BX = 0
+      if (not (data->egIEt.at(idx) >= 56)) continue;
+
+                        // 2.523 <= eta <= 5.0
+              etaWindow1 = ((58 <= data->egIEta.at(idx)) and (data->egIEta.at(idx) <= 114));
+            
+          if (not etaWindow1) continue;
+            
+      pass = true;
+      break;
+    }
+
+    if (pass) break;
+  }
+
+  return pass;
+}
+
+      
 bool
 SingleETMHF_306372248967728
 (L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
@@ -11652,6 +12677,29 @@ SingleETMHF_306372248967984
     if (not (data->sumBx.at(ii) == 0)) continue;
                         // ETMHF60: ET >= 120 at BX = 0
       if (not (data->sumIEt.at(ii) >= 120)) continue;
+      
+
+    pass = true;
+    break;
+  }
+
+  return pass;
+}
+
+      
+bool
+SingleETMHF_306372248968112
+(L1Analysis::L1AnalysisL1UpgradeDataFormat* data)
+{
+  bool pass = false;
+
+  
+  for (size_t ii = 0; ii < data->sumBx.size(); ii++)
+  {
+    if (not (data->sumType.at(ii) == L1Analysis::kMissingEtHF)) continue;
+    if (not (data->sumBx.at(ii) == 0)) continue;
+                        // ETMHF70: ET >= 140 at BX = 0
+      if (not (data->sumIEt.at(ii) >= 140)) continue;
       
 
     pass = true;
@@ -18786,6 +19834,16 @@ L1_DoubleEG_LooseIso25_12_er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data,
   return DoubleEG_56343050820653115(data);
 }
 bool
+L1_DoubleIsoTau28er2p1_Mass_Max80(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return InvariantMass_8076519572854956826(data);
+}
+bool
+L1_DoubleIsoTau28er2p1_Mass_Max90(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return InvariantMass_8076519572854973210(data);
+}
+bool
 L1_DoubleIsoTau32er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   return DoubleTAU_14812192849374407856(data);
@@ -18991,11 +20049,6 @@ L1_DoubleMu0er2p0_SQ_dR_Max1p4(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, 
   return MuonMuonCorrelation_15199048929593776303(data);
 }
 bool
-L1_DoubleMu10_SQ(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
-{
-  return DoubleMU_12394181525097886766(data);
-}
-bool
 L1_DoubleMu18er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   return DoubleMU_16323903523977050720(data);
@@ -19081,6 +20134,11 @@ L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18(L1Analysis::L1AnalysisL1UpgradeDataFormat* d
   return InvariantMass_2342552854377181621(data);
 }
 bool
+L1_DoubleMu4p5er2p0_SQ_OS_Mass_Min7(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return InvariantMass_15189938385114320317(data);
+}
+bool
 L1_DoubleMu5Upsilon_OS_DoubleEG3(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   return InvariantMass_13689376201502793133(data) and InvariantMass_2443380592745462540(data);
@@ -19089,6 +20147,11 @@ bool
 L1_DoubleMu5_SQ_EG9er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   return DoubleMU_14585792012884824895(data) and SingleEG_14243075932536834867(data);
+}
+bool
+L1_DoubleMu8_SQ(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return DoubleMU_14585800259222033215(data);
 }
 bool
 L1_DoubleMu9_SQ(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
@@ -19341,9 +20404,9 @@ L1_IsoTau40er2p1_ETMHF110(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Ana
   return SingleTAU_12210388642533153582(data) and SingleETMHF_39215647867820208(data);
 }
 bool
-L1_IsoTau40er2p1_ETMHF120(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+L1_IsoTau40er2p1_ETMHF80(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
-  return SingleTAU_12210388642533153582(data) and SingleETMHF_39215647867820336(data);
+  return SingleTAU_12210388642533153582(data) and SingleETMHF_306372248968240(data);
 }
 bool
 L1_IsoTau40er2p1_ETMHF90(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
@@ -19561,6 +20624,11 @@ L1_Mu6_HTT250er(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1A
   return SingleMU_14769293122775847365(data) and SingleHTT_2496626727600(data);
 }
 bool
+L1_Mu7_EG20er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleMU_14769293139955716549(data) and SingleEG_14262501741991168819(data);
+}
+bool
 L1_Mu7_EG23er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   return SingleMU_14769293139955716549(data) and SingleEG_14262501742393822003(data);
@@ -19636,6 +20704,26 @@ L1_SingleEG26er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::
   return SingleEG_14262501742796475187(data);
 }
 bool
+L1_SingleEG28_FWD2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_9918830921518453694(data) or SingleEG_9918830921514094014(data);
+}
+bool
+L1_SingleEG28er1p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_3915586522446180968(data);
+}
+bool
+L1_SingleEG28er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_14262501743064845235(data);
+}
+bool
+L1_SingleEG28er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_14262501743064910643(data);
+}
+bool
 L1_SingleEG34er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   return SingleEG_14262501759707908915(data);
@@ -19706,6 +20794,11 @@ L1_SingleIsoEG26er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysi
   return SingleEG_9244741005469453054(data);
 }
 bool
+L1_SingleIsoEG28_FWD2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_9662691281642447733(data) or SingleEG_9662691245927949173(data);
+}
+bool
 L1_SingleIsoEG28er1p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   return SingleEG_10104274591248881931(data);
@@ -19774,6 +20867,11 @@ bool
 L1_SingleJet140er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   return SingleJET_3448191326719711173(data);
+}
+bool
+L1_SingleJet140er2p5_ETMHF70(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleJET_3448191326719711173(data) and SingleETMHF_306372248968112(data);
 }
 bool
 L1_SingleJet140er2p5_ETMHF80(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
@@ -19876,14 +20974,44 @@ L1_SingleJet90er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis:
   return SingleJET_7529308009163787910(data);
 }
 bool
+L1_SingleLooseIsoEG26er1p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_10104274582658947595(data);
+}
+bool
+L1_SingleLooseIsoEG26er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_9244741005469453310(data);
+}
+bool
+L1_SingleLooseIsoEG28_FWD2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_9662691281642447989(data) or SingleEG_9662691245927949429(data);
+}
+bool
 L1_SingleLooseIsoEG28er1p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   return SingleEG_10104274591248882187(data);
 }
 bool
+L1_SingleLooseIsoEG28er2p1(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_9244743203956886526(data);
+}
+bool
+L1_SingleLooseIsoEG28er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_9244743204492708862(data);
+}
+bool
 L1_SingleLooseIsoEG30er1p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   return SingleEG_10104275106644957707(data);
+}
+bool
+L1_SingleLooseIsoEG30er2p5(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
+{
+  return SingleEG_9244875145888041982(data);
 }
 bool
 L1_SingleMu0_BMTF(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
@@ -20235,7 +21363,7 @@ L1_ZeroBias_copy(L1Analysis::L1AnalysisL1UpgradeDataFormat* data, L1Analysis::L1
 std::string getNameFromId(const int index)
 {
   static const std::pair<int, std::string> id2name[] = {
-          std::make_pair(458, "L1_AlwaysTrue"),          std::make_pair(486, "L1_BPTX_AND_Ref1_VME"),          std::make_pair(487, "L1_BPTX_AND_Ref3_VME"),          std::make_pair(488, "L1_BPTX_AND_Ref4_VME"),          std::make_pair(491, "L1_BPTX_BeamGas_B1_VME"),          std::make_pair(492, "L1_BPTX_BeamGas_B2_VME"),          std::make_pair(489, "L1_BPTX_BeamGas_Ref1_VME"),          std::make_pair(490, "L1_BPTX_BeamGas_Ref2_VME"),          std::make_pair(482, "L1_BPTX_NotOR_VME"),          std::make_pair(483, "L1_BPTX_OR_Ref3_VME"),          std::make_pair(484, "L1_BPTX_OR_Ref4_VME"),          std::make_pair(485, "L1_BPTX_RefAND_VME"),          std::make_pair(467, "L1_BptxMinus"),          std::make_pair(464, "L1_BptxOR"),          std::make_pair(466, "L1_BptxPlus"),          std::make_pair(465, "L1_BptxXOR"),          std::make_pair(494, "L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142"),          std::make_pair(247, "L1_DoubleEG8er2p5_HTT260er"),          std::make_pair(248, "L1_DoubleEG8er2p5_HTT280er"),          std::make_pair(249, "L1_DoubleEG8er2p5_HTT300er"),          std::make_pair(250, "L1_DoubleEG8er2p5_HTT320er"),          std::make_pair(251, "L1_DoubleEG8er2p5_HTT340er"),          std::make_pair(205, "L1_DoubleEG_15_10_er2p5"),          std::make_pair(206, "L1_DoubleEG_20_10_er2p5"),          std::make_pair(207, "L1_DoubleEG_22_10_er2p5"),          std::make_pair(208, "L1_DoubleEG_25_12_er2p5"),          std::make_pair(209, "L1_DoubleEG_25_14_er2p5"),          std::make_pair(210, "L1_DoubleEG_27_14_er2p5"),          std::make_pair(212, "L1_DoubleEG_LooseIso20_10_er2p5"),          std::make_pair(213, "L1_DoubleEG_LooseIso22_10_er2p5"),          std::make_pair(214, "L1_DoubleEG_LooseIso22_12_er2p5"),          std::make_pair(215, "L1_DoubleEG_LooseIso25_12_er2p5"),          std::make_pair(275, "L1_DoubleIsoTau32er2p1"),          std::make_pair(276, "L1_DoubleIsoTau34er2p1"),          std::make_pair(277, "L1_DoubleIsoTau36er2p1"),          std::make_pair(345, "L1_DoubleJet100er2p3_dEta_Max1p6"),          std::make_pair(341, "L1_DoubleJet100er2p5"),          std::make_pair(346, "L1_DoubleJet112er2p3_dEta_Max1p6"),          std::make_pair(342, "L1_DoubleJet120er2p5"),          std::make_pair(343, "L1_DoubleJet150er2p5"),          std::make_pair(348, "L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5"),          std::make_pair(349, "L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5"),          std::make_pair(350, "L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5"),          std::make_pair(351, "L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5"),          std::make_pair(352, "L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5"),          std::make_pair(353, "L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5"),          std::make_pair(363, "L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp"),          std::make_pair(340, "L1_DoubleJet40er2p5"),          std::make_pair(356, "L1_DoubleJet_100_30_DoubleJet30_Mass_Min620"),          std::make_pair(357, "L1_DoubleJet_110_35_DoubleJet35_Mass_Min620"),          std::make_pair(358, "L1_DoubleJet_115_40_DoubleJet40_Mass_Min620"),          std::make_pair(360, "L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28"),          std::make_pair(359, "L1_DoubleJet_120_45_DoubleJet45_Mass_Min620"),          std::make_pair(361, "L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28"),          std::make_pair(366, "L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ"),          std::make_pair(364, "L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp"),          std::make_pair(365, "L1_DoubleJet_80_30_Mass_Min420_Mu8"),          std::make_pair(355, "L1_DoubleJet_90_30_DoubleJet30_Mass_Min620"),          std::make_pair(217, "L1_DoubleLooseIsoEG22er2p1"),          std::make_pair(218, "L1_DoubleLooseIsoEG24er2p1"),          std::make_pair(40, "L1_DoubleMu0"),          std::make_pair(43, "L1_DoubleMu0_Mass_Min1"),          std::make_pair(39, "L1_DoubleMu0_OQ"),          std::make_pair(41, "L1_DoubleMu0_SQ"),          std::make_pair(42, "L1_DoubleMu0_SQ_OS"),          std::make_pair(142, "L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8"),          std::make_pair(59, "L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4"),          std::make_pair(55, "L1_DoubleMu0er1p5_SQ"),          std::make_pair(56, "L1_DoubleMu0er1p5_SQ_OS"),          std::make_pair(58, "L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4"),          std::make_pair(57, "L1_DoubleMu0er1p5_SQ_dR_Max1p4"),          std::make_pair(54, "L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4"),          std::make_pair(53, "L1_DoubleMu0er2p0_SQ_dR_Max1p4"),          std::make_pair(45, "L1_DoubleMu10_SQ"),          std::make_pair(51, "L1_DoubleMu18er2p1"),          std::make_pair(112, "L1_DoubleMu3_OS_DoubleEG7p5Upsilon"),          std::make_pair(145, "L1_DoubleMu3_SQ_ETMHF50_HTT60er"),          std::make_pair(147, "L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5"),          std::make_pair(146, "L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5"),          std::make_pair(148, "L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5"),          std::make_pair(150, "L1_DoubleMu3_SQ_HTT220er"),          std::make_pair(151, "L1_DoubleMu3_SQ_HTT240er"),          std::make_pair(152, "L1_DoubleMu3_SQ_HTT260er"),          std::make_pair(143, "L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8"),          std::make_pair(109, "L1_DoubleMu4_SQ_EG9er2p5"),          std::make_pair(60, "L1_DoubleMu4_SQ_OS"),          std::make_pair(61, "L1_DoubleMu4_SQ_OS_dR_Max1p2"),          std::make_pair(62, "L1_DoubleMu4p5_SQ_OS"),          std::make_pair(63, "L1_DoubleMu4p5_SQ_OS_dR_Max1p2"),          std::make_pair(64, "L1_DoubleMu4p5er2p0_SQ_OS"),          std::make_pair(65, "L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18"),          std::make_pair(113, "L1_DoubleMu5Upsilon_OS_DoubleEG3"),          std::make_pair(110, "L1_DoubleMu5_SQ_EG9er2p5"),          std::make_pair(44, "L1_DoubleMu9_SQ"),          std::make_pair(46, "L1_DoubleMu_12_5"),          std::make_pair(47, "L1_DoubleMu_15_5_SQ"),          std::make_pair(48, "L1_DoubleMu_15_7"),          std::make_pair(50, "L1_DoubleMu_15_7_Mass_Min1"),          std::make_pair(49, "L1_DoubleMu_15_7_SQ"),          std::make_pair(273, "L1_DoubleTau70er2p1"),          std::make_pair(416, "L1_ETM120"),          std::make_pair(417, "L1_ETM150"),          std::make_pair(421, "L1_ETMHF100"),          std::make_pair(429, "L1_ETMHF100_HTT60er"),          std::make_pair(422, "L1_ETMHF110"),          std::make_pair(430, "L1_ETMHF110_HTT60er"),          std::make_pair(444, "L1_ETMHF110_HTT60er_NotSecondBunchInTrain"),          std::make_pair(423, "L1_ETMHF120"),          std::make_pair(431, "L1_ETMHF120_HTT60er"),          std::make_pair(443, "L1_ETMHF120_NotSecondBunchInTrain"),          std::make_pair(424, "L1_ETMHF130"),          std::make_pair(432, "L1_ETMHF130_HTT60er"),          std::make_pair(425, "L1_ETMHF140"),          std::make_pair(426, "L1_ETMHF150"),          std::make_pair(428, "L1_ETMHF90_HTT60er"),          std::make_pair(410, "L1_ETT1200"),          std::make_pair(411, "L1_ETT1600"),          std::make_pair(412, "L1_ETT2000"),          std::make_pair(477, "L1_FirstBunchAfterTrain"),          std::make_pair(472, "L1_FirstBunchBeforeTrain"),          std::make_pair(473, "L1_FirstBunchInTrain"),          std::make_pair(480, "L1_FirstCollisionInOrbit"),          std::make_pair(479, "L1_FirstCollisionInTrain"),          std::make_pair(500, "L1_HCAL_LaserMon_Trig"),          std::make_pair(501, "L1_HCAL_LaserMon_Veto"),          std::make_pair(398, "L1_HTT120er"),          std::make_pair(399, "L1_HTT160er"),          std::make_pair(400, "L1_HTT200er"),          std::make_pair(401, "L1_HTT255er"),          std::make_pair(402, "L1_HTT280er"),          std::make_pair(384, "L1_HTT280er_QuadJet_70_55_40_35_er2p4"),          std::make_pair(403, "L1_HTT320er"),          std::make_pair(385, "L1_HTT320er_QuadJet_70_55_40_40_er2p4"),          std::make_pair(386, "L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3"),          std::make_pair(387, "L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3"),          std::make_pair(404, "L1_HTT360er"),          std::make_pair(405, "L1_HTT400er"),          std::make_pair(406, "L1_HTT450er"),          std::make_pair(197, "L1_IsoEG32er2p5_Mt40"),          std::make_pair(198, "L1_IsoEG32er2p5_Mt44"),          std::make_pair(199, "L1_IsoEG32er2p5_Mt48"),          std::make_pair(294, "L1_IsoTau40er2p1_ETMHF100"),          std::make_pair(295, "L1_IsoTau40er2p1_ETMHF110"),          std::make_pair(296, "L1_IsoTau40er2p1_ETMHF120"),          std::make_pair(293, "L1_IsoTau40er2p1_ETMHF90"),          std::make_pair(471, "L1_IsolatedBunch"),          std::make_pair(476, "L1_LastBunchInTrain"),          std::make_pair(478, "L1_LastCollisionInTrain"),          std::make_pair(257, "L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3"),          std::make_pair(259, "L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3"),          std::make_pair(238, "L1_LooseIsoEG24er2p1_HTT100er"),          std::make_pair(258, "L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3"),          std::make_pair(239, "L1_LooseIsoEG26er2p1_HTT100er"),          std::make_pair(234, "L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3"),          std::make_pair(240, "L1_LooseIsoEG28er2p1_HTT100er"),          std::make_pair(235, "L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3"),          std::make_pair(241, "L1_LooseIsoEG30er2p1_HTT100er"),          std::make_pair(236, "L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3"),          std::make_pair(461, "L1_MinimumBiasHF0_AND_BptxAND"),          std::make_pair(134, "L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6"),          std::make_pair(136, "L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6"),          std::make_pair(135, "L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6"),          std::make_pair(281, "L1_Mu18er2p1_Tau24er2p1"),          std::make_pair(282, "L1_Mu18er2p1_Tau26er2p1"),          std::make_pair(98, "L1_Mu20_EG10er2p5"),          std::make_pair(284, "L1_Mu22er2p1_IsoTau32er2p1"),          std::make_pair(285, "L1_Mu22er2p1_IsoTau34er2p1"),          std::make_pair(286, "L1_Mu22er2p1_IsoTau36er2p1"),          std::make_pair(287, "L1_Mu22er2p1_IsoTau40er2p1"),          std::make_pair(289, "L1_Mu22er2p1_Tau70er2p1"),          std::make_pair(126, "L1_Mu3_Jet120er2p5_dR_Max0p4"),          std::make_pair(125, "L1_Mu3_Jet120er2p5_dR_Max0p8"),          std::make_pair(121, "L1_Mu3_Jet16er2p5_dR_Max0p4"),          std::make_pair(119, "L1_Mu3_Jet30er2p5"),          std::make_pair(122, "L1_Mu3_Jet35er2p5_dR_Max0p4"),          std::make_pair(123, "L1_Mu3_Jet60er2p5_dR_Max0p4"),          std::make_pair(124, "L1_Mu3_Jet80er2p5_dR_Max0p4"),          std::make_pair(128, "L1_Mu3er1p5_Jet100er2p5_ETMHF40"),          std::make_pair(129, "L1_Mu3er1p5_Jet100er2p5_ETMHF50"),          std::make_pair(96, "L1_Mu5_EG23er2p5"),          std::make_pair(100, "L1_Mu5_LooseIsoEG20er2p5"),          std::make_pair(104, "L1_Mu6_DoubleEG10er2p5"),          std::make_pair(105, "L1_Mu6_DoubleEG12er2p5"),          std::make_pair(106, "L1_Mu6_DoubleEG15er2p5"),          std::make_pair(107, "L1_Mu6_DoubleEG17er2p5"),          std::make_pair(131, "L1_Mu6_HTT240er"),          std::make_pair(132, "L1_Mu6_HTT250er"),          std::make_pair(97, "L1_Mu7_EG23er2p5"),          std::make_pair(101, "L1_Mu7_LooseIsoEG20er2p5"),          std::make_pair(102, "L1_Mu7_LooseIsoEG23er2p5"),          std::make_pair(463, "L1_NotBptxOR"),          std::make_pair(298, "L1_QuadJet36er2p5_IsoTau52er2p1"),          std::make_pair(382, "L1_QuadJet60er2p5"),          std::make_pair(376, "L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0"),          std::make_pair(89, "L1_QuadMu0"),          std::make_pair(88, "L1_QuadMu0_OQ"),          std::make_pair(90, "L1_QuadMu0_SQ"),          std::make_pair(474, "L1_SecondBunchInTrain"),          std::make_pair(475, "L1_SecondLastBunchInTrain"),          std::make_pair(164, "L1_SingleEG10er2p5"),          std::make_pair(165, "L1_SingleEG15er2p5"),          std::make_pair(166, "L1_SingleEG26er2p5"),          std::make_pair(167, "L1_SingleEG34er2p5"),          std::make_pair(168, "L1_SingleEG36er2p5"),          std::make_pair(169, "L1_SingleEG38er2p5"),          std::make_pair(170, "L1_SingleEG40er2p5"),          std::make_pair(171, "L1_SingleEG42er2p5"),          std::make_pair(172, "L1_SingleEG45er2p5"),          std::make_pair(173, "L1_SingleEG50"),          std::make_pair(174, "L1_SingleEG60"),          std::make_pair(163, "L1_SingleEG8er2p5"),          std::make_pair(184, "L1_SingleIsoEG24er1p5"),          std::make_pair(183, "L1_SingleIsoEG24er2p1"),          std::make_pair(187, "L1_SingleIsoEG26er1p5"),          std::make_pair(186, "L1_SingleIsoEG26er2p1"),          std::make_pair(185, "L1_SingleIsoEG26er2p5"),          std::make_pair(190, "L1_SingleIsoEG28er1p5"),          std::make_pair(189, "L1_SingleIsoEG28er2p1"),          std::make_pair(188, "L1_SingleIsoEG28er2p5"),          std::make_pair(192, "L1_SingleIsoEG30er2p1"),          std::make_pair(191, "L1_SingleIsoEG30er2p5"),          std::make_pair(194, "L1_SingleIsoEG32er2p1"),          std::make_pair(193, "L1_SingleIsoEG32er2p5"),          std::make_pair(195, "L1_SingleIsoEG34er2p5"),          std::make_pair(330, "L1_SingleJet10erHE"),          std::make_pair(312, "L1_SingleJet120"),          std::make_pair(327, "L1_SingleJet120_FWD3p0"),          std::make_pair(319, "L1_SingleJet120er2p5"),          std::make_pair(331, "L1_SingleJet12erHE"),          std::make_pair(320, "L1_SingleJet140er2p5"),          std::make_pair(333, "L1_SingleJet140er2p5_ETMHF80"),          std::make_pair(334, "L1_SingleJet140er2p5_ETMHF90"),          std::make_pair(321, "L1_SingleJet160er2p5"),          std::make_pair(313, "L1_SingleJet180"),          std::make_pair(322, "L1_SingleJet180er2p5"),          std::make_pair(314, "L1_SingleJet200"),          std::make_pair(450, "L1_SingleJet20er2p5_NotBptxOR"),          std::make_pair(451, "L1_SingleJet20er2p5_NotBptxOR_3BX"),          std::make_pair(309, "L1_SingleJet35"),          std::make_pair(324, "L1_SingleJet35_FWD3p0"),          std::make_pair(316, "L1_SingleJet35er2p5"),          std::make_pair(452, "L1_SingleJet43er2p5_NotBptxOR_3BX"),          std::make_pair(454, "L1_SingleJet46er2p5_NotBptxOR_3BX"),          std::make_pair(310, "L1_SingleJet60"),          std::make_pair(325, "L1_SingleJet60_FWD3p0"),          std::make_pair(317, "L1_SingleJet60er2p5"),          std::make_pair(329, "L1_SingleJet8erHE"),          std::make_pair(311, "L1_SingleJet90"),          std::make_pair(326, "L1_SingleJet90_FWD3p0"),          std::make_pair(318, "L1_SingleJet90er2p5"),          std::make_pair(180, "L1_SingleLooseIsoEG28er1p5"),          std::make_pair(181, "L1_SingleLooseIsoEG30er1p5"),          std::make_pair(6, "L1_SingleMu0_BMTF"),          std::make_pair(5, "L1_SingleMu0_DQ"),          std::make_pair(8, "L1_SingleMu0_EMTF"),          std::make_pair(7, "L1_SingleMu0_OMTF"),          std::make_pair(29, "L1_SingleMu10er1p5"),          std::make_pair(13, "L1_SingleMu12_DQ_BMTF"),          std::make_pair(15, "L1_SingleMu12_DQ_EMTF"),          std::make_pair(14, "L1_SingleMu12_DQ_OMTF"),          std::make_pair(30, "L1_SingleMu12er1p5"),          std::make_pair(31, "L1_SingleMu14er1p5"),          std::make_pair(16, "L1_SingleMu15_DQ"),          std::make_pair(32, "L1_SingleMu16er1p5"),          std::make_pair(17, "L1_SingleMu18"),          std::make_pair(33, "L1_SingleMu18er1p5"),          std::make_pair(18, "L1_SingleMu20"),          std::make_pair(19, "L1_SingleMu22"),          std::make_pair(20, "L1_SingleMu22_BMTF"),          std::make_pair(22, "L1_SingleMu22_EMTF"),          std::make_pair(21, "L1_SingleMu22_OMTF"),          std::make_pair(23, "L1_SingleMu25"),          std::make_pair(9, "L1_SingleMu3"),          std::make_pair(10, "L1_SingleMu5"),          std::make_pair(25, "L1_SingleMu6er1p5"),          std::make_pair(12, "L1_SingleMu7"),          std::make_pair(11, "L1_SingleMu7_DQ"),          std::make_pair(26, "L1_SingleMu7er1p5"),          std::make_pair(27, "L1_SingleMu8er1p5"),          std::make_pair(28, "L1_SingleMu9er1p5"),          std::make_pair(0, "L1_SingleMuCosmics"),          std::make_pair(1, "L1_SingleMuCosmics_BMTF"),          std::make_pair(3, "L1_SingleMuCosmics_EMTF"),          std::make_pair(2, "L1_SingleMuCosmics_OMTF"),          std::make_pair(4, "L1_SingleMuOpen"),          std::make_pair(446, "L1_SingleMuOpen_NotBptxOR"),          std::make_pair(448, "L1_SingleMuOpen_er1p1_NotBptxOR_3BX"),          std::make_pair(447, "L1_SingleMuOpen_er1p4_NotBptxOR_3BX"),          std::make_pair(270, "L1_SingleTau120er2p1"),          std::make_pair(271, "L1_SingleTau130er2p1"),          std::make_pair(503, "L1_TOTEM_1"),          std::make_pair(504, "L1_TOTEM_2"),          std::make_pair(505, "L1_TOTEM_3"),          std::make_pair(506, "L1_TOTEM_4"),          std::make_pair(228, "L1_TripleEG16er2p5"),          std::make_pair(224, "L1_TripleEG_16_12_8_er2p5"),          std::make_pair(225, "L1_TripleEG_16_15_8_er2p5"),          std::make_pair(226, "L1_TripleEG_18_17_8_er2p5"),          std::make_pair(227, "L1_TripleEG_18_18_12_er2p5"),          std::make_pair(373, "L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5"),          std::make_pair(374, "L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5"),          std::make_pair(372, "L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5"),          std::make_pair(72, "L1_TripleMu0"),          std::make_pair(71, "L1_TripleMu0_OQ"),          std::make_pair(73, "L1_TripleMu0_SQ"),          std::make_pair(74, "L1_TripleMu3"),          std::make_pair(75, "L1_TripleMu3_SQ"),          std::make_pair(76, "L1_TripleMu_5SQ_3SQ_0OQ"),          std::make_pair(85, "L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9"),          std::make_pair(86, "L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9"),          std::make_pair(78, "L1_TripleMu_5_3_3"),          std::make_pair(79, "L1_TripleMu_5_3_3_SQ"),          std::make_pair(77, "L1_TripleMu_5_3p5_2p5"),          std::make_pair(83, "L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17"),          std::make_pair(82, "L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17"),          std::make_pair(84, "L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17"),          std::make_pair(80, "L1_TripleMu_5_5_3"),          std::make_pair(469, "L1_UnpairedBunchBptxMinus"),          std::make_pair(468, "L1_UnpairedBunchBptxPlus"),          std::make_pair(459, "L1_ZeroBias"),          std::make_pair(460, "L1_ZeroBias_copy")      };
+          std::make_pair(458, "L1_AlwaysTrue"),          std::make_pair(486, "L1_BPTX_AND_Ref1_VME"),          std::make_pair(487, "L1_BPTX_AND_Ref3_VME"),          std::make_pair(488, "L1_BPTX_AND_Ref4_VME"),          std::make_pair(491, "L1_BPTX_BeamGas_B1_VME"),          std::make_pair(492, "L1_BPTX_BeamGas_B2_VME"),          std::make_pair(489, "L1_BPTX_BeamGas_Ref1_VME"),          std::make_pair(490, "L1_BPTX_BeamGas_Ref2_VME"),          std::make_pair(482, "L1_BPTX_NotOR_VME"),          std::make_pair(483, "L1_BPTX_OR_Ref3_VME"),          std::make_pair(484, "L1_BPTX_OR_Ref4_VME"),          std::make_pair(485, "L1_BPTX_RefAND_VME"),          std::make_pair(467, "L1_BptxMinus"),          std::make_pair(464, "L1_BptxOR"),          std::make_pair(466, "L1_BptxPlus"),          std::make_pair(465, "L1_BptxXOR"),          std::make_pair(494, "L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142"),          std::make_pair(247, "L1_DoubleEG8er2p5_HTT260er"),          std::make_pair(248, "L1_DoubleEG8er2p5_HTT280er"),          std::make_pair(249, "L1_DoubleEG8er2p5_HTT300er"),          std::make_pair(250, "L1_DoubleEG8er2p5_HTT320er"),          std::make_pair(251, "L1_DoubleEG8er2p5_HTT340er"),          std::make_pair(205, "L1_DoubleEG_15_10_er2p5"),          std::make_pair(206, "L1_DoubleEG_20_10_er2p5"),          std::make_pair(207, "L1_DoubleEG_22_10_er2p5"),          std::make_pair(208, "L1_DoubleEG_25_12_er2p5"),          std::make_pair(209, "L1_DoubleEG_25_14_er2p5"),          std::make_pair(210, "L1_DoubleEG_27_14_er2p5"),          std::make_pair(212, "L1_DoubleEG_LooseIso20_10_er2p5"),          std::make_pair(213, "L1_DoubleEG_LooseIso22_10_er2p5"),          std::make_pair(214, "L1_DoubleEG_LooseIso22_12_er2p5"),          std::make_pair(215, "L1_DoubleEG_LooseIso25_12_er2p5"),          std::make_pair(279, "L1_DoubleIsoTau28er2p1_Mass_Max80"),          std::make_pair(278, "L1_DoubleIsoTau28er2p1_Mass_Max90"),          std::make_pair(275, "L1_DoubleIsoTau32er2p1"),          std::make_pair(276, "L1_DoubleIsoTau34er2p1"),          std::make_pair(277, "L1_DoubleIsoTau36er2p1"),          std::make_pair(345, "L1_DoubleJet100er2p3_dEta_Max1p6"),          std::make_pair(341, "L1_DoubleJet100er2p5"),          std::make_pair(346, "L1_DoubleJet112er2p3_dEta_Max1p6"),          std::make_pair(342, "L1_DoubleJet120er2p5"),          std::make_pair(343, "L1_DoubleJet150er2p5"),          std::make_pair(348, "L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5"),          std::make_pair(349, "L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5"),          std::make_pair(350, "L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5"),          std::make_pair(351, "L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5"),          std::make_pair(352, "L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5"),          std::make_pair(353, "L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5"),          std::make_pair(363, "L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp"),          std::make_pair(340, "L1_DoubleJet40er2p5"),          std::make_pair(356, "L1_DoubleJet_100_30_DoubleJet30_Mass_Min620"),          std::make_pair(357, "L1_DoubleJet_110_35_DoubleJet35_Mass_Min620"),          std::make_pair(358, "L1_DoubleJet_115_40_DoubleJet40_Mass_Min620"),          std::make_pair(360, "L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28"),          std::make_pair(359, "L1_DoubleJet_120_45_DoubleJet45_Mass_Min620"),          std::make_pair(361, "L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28"),          std::make_pair(366, "L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ"),          std::make_pair(364, "L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp"),          std::make_pair(365, "L1_DoubleJet_80_30_Mass_Min420_Mu8"),          std::make_pair(355, "L1_DoubleJet_90_30_DoubleJet30_Mass_Min620"),          std::make_pair(217, "L1_DoubleLooseIsoEG22er2p1"),          std::make_pair(218, "L1_DoubleLooseIsoEG24er2p1"),          std::make_pair(40, "L1_DoubleMu0"),          std::make_pair(43, "L1_DoubleMu0_Mass_Min1"),          std::make_pair(39, "L1_DoubleMu0_OQ"),          std::make_pair(41, "L1_DoubleMu0_SQ"),          std::make_pair(42, "L1_DoubleMu0_SQ_OS"),          std::make_pair(142, "L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8"),          std::make_pair(59, "L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4"),          std::make_pair(55, "L1_DoubleMu0er1p5_SQ"),          std::make_pair(56, "L1_DoubleMu0er1p5_SQ_OS"),          std::make_pair(58, "L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4"),          std::make_pair(57, "L1_DoubleMu0er1p5_SQ_dR_Max1p4"),          std::make_pair(54, "L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4"),          std::make_pair(53, "L1_DoubleMu0er2p0_SQ_dR_Max1p4"),          std::make_pair(51, "L1_DoubleMu18er2p1"),          std::make_pair(112, "L1_DoubleMu3_OS_DoubleEG7p5Upsilon"),          std::make_pair(145, "L1_DoubleMu3_SQ_ETMHF50_HTT60er"),          std::make_pair(147, "L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5"),          std::make_pair(146, "L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5"),          std::make_pair(148, "L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5"),          std::make_pair(150, "L1_DoubleMu3_SQ_HTT220er"),          std::make_pair(151, "L1_DoubleMu3_SQ_HTT240er"),          std::make_pair(152, "L1_DoubleMu3_SQ_HTT260er"),          std::make_pair(143, "L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8"),          std::make_pair(109, "L1_DoubleMu4_SQ_EG9er2p5"),          std::make_pair(60, "L1_DoubleMu4_SQ_OS"),          std::make_pair(61, "L1_DoubleMu4_SQ_OS_dR_Max1p2"),          std::make_pair(62, "L1_DoubleMu4p5_SQ_OS"),          std::make_pair(63, "L1_DoubleMu4p5_SQ_OS_dR_Max1p2"),          std::make_pair(64, "L1_DoubleMu4p5er2p0_SQ_OS"),          std::make_pair(66, "L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18"),          std::make_pair(65, "L1_DoubleMu4p5er2p0_SQ_OS_Mass_Min7"),          std::make_pair(113, "L1_DoubleMu5Upsilon_OS_DoubleEG3"),          std::make_pair(110, "L1_DoubleMu5_SQ_EG9er2p5"),          std::make_pair(44, "L1_DoubleMu8_SQ"),          std::make_pair(45, "L1_DoubleMu9_SQ"),          std::make_pair(46, "L1_DoubleMu_12_5"),          std::make_pair(47, "L1_DoubleMu_15_5_SQ"),          std::make_pair(48, "L1_DoubleMu_15_7"),          std::make_pair(50, "L1_DoubleMu_15_7_Mass_Min1"),          std::make_pair(49, "L1_DoubleMu_15_7_SQ"),          std::make_pair(273, "L1_DoubleTau70er2p1"),          std::make_pair(416, "L1_ETM120"),          std::make_pair(417, "L1_ETM150"),          std::make_pair(421, "L1_ETMHF100"),          std::make_pair(429, "L1_ETMHF100_HTT60er"),          std::make_pair(422, "L1_ETMHF110"),          std::make_pair(430, "L1_ETMHF110_HTT60er"),          std::make_pair(444, "L1_ETMHF110_HTT60er_NotSecondBunchInTrain"),          std::make_pair(423, "L1_ETMHF120"),          std::make_pair(431, "L1_ETMHF120_HTT60er"),          std::make_pair(443, "L1_ETMHF120_NotSecondBunchInTrain"),          std::make_pair(424, "L1_ETMHF130"),          std::make_pair(432, "L1_ETMHF130_HTT60er"),          std::make_pair(425, "L1_ETMHF140"),          std::make_pair(426, "L1_ETMHF150"),          std::make_pair(428, "L1_ETMHF90_HTT60er"),          std::make_pair(410, "L1_ETT1200"),          std::make_pair(411, "L1_ETT1600"),          std::make_pair(412, "L1_ETT2000"),          std::make_pair(477, "L1_FirstBunchAfterTrain"),          std::make_pair(472, "L1_FirstBunchBeforeTrain"),          std::make_pair(473, "L1_FirstBunchInTrain"),          std::make_pair(480, "L1_FirstCollisionInOrbit"),          std::make_pair(479, "L1_FirstCollisionInTrain"),          std::make_pair(500, "L1_HCAL_LaserMon_Trig"),          std::make_pair(501, "L1_HCAL_LaserMon_Veto"),          std::make_pair(398, "L1_HTT120er"),          std::make_pair(399, "L1_HTT160er"),          std::make_pair(400, "L1_HTT200er"),          std::make_pair(401, "L1_HTT255er"),          std::make_pair(402, "L1_HTT280er"),          std::make_pair(384, "L1_HTT280er_QuadJet_70_55_40_35_er2p4"),          std::make_pair(403, "L1_HTT320er"),          std::make_pair(385, "L1_HTT320er_QuadJet_70_55_40_40_er2p4"),          std::make_pair(386, "L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3"),          std::make_pair(387, "L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3"),          std::make_pair(404, "L1_HTT360er"),          std::make_pair(405, "L1_HTT400er"),          std::make_pair(406, "L1_HTT450er"),          std::make_pair(197, "L1_IsoEG32er2p5_Mt40"),          std::make_pair(198, "L1_IsoEG32er2p5_Mt44"),          std::make_pair(199, "L1_IsoEG32er2p5_Mt48"),          std::make_pair(293, "L1_IsoTau40er2p1_ETMHF100"),          std::make_pair(294, "L1_IsoTau40er2p1_ETMHF110"),          std::make_pair(291, "L1_IsoTau40er2p1_ETMHF80"),          std::make_pair(292, "L1_IsoTau40er2p1_ETMHF90"),          std::make_pair(471, "L1_IsolatedBunch"),          std::make_pair(476, "L1_LastBunchInTrain"),          std::make_pair(478, "L1_LastCollisionInTrain"),          std::make_pair(257, "L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3"),          std::make_pair(259, "L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3"),          std::make_pair(238, "L1_LooseIsoEG24er2p1_HTT100er"),          std::make_pair(258, "L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3"),          std::make_pair(239, "L1_LooseIsoEG26er2p1_HTT100er"),          std::make_pair(234, "L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3"),          std::make_pair(240, "L1_LooseIsoEG28er2p1_HTT100er"),          std::make_pair(235, "L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3"),          std::make_pair(241, "L1_LooseIsoEG30er2p1_HTT100er"),          std::make_pair(236, "L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3"),          std::make_pair(461, "L1_MinimumBiasHF0_AND_BptxAND"),          std::make_pair(134, "L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6"),          std::make_pair(136, "L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6"),          std::make_pair(135, "L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6"),          std::make_pair(281, "L1_Mu18er2p1_Tau24er2p1"),          std::make_pair(282, "L1_Mu18er2p1_Tau26er2p1"),          std::make_pair(99, "L1_Mu20_EG10er2p5"),          std::make_pair(284, "L1_Mu22er2p1_IsoTau32er2p1"),          std::make_pair(285, "L1_Mu22er2p1_IsoTau34er2p1"),          std::make_pair(286, "L1_Mu22er2p1_IsoTau36er2p1"),          std::make_pair(287, "L1_Mu22er2p1_IsoTau40er2p1"),          std::make_pair(289, "L1_Mu22er2p1_Tau70er2p1"),          std::make_pair(126, "L1_Mu3_Jet120er2p5_dR_Max0p4"),          std::make_pair(125, "L1_Mu3_Jet120er2p5_dR_Max0p8"),          std::make_pair(121, "L1_Mu3_Jet16er2p5_dR_Max0p4"),          std::make_pair(119, "L1_Mu3_Jet30er2p5"),          std::make_pair(122, "L1_Mu3_Jet35er2p5_dR_Max0p4"),          std::make_pair(123, "L1_Mu3_Jet60er2p5_dR_Max0p4"),          std::make_pair(124, "L1_Mu3_Jet80er2p5_dR_Max0p4"),          std::make_pair(128, "L1_Mu3er1p5_Jet100er2p5_ETMHF40"),          std::make_pair(129, "L1_Mu3er1p5_Jet100er2p5_ETMHF50"),          std::make_pair(96, "L1_Mu5_EG23er2p5"),          std::make_pair(100, "L1_Mu5_LooseIsoEG20er2p5"),          std::make_pair(104, "L1_Mu6_DoubleEG10er2p5"),          std::make_pair(105, "L1_Mu6_DoubleEG12er2p5"),          std::make_pair(106, "L1_Mu6_DoubleEG15er2p5"),          std::make_pair(107, "L1_Mu6_DoubleEG17er2p5"),          std::make_pair(131, "L1_Mu6_HTT240er"),          std::make_pair(132, "L1_Mu6_HTT250er"),          std::make_pair(97, "L1_Mu7_EG20er2p5"),          std::make_pair(98, "L1_Mu7_EG23er2p5"),          std::make_pair(101, "L1_Mu7_LooseIsoEG20er2p5"),          std::make_pair(102, "L1_Mu7_LooseIsoEG23er2p5"),          std::make_pair(463, "L1_NotBptxOR"),          std::make_pair(298, "L1_QuadJet36er2p5_IsoTau52er2p1"),          std::make_pair(382, "L1_QuadJet60er2p5"),          std::make_pair(376, "L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0"),          std::make_pair(89, "L1_QuadMu0"),          std::make_pair(88, "L1_QuadMu0_OQ"),          std::make_pair(90, "L1_QuadMu0_SQ"),          std::make_pair(474, "L1_SecondBunchInTrain"),          std::make_pair(475, "L1_SecondLastBunchInTrain"),          std::make_pair(160, "L1_SingleEG10er2p5"),          std::make_pair(161, "L1_SingleEG15er2p5"),          std::make_pair(162, "L1_SingleEG26er2p5"),          std::make_pair(163, "L1_SingleEG28_FWD2p5"),          std::make_pair(166, "L1_SingleEG28er1p5"),          std::make_pair(165, "L1_SingleEG28er2p1"),          std::make_pair(164, "L1_SingleEG28er2p5"),          std::make_pair(167, "L1_SingleEG34er2p5"),          std::make_pair(168, "L1_SingleEG36er2p5"),          std::make_pair(169, "L1_SingleEG38er2p5"),          std::make_pair(170, "L1_SingleEG40er2p5"),          std::make_pair(171, "L1_SingleEG42er2p5"),          std::make_pair(172, "L1_SingleEG45er2p5"),          std::make_pair(173, "L1_SingleEG50"),          std::make_pair(174, "L1_SingleEG60"),          std::make_pair(159, "L1_SingleEG8er2p5"),          std::make_pair(184, "L1_SingleIsoEG24er1p5"),          std::make_pair(183, "L1_SingleIsoEG24er2p1"),          std::make_pair(187, "L1_SingleIsoEG26er1p5"),          std::make_pair(186, "L1_SingleIsoEG26er2p1"),          std::make_pair(185, "L1_SingleIsoEG26er2p5"),          std::make_pair(188, "L1_SingleIsoEG28_FWD2p5"),          std::make_pair(191, "L1_SingleIsoEG28er1p5"),          std::make_pair(190, "L1_SingleIsoEG28er2p1"),          std::make_pair(189, "L1_SingleIsoEG28er2p5"),          std::make_pair(193, "L1_SingleIsoEG30er2p1"),          std::make_pair(192, "L1_SingleIsoEG30er2p5"),          std::make_pair(195, "L1_SingleIsoEG32er2p1"),          std::make_pair(194, "L1_SingleIsoEG32er2p5"),          std::make_pair(196, "L1_SingleIsoEG34er2p5"),          std::make_pair(330, "L1_SingleJet10erHE"),          std::make_pair(312, "L1_SingleJet120"),          std::make_pair(327, "L1_SingleJet120_FWD3p0"),          std::make_pair(319, "L1_SingleJet120er2p5"),          std::make_pair(331, "L1_SingleJet12erHE"),          std::make_pair(320, "L1_SingleJet140er2p5"),          std::make_pair(332, "L1_SingleJet140er2p5_ETMHF70"),          std::make_pair(333, "L1_SingleJet140er2p5_ETMHF80"),          std::make_pair(334, "L1_SingleJet140er2p5_ETMHF90"),          std::make_pair(321, "L1_SingleJet160er2p5"),          std::make_pair(313, "L1_SingleJet180"),          std::make_pair(322, "L1_SingleJet180er2p5"),          std::make_pair(314, "L1_SingleJet200"),          std::make_pair(450, "L1_SingleJet20er2p5_NotBptxOR"),          std::make_pair(451, "L1_SingleJet20er2p5_NotBptxOR_3BX"),          std::make_pair(309, "L1_SingleJet35"),          std::make_pair(324, "L1_SingleJet35_FWD3p0"),          std::make_pair(316, "L1_SingleJet35er2p5"),          std::make_pair(452, "L1_SingleJet43er2p5_NotBptxOR_3BX"),          std::make_pair(453, "L1_SingleJet46er2p5_NotBptxOR_3BX"),          std::make_pair(310, "L1_SingleJet60"),          std::make_pair(325, "L1_SingleJet60_FWD3p0"),          std::make_pair(317, "L1_SingleJet60er2p5"),          std::make_pair(329, "L1_SingleJet8erHE"),          std::make_pair(311, "L1_SingleJet90"),          std::make_pair(326, "L1_SingleJet90_FWD3p0"),          std::make_pair(318, "L1_SingleJet90er2p5"),          std::make_pair(176, "L1_SingleLooseIsoEG26er1p5"),          std::make_pair(175, "L1_SingleLooseIsoEG26er2p5"),          std::make_pair(177, "L1_SingleLooseIsoEG28_FWD2p5"),          std::make_pair(180, "L1_SingleLooseIsoEG28er1p5"),          std::make_pair(179, "L1_SingleLooseIsoEG28er2p1"),          std::make_pair(178, "L1_SingleLooseIsoEG28er2p5"),          std::make_pair(182, "L1_SingleLooseIsoEG30er1p5"),          std::make_pair(181, "L1_SingleLooseIsoEG30er2p5"),          std::make_pair(6, "L1_SingleMu0_BMTF"),          std::make_pair(5, "L1_SingleMu0_DQ"),          std::make_pair(8, "L1_SingleMu0_EMTF"),          std::make_pair(7, "L1_SingleMu0_OMTF"),          std::make_pair(29, "L1_SingleMu10er1p5"),          std::make_pair(13, "L1_SingleMu12_DQ_BMTF"),          std::make_pair(15, "L1_SingleMu12_DQ_EMTF"),          std::make_pair(14, "L1_SingleMu12_DQ_OMTF"),          std::make_pair(30, "L1_SingleMu12er1p5"),          std::make_pair(31, "L1_SingleMu14er1p5"),          std::make_pair(16, "L1_SingleMu15_DQ"),          std::make_pair(32, "L1_SingleMu16er1p5"),          std::make_pair(17, "L1_SingleMu18"),          std::make_pair(33, "L1_SingleMu18er1p5"),          std::make_pair(18, "L1_SingleMu20"),          std::make_pair(19, "L1_SingleMu22"),          std::make_pair(20, "L1_SingleMu22_BMTF"),          std::make_pair(22, "L1_SingleMu22_EMTF"),          std::make_pair(21, "L1_SingleMu22_OMTF"),          std::make_pair(23, "L1_SingleMu25"),          std::make_pair(9, "L1_SingleMu3"),          std::make_pair(10, "L1_SingleMu5"),          std::make_pair(25, "L1_SingleMu6er1p5"),          std::make_pair(12, "L1_SingleMu7"),          std::make_pair(11, "L1_SingleMu7_DQ"),          std::make_pair(26, "L1_SingleMu7er1p5"),          std::make_pair(27, "L1_SingleMu8er1p5"),          std::make_pair(28, "L1_SingleMu9er1p5"),          std::make_pair(0, "L1_SingleMuCosmics"),          std::make_pair(1, "L1_SingleMuCosmics_BMTF"),          std::make_pair(3, "L1_SingleMuCosmics_EMTF"),          std::make_pair(2, "L1_SingleMuCosmics_OMTF"),          std::make_pair(4, "L1_SingleMuOpen"),          std::make_pair(446, "L1_SingleMuOpen_NotBptxOR"),          std::make_pair(448, "L1_SingleMuOpen_er1p1_NotBptxOR_3BX"),          std::make_pair(447, "L1_SingleMuOpen_er1p4_NotBptxOR_3BX"),          std::make_pair(270, "L1_SingleTau120er2p1"),          std::make_pair(271, "L1_SingleTau130er2p1"),          std::make_pair(503, "L1_TOTEM_1"),          std::make_pair(504, "L1_TOTEM_2"),          std::make_pair(505, "L1_TOTEM_3"),          std::make_pair(506, "L1_TOTEM_4"),          std::make_pair(228, "L1_TripleEG16er2p5"),          std::make_pair(224, "L1_TripleEG_16_12_8_er2p5"),          std::make_pair(225, "L1_TripleEG_16_15_8_er2p5"),          std::make_pair(226, "L1_TripleEG_18_17_8_er2p5"),          std::make_pair(227, "L1_TripleEG_18_18_12_er2p5"),          std::make_pair(373, "L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5"),          std::make_pair(374, "L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5"),          std::make_pair(372, "L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5"),          std::make_pair(72, "L1_TripleMu0"),          std::make_pair(71, "L1_TripleMu0_OQ"),          std::make_pair(73, "L1_TripleMu0_SQ"),          std::make_pair(74, "L1_TripleMu3"),          std::make_pair(75, "L1_TripleMu3_SQ"),          std::make_pair(76, "L1_TripleMu_5SQ_3SQ_0OQ"),          std::make_pair(85, "L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9"),          std::make_pair(86, "L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9"),          std::make_pair(78, "L1_TripleMu_5_3_3"),          std::make_pair(79, "L1_TripleMu_5_3_3_SQ"),          std::make_pair(77, "L1_TripleMu_5_3p5_2p5"),          std::make_pair(83, "L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17"),          std::make_pair(82, "L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17"),          std::make_pair(84, "L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17"),          std::make_pair(80, "L1_TripleMu_5_5_3"),          std::make_pair(469, "L1_UnpairedBunchBptxMinus"),          std::make_pair(468, "L1_UnpairedBunchBptxPlus"),          std::make_pair(459, "L1_ZeroBias"),          std::make_pair(460, "L1_ZeroBias_copy")      };
 
   static const std::map<int, std::string> Id2Name(id2name, id2name + sizeof(id2name) / sizeof(id2name[0]));
   const std::map<int, std::string>::const_iterator rc = Id2Name.find(index);
@@ -20248,7 +21376,7 @@ std::string getNameFromId(const int index)
 int getIdFromName(const std::string& name)
 {
   static const std::pair<std::string, int> name2id[] = {
-          std::make_pair("L1_AlwaysTrue", 458),          std::make_pair("L1_BPTX_AND_Ref1_VME", 486),          std::make_pair("L1_BPTX_AND_Ref3_VME", 487),          std::make_pair("L1_BPTX_AND_Ref4_VME", 488),          std::make_pair("L1_BPTX_BeamGas_B1_VME", 491),          std::make_pair("L1_BPTX_BeamGas_B2_VME", 492),          std::make_pair("L1_BPTX_BeamGas_Ref1_VME", 489),          std::make_pair("L1_BPTX_BeamGas_Ref2_VME", 490),          std::make_pair("L1_BPTX_NotOR_VME", 482),          std::make_pair("L1_BPTX_OR_Ref3_VME", 483),          std::make_pair("L1_BPTX_OR_Ref4_VME", 484),          std::make_pair("L1_BPTX_RefAND_VME", 485),          std::make_pair("L1_BptxMinus", 467),          std::make_pair("L1_BptxOR", 464),          std::make_pair("L1_BptxPlus", 466),          std::make_pair("L1_BptxXOR", 465),          std::make_pair("L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142", 494),          std::make_pair("L1_DoubleEG8er2p5_HTT260er", 247),          std::make_pair("L1_DoubleEG8er2p5_HTT280er", 248),          std::make_pair("L1_DoubleEG8er2p5_HTT300er", 249),          std::make_pair("L1_DoubleEG8er2p5_HTT320er", 250),          std::make_pair("L1_DoubleEG8er2p5_HTT340er", 251),          std::make_pair("L1_DoubleEG_15_10_er2p5", 205),          std::make_pair("L1_DoubleEG_20_10_er2p5", 206),          std::make_pair("L1_DoubleEG_22_10_er2p5", 207),          std::make_pair("L1_DoubleEG_25_12_er2p5", 208),          std::make_pair("L1_DoubleEG_25_14_er2p5", 209),          std::make_pair("L1_DoubleEG_27_14_er2p5", 210),          std::make_pair("L1_DoubleEG_LooseIso20_10_er2p5", 212),          std::make_pair("L1_DoubleEG_LooseIso22_10_er2p5", 213),          std::make_pair("L1_DoubleEG_LooseIso22_12_er2p5", 214),          std::make_pair("L1_DoubleEG_LooseIso25_12_er2p5", 215),          std::make_pair("L1_DoubleIsoTau32er2p1", 275),          std::make_pair("L1_DoubleIsoTau34er2p1", 276),          std::make_pair("L1_DoubleIsoTau36er2p1", 277),          std::make_pair("L1_DoubleJet100er2p3_dEta_Max1p6", 345),          std::make_pair("L1_DoubleJet100er2p5", 341),          std::make_pair("L1_DoubleJet112er2p3_dEta_Max1p6", 346),          std::make_pair("L1_DoubleJet120er2p5", 342),          std::make_pair("L1_DoubleJet150er2p5", 343),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5", 348),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5", 349),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5", 350),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5", 351),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5", 352),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5", 353),          std::make_pair("L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp", 363),          std::make_pair("L1_DoubleJet40er2p5", 340),          std::make_pair("L1_DoubleJet_100_30_DoubleJet30_Mass_Min620", 356),          std::make_pair("L1_DoubleJet_110_35_DoubleJet35_Mass_Min620", 357),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620", 358),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28", 360),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620", 359),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28", 361),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ", 366),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp", 364),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_Mu8", 365),          std::make_pair("L1_DoubleJet_90_30_DoubleJet30_Mass_Min620", 355),          std::make_pair("L1_DoubleLooseIsoEG22er2p1", 217),          std::make_pair("L1_DoubleLooseIsoEG24er2p1", 218),          std::make_pair("L1_DoubleMu0", 40),          std::make_pair("L1_DoubleMu0_Mass_Min1", 43),          std::make_pair("L1_DoubleMu0_OQ", 39),          std::make_pair("L1_DoubleMu0_SQ", 41),          std::make_pair("L1_DoubleMu0_SQ_OS", 42),          std::make_pair("L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8", 142),          std::make_pair("L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4", 59),          std::make_pair("L1_DoubleMu0er1p5_SQ", 55),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS", 56),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4", 58),          std::make_pair("L1_DoubleMu0er1p5_SQ_dR_Max1p4", 57),          std::make_pair("L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4", 54),          std::make_pair("L1_DoubleMu0er2p0_SQ_dR_Max1p4", 53),          std::make_pair("L1_DoubleMu10_SQ", 45),          std::make_pair("L1_DoubleMu18er2p1", 51),          std::make_pair("L1_DoubleMu3_OS_DoubleEG7p5Upsilon", 112),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_HTT60er", 145),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5", 147),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5", 146),          std::make_pair("L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5", 148),          std::make_pair("L1_DoubleMu3_SQ_HTT220er", 150),          std::make_pair("L1_DoubleMu3_SQ_HTT240er", 151),          std::make_pair("L1_DoubleMu3_SQ_HTT260er", 152),          std::make_pair("L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8", 143),          std::make_pair("L1_DoubleMu4_SQ_EG9er2p5", 109),          std::make_pair("L1_DoubleMu4_SQ_OS", 60),          std::make_pair("L1_DoubleMu4_SQ_OS_dR_Max1p2", 61),          std::make_pair("L1_DoubleMu4p5_SQ_OS", 62),          std::make_pair("L1_DoubleMu4p5_SQ_OS_dR_Max1p2", 63),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS", 64),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18", 65),          std::make_pair("L1_DoubleMu5Upsilon_OS_DoubleEG3", 113),          std::make_pair("L1_DoubleMu5_SQ_EG9er2p5", 110),          std::make_pair("L1_DoubleMu9_SQ", 44),          std::make_pair("L1_DoubleMu_12_5", 46),          std::make_pair("L1_DoubleMu_15_5_SQ", 47),          std::make_pair("L1_DoubleMu_15_7", 48),          std::make_pair("L1_DoubleMu_15_7_Mass_Min1", 50),          std::make_pair("L1_DoubleMu_15_7_SQ", 49),          std::make_pair("L1_DoubleTau70er2p1", 273),          std::make_pair("L1_ETM120", 416),          std::make_pair("L1_ETM150", 417),          std::make_pair("L1_ETMHF100", 421),          std::make_pair("L1_ETMHF100_HTT60er", 429),          std::make_pair("L1_ETMHF110", 422),          std::make_pair("L1_ETMHF110_HTT60er", 430),          std::make_pair("L1_ETMHF110_HTT60er_NotSecondBunchInTrain", 444),          std::make_pair("L1_ETMHF120", 423),          std::make_pair("L1_ETMHF120_HTT60er", 431),          std::make_pair("L1_ETMHF120_NotSecondBunchInTrain", 443),          std::make_pair("L1_ETMHF130", 424),          std::make_pair("L1_ETMHF130_HTT60er", 432),          std::make_pair("L1_ETMHF140", 425),          std::make_pair("L1_ETMHF150", 426),          std::make_pair("L1_ETMHF90_HTT60er", 428),          std::make_pair("L1_ETT1200", 410),          std::make_pair("L1_ETT1600", 411),          std::make_pair("L1_ETT2000", 412),          std::make_pair("L1_FirstBunchAfterTrain", 477),          std::make_pair("L1_FirstBunchBeforeTrain", 472),          std::make_pair("L1_FirstBunchInTrain", 473),          std::make_pair("L1_FirstCollisionInOrbit", 480),          std::make_pair("L1_FirstCollisionInTrain", 479),          std::make_pair("L1_HCAL_LaserMon_Trig", 500),          std::make_pair("L1_HCAL_LaserMon_Veto", 501),          std::make_pair("L1_HTT120er", 398),          std::make_pair("L1_HTT160er", 399),          std::make_pair("L1_HTT200er", 400),          std::make_pair("L1_HTT255er", 401),          std::make_pair("L1_HTT280er", 402),          std::make_pair("L1_HTT280er_QuadJet_70_55_40_35_er2p4", 384),          std::make_pair("L1_HTT320er", 403),          std::make_pair("L1_HTT320er_QuadJet_70_55_40_40_er2p4", 385),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3", 386),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3", 387),          std::make_pair("L1_HTT360er", 404),          std::make_pair("L1_HTT400er", 405),          std::make_pair("L1_HTT450er", 406),          std::make_pair("L1_IsoEG32er2p5_Mt40", 197),          std::make_pair("L1_IsoEG32er2p5_Mt44", 198),          std::make_pair("L1_IsoEG32er2p5_Mt48", 199),          std::make_pair("L1_IsoTau40er2p1_ETMHF100", 294),          std::make_pair("L1_IsoTau40er2p1_ETMHF110", 295),          std::make_pair("L1_IsoTau40er2p1_ETMHF120", 296),          std::make_pair("L1_IsoTau40er2p1_ETMHF90", 293),          std::make_pair("L1_IsolatedBunch", 471),          std::make_pair("L1_LastBunchInTrain", 476),          std::make_pair("L1_LastCollisionInTrain", 478),          std::make_pair("L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3", 257),          std::make_pair("L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3", 259),          std::make_pair("L1_LooseIsoEG24er2p1_HTT100er", 238),          std::make_pair("L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3", 258),          std::make_pair("L1_LooseIsoEG26er2p1_HTT100er", 239),          std::make_pair("L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3", 234),          std::make_pair("L1_LooseIsoEG28er2p1_HTT100er", 240),          std::make_pair("L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3", 235),          std::make_pair("L1_LooseIsoEG30er2p1_HTT100er", 241),          std::make_pair("L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3", 236),          std::make_pair("L1_MinimumBiasHF0_AND_BptxAND", 461),          std::make_pair("L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6", 134),          std::make_pair("L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6", 136),          std::make_pair("L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6", 135),          std::make_pair("L1_Mu18er2p1_Tau24er2p1", 281),          std::make_pair("L1_Mu18er2p1_Tau26er2p1", 282),          std::make_pair("L1_Mu20_EG10er2p5", 98),          std::make_pair("L1_Mu22er2p1_IsoTau32er2p1", 284),          std::make_pair("L1_Mu22er2p1_IsoTau34er2p1", 285),          std::make_pair("L1_Mu22er2p1_IsoTau36er2p1", 286),          std::make_pair("L1_Mu22er2p1_IsoTau40er2p1", 287),          std::make_pair("L1_Mu22er2p1_Tau70er2p1", 289),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p4", 126),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p8", 125),          std::make_pair("L1_Mu3_Jet16er2p5_dR_Max0p4", 121),          std::make_pair("L1_Mu3_Jet30er2p5", 119),          std::make_pair("L1_Mu3_Jet35er2p5_dR_Max0p4", 122),          std::make_pair("L1_Mu3_Jet60er2p5_dR_Max0p4", 123),          std::make_pair("L1_Mu3_Jet80er2p5_dR_Max0p4", 124),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF40", 128),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF50", 129),          std::make_pair("L1_Mu5_EG23er2p5", 96),          std::make_pair("L1_Mu5_LooseIsoEG20er2p5", 100),          std::make_pair("L1_Mu6_DoubleEG10er2p5", 104),          std::make_pair("L1_Mu6_DoubleEG12er2p5", 105),          std::make_pair("L1_Mu6_DoubleEG15er2p5", 106),          std::make_pair("L1_Mu6_DoubleEG17er2p5", 107),          std::make_pair("L1_Mu6_HTT240er", 131),          std::make_pair("L1_Mu6_HTT250er", 132),          std::make_pair("L1_Mu7_EG23er2p5", 97),          std::make_pair("L1_Mu7_LooseIsoEG20er2p5", 101),          std::make_pair("L1_Mu7_LooseIsoEG23er2p5", 102),          std::make_pair("L1_NotBptxOR", 463),          std::make_pair("L1_QuadJet36er2p5_IsoTau52er2p1", 298),          std::make_pair("L1_QuadJet60er2p5", 382),          std::make_pair("L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0", 376),          std::make_pair("L1_QuadMu0", 89),          std::make_pair("L1_QuadMu0_OQ", 88),          std::make_pair("L1_QuadMu0_SQ", 90),          std::make_pair("L1_SecondBunchInTrain", 474),          std::make_pair("L1_SecondLastBunchInTrain", 475),          std::make_pair("L1_SingleEG10er2p5", 164),          std::make_pair("L1_SingleEG15er2p5", 165),          std::make_pair("L1_SingleEG26er2p5", 166),          std::make_pair("L1_SingleEG34er2p5", 167),          std::make_pair("L1_SingleEG36er2p5", 168),          std::make_pair("L1_SingleEG38er2p5", 169),          std::make_pair("L1_SingleEG40er2p5", 170),          std::make_pair("L1_SingleEG42er2p5", 171),          std::make_pair("L1_SingleEG45er2p5", 172),          std::make_pair("L1_SingleEG50", 173),          std::make_pair("L1_SingleEG60", 174),          std::make_pair("L1_SingleEG8er2p5", 163),          std::make_pair("L1_SingleIsoEG24er1p5", 184),          std::make_pair("L1_SingleIsoEG24er2p1", 183),          std::make_pair("L1_SingleIsoEG26er1p5", 187),          std::make_pair("L1_SingleIsoEG26er2p1", 186),          std::make_pair("L1_SingleIsoEG26er2p5", 185),          std::make_pair("L1_SingleIsoEG28er1p5", 190),          std::make_pair("L1_SingleIsoEG28er2p1", 189),          std::make_pair("L1_SingleIsoEG28er2p5", 188),          std::make_pair("L1_SingleIsoEG30er2p1", 192),          std::make_pair("L1_SingleIsoEG30er2p5", 191),          std::make_pair("L1_SingleIsoEG32er2p1", 194),          std::make_pair("L1_SingleIsoEG32er2p5", 193),          std::make_pair("L1_SingleIsoEG34er2p5", 195),          std::make_pair("L1_SingleJet10erHE", 330),          std::make_pair("L1_SingleJet120", 312),          std::make_pair("L1_SingleJet120_FWD3p0", 327),          std::make_pair("L1_SingleJet120er2p5", 319),          std::make_pair("L1_SingleJet12erHE", 331),          std::make_pair("L1_SingleJet140er2p5", 320),          std::make_pair("L1_SingleJet140er2p5_ETMHF80", 333),          std::make_pair("L1_SingleJet140er2p5_ETMHF90", 334),          std::make_pair("L1_SingleJet160er2p5", 321),          std::make_pair("L1_SingleJet180", 313),          std::make_pair("L1_SingleJet180er2p5", 322),          std::make_pair("L1_SingleJet200", 314),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR", 450),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR_3BX", 451),          std::make_pair("L1_SingleJet35", 309),          std::make_pair("L1_SingleJet35_FWD3p0", 324),          std::make_pair("L1_SingleJet35er2p5", 316),          std::make_pair("L1_SingleJet43er2p5_NotBptxOR_3BX", 452),          std::make_pair("L1_SingleJet46er2p5_NotBptxOR_3BX", 454),          std::make_pair("L1_SingleJet60", 310),          std::make_pair("L1_SingleJet60_FWD3p0", 325),          std::make_pair("L1_SingleJet60er2p5", 317),          std::make_pair("L1_SingleJet8erHE", 329),          std::make_pair("L1_SingleJet90", 311),          std::make_pair("L1_SingleJet90_FWD3p0", 326),          std::make_pair("L1_SingleJet90er2p5", 318),          std::make_pair("L1_SingleLooseIsoEG28er1p5", 180),          std::make_pair("L1_SingleLooseIsoEG30er1p5", 181),          std::make_pair("L1_SingleMu0_BMTF", 6),          std::make_pair("L1_SingleMu0_DQ", 5),          std::make_pair("L1_SingleMu0_EMTF", 8),          std::make_pair("L1_SingleMu0_OMTF", 7),          std::make_pair("L1_SingleMu10er1p5", 29),          std::make_pair("L1_SingleMu12_DQ_BMTF", 13),          std::make_pair("L1_SingleMu12_DQ_EMTF", 15),          std::make_pair("L1_SingleMu12_DQ_OMTF", 14),          std::make_pair("L1_SingleMu12er1p5", 30),          std::make_pair("L1_SingleMu14er1p5", 31),          std::make_pair("L1_SingleMu15_DQ", 16),          std::make_pair("L1_SingleMu16er1p5", 32),          std::make_pair("L1_SingleMu18", 17),          std::make_pair("L1_SingleMu18er1p5", 33),          std::make_pair("L1_SingleMu20", 18),          std::make_pair("L1_SingleMu22", 19),          std::make_pair("L1_SingleMu22_BMTF", 20),          std::make_pair("L1_SingleMu22_EMTF", 22),          std::make_pair("L1_SingleMu22_OMTF", 21),          std::make_pair("L1_SingleMu25", 23),          std::make_pair("L1_SingleMu3", 9),          std::make_pair("L1_SingleMu5", 10),          std::make_pair("L1_SingleMu6er1p5", 25),          std::make_pair("L1_SingleMu7", 12),          std::make_pair("L1_SingleMu7_DQ", 11),          std::make_pair("L1_SingleMu7er1p5", 26),          std::make_pair("L1_SingleMu8er1p5", 27),          std::make_pair("L1_SingleMu9er1p5", 28),          std::make_pair("L1_SingleMuCosmics", 0),          std::make_pair("L1_SingleMuCosmics_BMTF", 1),          std::make_pair("L1_SingleMuCosmics_EMTF", 3),          std::make_pair("L1_SingleMuCosmics_OMTF", 2),          std::make_pair("L1_SingleMuOpen", 4),          std::make_pair("L1_SingleMuOpen_NotBptxOR", 446),          std::make_pair("L1_SingleMuOpen_er1p1_NotBptxOR_3BX", 448),          std::make_pair("L1_SingleMuOpen_er1p4_NotBptxOR_3BX", 447),          std::make_pair("L1_SingleTau120er2p1", 270),          std::make_pair("L1_SingleTau130er2p1", 271),          std::make_pair("L1_TOTEM_1", 503),          std::make_pair("L1_TOTEM_2", 504),          std::make_pair("L1_TOTEM_3", 505),          std::make_pair("L1_TOTEM_4", 506),          std::make_pair("L1_TripleEG16er2p5", 228),          std::make_pair("L1_TripleEG_16_12_8_er2p5", 224),          std::make_pair("L1_TripleEG_16_15_8_er2p5", 225),          std::make_pair("L1_TripleEG_18_17_8_er2p5", 226),          std::make_pair("L1_TripleEG_18_18_12_er2p5", 227),          std::make_pair("L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5", 373),          std::make_pair("L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5", 374),          std::make_pair("L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5", 372),          std::make_pair("L1_TripleMu0", 72),          std::make_pair("L1_TripleMu0_OQ", 71),          std::make_pair("L1_TripleMu0_SQ", 73),          std::make_pair("L1_TripleMu3", 74),          std::make_pair("L1_TripleMu3_SQ", 75),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ", 76),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9", 85),          std::make_pair("L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9", 86),          std::make_pair("L1_TripleMu_5_3_3", 78),          std::make_pair("L1_TripleMu_5_3_3_SQ", 79),          std::make_pair("L1_TripleMu_5_3p5_2p5", 77),          std::make_pair("L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17", 83),          std::make_pair("L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17", 82),          std::make_pair("L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17", 84),          std::make_pair("L1_TripleMu_5_5_3", 80),          std::make_pair("L1_UnpairedBunchBptxMinus", 469),          std::make_pair("L1_UnpairedBunchBptxPlus", 468),          std::make_pair("L1_ZeroBias", 459),          std::make_pair("L1_ZeroBias_copy", 460)      };
+          std::make_pair("L1_AlwaysTrue", 458),          std::make_pair("L1_BPTX_AND_Ref1_VME", 486),          std::make_pair("L1_BPTX_AND_Ref3_VME", 487),          std::make_pair("L1_BPTX_AND_Ref4_VME", 488),          std::make_pair("L1_BPTX_BeamGas_B1_VME", 491),          std::make_pair("L1_BPTX_BeamGas_B2_VME", 492),          std::make_pair("L1_BPTX_BeamGas_Ref1_VME", 489),          std::make_pair("L1_BPTX_BeamGas_Ref2_VME", 490),          std::make_pair("L1_BPTX_NotOR_VME", 482),          std::make_pair("L1_BPTX_OR_Ref3_VME", 483),          std::make_pair("L1_BPTX_OR_Ref4_VME", 484),          std::make_pair("L1_BPTX_RefAND_VME", 485),          std::make_pair("L1_BptxMinus", 467),          std::make_pair("L1_BptxOR", 464),          std::make_pair("L1_BptxPlus", 466),          std::make_pair("L1_BptxXOR", 465),          std::make_pair("L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142", 494),          std::make_pair("L1_DoubleEG8er2p5_HTT260er", 247),          std::make_pair("L1_DoubleEG8er2p5_HTT280er", 248),          std::make_pair("L1_DoubleEG8er2p5_HTT300er", 249),          std::make_pair("L1_DoubleEG8er2p5_HTT320er", 250),          std::make_pair("L1_DoubleEG8er2p5_HTT340er", 251),          std::make_pair("L1_DoubleEG_15_10_er2p5", 205),          std::make_pair("L1_DoubleEG_20_10_er2p5", 206),          std::make_pair("L1_DoubleEG_22_10_er2p5", 207),          std::make_pair("L1_DoubleEG_25_12_er2p5", 208),          std::make_pair("L1_DoubleEG_25_14_er2p5", 209),          std::make_pair("L1_DoubleEG_27_14_er2p5", 210),          std::make_pair("L1_DoubleEG_LooseIso20_10_er2p5", 212),          std::make_pair("L1_DoubleEG_LooseIso22_10_er2p5", 213),          std::make_pair("L1_DoubleEG_LooseIso22_12_er2p5", 214),          std::make_pair("L1_DoubleEG_LooseIso25_12_er2p5", 215),          std::make_pair("L1_DoubleIsoTau28er2p1_Mass_Max80", 279),          std::make_pair("L1_DoubleIsoTau28er2p1_Mass_Max90", 278),          std::make_pair("L1_DoubleIsoTau32er2p1", 275),          std::make_pair("L1_DoubleIsoTau34er2p1", 276),          std::make_pair("L1_DoubleIsoTau36er2p1", 277),          std::make_pair("L1_DoubleJet100er2p3_dEta_Max1p6", 345),          std::make_pair("L1_DoubleJet100er2p5", 341),          std::make_pair("L1_DoubleJet112er2p3_dEta_Max1p6", 346),          std::make_pair("L1_DoubleJet120er2p5", 342),          std::make_pair("L1_DoubleJet150er2p5", 343),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5", 348),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5", 349),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5", 350),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5", 351),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5", 352),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5", 353),          std::make_pair("L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp", 363),          std::make_pair("L1_DoubleJet40er2p5", 340),          std::make_pair("L1_DoubleJet_100_30_DoubleJet30_Mass_Min620", 356),          std::make_pair("L1_DoubleJet_110_35_DoubleJet35_Mass_Min620", 357),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620", 358),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28", 360),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620", 359),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28", 361),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ", 366),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp", 364),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_Mu8", 365),          std::make_pair("L1_DoubleJet_90_30_DoubleJet30_Mass_Min620", 355),          std::make_pair("L1_DoubleLooseIsoEG22er2p1", 217),          std::make_pair("L1_DoubleLooseIsoEG24er2p1", 218),          std::make_pair("L1_DoubleMu0", 40),          std::make_pair("L1_DoubleMu0_Mass_Min1", 43),          std::make_pair("L1_DoubleMu0_OQ", 39),          std::make_pair("L1_DoubleMu0_SQ", 41),          std::make_pair("L1_DoubleMu0_SQ_OS", 42),          std::make_pair("L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8", 142),          std::make_pair("L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4", 59),          std::make_pair("L1_DoubleMu0er1p5_SQ", 55),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS", 56),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4", 58),          std::make_pair("L1_DoubleMu0er1p5_SQ_dR_Max1p4", 57),          std::make_pair("L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4", 54),          std::make_pair("L1_DoubleMu0er2p0_SQ_dR_Max1p4", 53),          std::make_pair("L1_DoubleMu18er2p1", 51),          std::make_pair("L1_DoubleMu3_OS_DoubleEG7p5Upsilon", 112),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_HTT60er", 145),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5", 147),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5", 146),          std::make_pair("L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5", 148),          std::make_pair("L1_DoubleMu3_SQ_HTT220er", 150),          std::make_pair("L1_DoubleMu3_SQ_HTT240er", 151),          std::make_pair("L1_DoubleMu3_SQ_HTT260er", 152),          std::make_pair("L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8", 143),          std::make_pair("L1_DoubleMu4_SQ_EG9er2p5", 109),          std::make_pair("L1_DoubleMu4_SQ_OS", 60),          std::make_pair("L1_DoubleMu4_SQ_OS_dR_Max1p2", 61),          std::make_pair("L1_DoubleMu4p5_SQ_OS", 62),          std::make_pair("L1_DoubleMu4p5_SQ_OS_dR_Max1p2", 63),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS", 64),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18", 66),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS_Mass_Min7", 65),          std::make_pair("L1_DoubleMu5Upsilon_OS_DoubleEG3", 113),          std::make_pair("L1_DoubleMu5_SQ_EG9er2p5", 110),          std::make_pair("L1_DoubleMu8_SQ", 44),          std::make_pair("L1_DoubleMu9_SQ", 45),          std::make_pair("L1_DoubleMu_12_5", 46),          std::make_pair("L1_DoubleMu_15_5_SQ", 47),          std::make_pair("L1_DoubleMu_15_7", 48),          std::make_pair("L1_DoubleMu_15_7_Mass_Min1", 50),          std::make_pair("L1_DoubleMu_15_7_SQ", 49),          std::make_pair("L1_DoubleTau70er2p1", 273),          std::make_pair("L1_ETM120", 416),          std::make_pair("L1_ETM150", 417),          std::make_pair("L1_ETMHF100", 421),          std::make_pair("L1_ETMHF100_HTT60er", 429),          std::make_pair("L1_ETMHF110", 422),          std::make_pair("L1_ETMHF110_HTT60er", 430),          std::make_pair("L1_ETMHF110_HTT60er_NotSecondBunchInTrain", 444),          std::make_pair("L1_ETMHF120", 423),          std::make_pair("L1_ETMHF120_HTT60er", 431),          std::make_pair("L1_ETMHF120_NotSecondBunchInTrain", 443),          std::make_pair("L1_ETMHF130", 424),          std::make_pair("L1_ETMHF130_HTT60er", 432),          std::make_pair("L1_ETMHF140", 425),          std::make_pair("L1_ETMHF150", 426),          std::make_pair("L1_ETMHF90_HTT60er", 428),          std::make_pair("L1_ETT1200", 410),          std::make_pair("L1_ETT1600", 411),          std::make_pair("L1_ETT2000", 412),          std::make_pair("L1_FirstBunchAfterTrain", 477),          std::make_pair("L1_FirstBunchBeforeTrain", 472),          std::make_pair("L1_FirstBunchInTrain", 473),          std::make_pair("L1_FirstCollisionInOrbit", 480),          std::make_pair("L1_FirstCollisionInTrain", 479),          std::make_pair("L1_HCAL_LaserMon_Trig", 500),          std::make_pair("L1_HCAL_LaserMon_Veto", 501),          std::make_pair("L1_HTT120er", 398),          std::make_pair("L1_HTT160er", 399),          std::make_pair("L1_HTT200er", 400),          std::make_pair("L1_HTT255er", 401),          std::make_pair("L1_HTT280er", 402),          std::make_pair("L1_HTT280er_QuadJet_70_55_40_35_er2p4", 384),          std::make_pair("L1_HTT320er", 403),          std::make_pair("L1_HTT320er_QuadJet_70_55_40_40_er2p4", 385),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3", 386),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3", 387),          std::make_pair("L1_HTT360er", 404),          std::make_pair("L1_HTT400er", 405),          std::make_pair("L1_HTT450er", 406),          std::make_pair("L1_IsoEG32er2p5_Mt40", 197),          std::make_pair("L1_IsoEG32er2p5_Mt44", 198),          std::make_pair("L1_IsoEG32er2p5_Mt48", 199),          std::make_pair("L1_IsoTau40er2p1_ETMHF100", 293),          std::make_pair("L1_IsoTau40er2p1_ETMHF110", 294),          std::make_pair("L1_IsoTau40er2p1_ETMHF80", 291),          std::make_pair("L1_IsoTau40er2p1_ETMHF90", 292),          std::make_pair("L1_IsolatedBunch", 471),          std::make_pair("L1_LastBunchInTrain", 476),          std::make_pair("L1_LastCollisionInTrain", 478),          std::make_pair("L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3", 257),          std::make_pair("L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3", 259),          std::make_pair("L1_LooseIsoEG24er2p1_HTT100er", 238),          std::make_pair("L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3", 258),          std::make_pair("L1_LooseIsoEG26er2p1_HTT100er", 239),          std::make_pair("L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3", 234),          std::make_pair("L1_LooseIsoEG28er2p1_HTT100er", 240),          std::make_pair("L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3", 235),          std::make_pair("L1_LooseIsoEG30er2p1_HTT100er", 241),          std::make_pair("L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3", 236),          std::make_pair("L1_MinimumBiasHF0_AND_BptxAND", 461),          std::make_pair("L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6", 134),          std::make_pair("L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6", 136),          std::make_pair("L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6", 135),          std::make_pair("L1_Mu18er2p1_Tau24er2p1", 281),          std::make_pair("L1_Mu18er2p1_Tau26er2p1", 282),          std::make_pair("L1_Mu20_EG10er2p5", 99),          std::make_pair("L1_Mu22er2p1_IsoTau32er2p1", 284),          std::make_pair("L1_Mu22er2p1_IsoTau34er2p1", 285),          std::make_pair("L1_Mu22er2p1_IsoTau36er2p1", 286),          std::make_pair("L1_Mu22er2p1_IsoTau40er2p1", 287),          std::make_pair("L1_Mu22er2p1_Tau70er2p1", 289),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p4", 126),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p8", 125),          std::make_pair("L1_Mu3_Jet16er2p5_dR_Max0p4", 121),          std::make_pair("L1_Mu3_Jet30er2p5", 119),          std::make_pair("L1_Mu3_Jet35er2p5_dR_Max0p4", 122),          std::make_pair("L1_Mu3_Jet60er2p5_dR_Max0p4", 123),          std::make_pair("L1_Mu3_Jet80er2p5_dR_Max0p4", 124),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF40", 128),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF50", 129),          std::make_pair("L1_Mu5_EG23er2p5", 96),          std::make_pair("L1_Mu5_LooseIsoEG20er2p5", 100),          std::make_pair("L1_Mu6_DoubleEG10er2p5", 104),          std::make_pair("L1_Mu6_DoubleEG12er2p5", 105),          std::make_pair("L1_Mu6_DoubleEG15er2p5", 106),          std::make_pair("L1_Mu6_DoubleEG17er2p5", 107),          std::make_pair("L1_Mu6_HTT240er", 131),          std::make_pair("L1_Mu6_HTT250er", 132),          std::make_pair("L1_Mu7_EG20er2p5", 97),          std::make_pair("L1_Mu7_EG23er2p5", 98),          std::make_pair("L1_Mu7_LooseIsoEG20er2p5", 101),          std::make_pair("L1_Mu7_LooseIsoEG23er2p5", 102),          std::make_pair("L1_NotBptxOR", 463),          std::make_pair("L1_QuadJet36er2p5_IsoTau52er2p1", 298),          std::make_pair("L1_QuadJet60er2p5", 382),          std::make_pair("L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0", 376),          std::make_pair("L1_QuadMu0", 89),          std::make_pair("L1_QuadMu0_OQ", 88),          std::make_pair("L1_QuadMu0_SQ", 90),          std::make_pair("L1_SecondBunchInTrain", 474),          std::make_pair("L1_SecondLastBunchInTrain", 475),          std::make_pair("L1_SingleEG10er2p5", 160),          std::make_pair("L1_SingleEG15er2p5", 161),          std::make_pair("L1_SingleEG26er2p5", 162),          std::make_pair("L1_SingleEG28_FWD2p5", 163),          std::make_pair("L1_SingleEG28er1p5", 166),          std::make_pair("L1_SingleEG28er2p1", 165),          std::make_pair("L1_SingleEG28er2p5", 164),          std::make_pair("L1_SingleEG34er2p5", 167),          std::make_pair("L1_SingleEG36er2p5", 168),          std::make_pair("L1_SingleEG38er2p5", 169),          std::make_pair("L1_SingleEG40er2p5", 170),          std::make_pair("L1_SingleEG42er2p5", 171),          std::make_pair("L1_SingleEG45er2p5", 172),          std::make_pair("L1_SingleEG50", 173),          std::make_pair("L1_SingleEG60", 174),          std::make_pair("L1_SingleEG8er2p5", 159),          std::make_pair("L1_SingleIsoEG24er1p5", 184),          std::make_pair("L1_SingleIsoEG24er2p1", 183),          std::make_pair("L1_SingleIsoEG26er1p5", 187),          std::make_pair("L1_SingleIsoEG26er2p1", 186),          std::make_pair("L1_SingleIsoEG26er2p5", 185),          std::make_pair("L1_SingleIsoEG28_FWD2p5", 188),          std::make_pair("L1_SingleIsoEG28er1p5", 191),          std::make_pair("L1_SingleIsoEG28er2p1", 190),          std::make_pair("L1_SingleIsoEG28er2p5", 189),          std::make_pair("L1_SingleIsoEG30er2p1", 193),          std::make_pair("L1_SingleIsoEG30er2p5", 192),          std::make_pair("L1_SingleIsoEG32er2p1", 195),          std::make_pair("L1_SingleIsoEG32er2p5", 194),          std::make_pair("L1_SingleIsoEG34er2p5", 196),          std::make_pair("L1_SingleJet10erHE", 330),          std::make_pair("L1_SingleJet120", 312),          std::make_pair("L1_SingleJet120_FWD3p0", 327),          std::make_pair("L1_SingleJet120er2p5", 319),          std::make_pair("L1_SingleJet12erHE", 331),          std::make_pair("L1_SingleJet140er2p5", 320),          std::make_pair("L1_SingleJet140er2p5_ETMHF70", 332),          std::make_pair("L1_SingleJet140er2p5_ETMHF80", 333),          std::make_pair("L1_SingleJet140er2p5_ETMHF90", 334),          std::make_pair("L1_SingleJet160er2p5", 321),          std::make_pair("L1_SingleJet180", 313),          std::make_pair("L1_SingleJet180er2p5", 322),          std::make_pair("L1_SingleJet200", 314),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR", 450),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR_3BX", 451),          std::make_pair("L1_SingleJet35", 309),          std::make_pair("L1_SingleJet35_FWD3p0", 324),          std::make_pair("L1_SingleJet35er2p5", 316),          std::make_pair("L1_SingleJet43er2p5_NotBptxOR_3BX", 452),          std::make_pair("L1_SingleJet46er2p5_NotBptxOR_3BX", 453),          std::make_pair("L1_SingleJet60", 310),          std::make_pair("L1_SingleJet60_FWD3p0", 325),          std::make_pair("L1_SingleJet60er2p5", 317),          std::make_pair("L1_SingleJet8erHE", 329),          std::make_pair("L1_SingleJet90", 311),          std::make_pair("L1_SingleJet90_FWD3p0", 326),          std::make_pair("L1_SingleJet90er2p5", 318),          std::make_pair("L1_SingleLooseIsoEG26er1p5", 176),          std::make_pair("L1_SingleLooseIsoEG26er2p5", 175),          std::make_pair("L1_SingleLooseIsoEG28_FWD2p5", 177),          std::make_pair("L1_SingleLooseIsoEG28er1p5", 180),          std::make_pair("L1_SingleLooseIsoEG28er2p1", 179),          std::make_pair("L1_SingleLooseIsoEG28er2p5", 178),          std::make_pair("L1_SingleLooseIsoEG30er1p5", 182),          std::make_pair("L1_SingleLooseIsoEG30er2p5", 181),          std::make_pair("L1_SingleMu0_BMTF", 6),          std::make_pair("L1_SingleMu0_DQ", 5),          std::make_pair("L1_SingleMu0_EMTF", 8),          std::make_pair("L1_SingleMu0_OMTF", 7),          std::make_pair("L1_SingleMu10er1p5", 29),          std::make_pair("L1_SingleMu12_DQ_BMTF", 13),          std::make_pair("L1_SingleMu12_DQ_EMTF", 15),          std::make_pair("L1_SingleMu12_DQ_OMTF", 14),          std::make_pair("L1_SingleMu12er1p5", 30),          std::make_pair("L1_SingleMu14er1p5", 31),          std::make_pair("L1_SingleMu15_DQ", 16),          std::make_pair("L1_SingleMu16er1p5", 32),          std::make_pair("L1_SingleMu18", 17),          std::make_pair("L1_SingleMu18er1p5", 33),          std::make_pair("L1_SingleMu20", 18),          std::make_pair("L1_SingleMu22", 19),          std::make_pair("L1_SingleMu22_BMTF", 20),          std::make_pair("L1_SingleMu22_EMTF", 22),          std::make_pair("L1_SingleMu22_OMTF", 21),          std::make_pair("L1_SingleMu25", 23),          std::make_pair("L1_SingleMu3", 9),          std::make_pair("L1_SingleMu5", 10),          std::make_pair("L1_SingleMu6er1p5", 25),          std::make_pair("L1_SingleMu7", 12),          std::make_pair("L1_SingleMu7_DQ", 11),          std::make_pair("L1_SingleMu7er1p5", 26),          std::make_pair("L1_SingleMu8er1p5", 27),          std::make_pair("L1_SingleMu9er1p5", 28),          std::make_pair("L1_SingleMuCosmics", 0),          std::make_pair("L1_SingleMuCosmics_BMTF", 1),          std::make_pair("L1_SingleMuCosmics_EMTF", 3),          std::make_pair("L1_SingleMuCosmics_OMTF", 2),          std::make_pair("L1_SingleMuOpen", 4),          std::make_pair("L1_SingleMuOpen_NotBptxOR", 446),          std::make_pair("L1_SingleMuOpen_er1p1_NotBptxOR_3BX", 448),          std::make_pair("L1_SingleMuOpen_er1p4_NotBptxOR_3BX", 447),          std::make_pair("L1_SingleTau120er2p1", 270),          std::make_pair("L1_SingleTau130er2p1", 271),          std::make_pair("L1_TOTEM_1", 503),          std::make_pair("L1_TOTEM_2", 504),          std::make_pair("L1_TOTEM_3", 505),          std::make_pair("L1_TOTEM_4", 506),          std::make_pair("L1_TripleEG16er2p5", 228),          std::make_pair("L1_TripleEG_16_12_8_er2p5", 224),          std::make_pair("L1_TripleEG_16_15_8_er2p5", 225),          std::make_pair("L1_TripleEG_18_17_8_er2p5", 226),          std::make_pair("L1_TripleEG_18_18_12_er2p5", 227),          std::make_pair("L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5", 373),          std::make_pair("L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5", 374),          std::make_pair("L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5", 372),          std::make_pair("L1_TripleMu0", 72),          std::make_pair("L1_TripleMu0_OQ", 71),          std::make_pair("L1_TripleMu0_SQ", 73),          std::make_pair("L1_TripleMu3", 74),          std::make_pair("L1_TripleMu3_SQ", 75),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ", 76),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9", 85),          std::make_pair("L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9", 86),          std::make_pair("L1_TripleMu_5_3_3", 78),          std::make_pair("L1_TripleMu_5_3_3_SQ", 79),          std::make_pair("L1_TripleMu_5_3p5_2p5", 77),          std::make_pair("L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17", 83),          std::make_pair("L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17", 82),          std::make_pair("L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17", 84),          std::make_pair("L1_TripleMu_5_5_3", 80),          std::make_pair("L1_UnpairedBunchBptxMinus", 469),          std::make_pair("L1_UnpairedBunchBptxPlus", 468),          std::make_pair("L1_ZeroBias", 459),          std::make_pair("L1_ZeroBias_copy", 460)      };
 
   static const std::map<std::string, int> Name2Id(name2id, name2id + sizeof(name2id) / sizeof(name2id[0]));
   const std::map<std::string, int>::const_iterator rc = Name2Id.find(name);
@@ -20261,7 +21389,7 @@ int getIdFromName(const std::string& name)
 AlgorithmFunction getFuncFromId(const int index)
 {
   static const std::pair<int, AlgorithmFunction> id2func[] = {
-          std::make_pair(458, &L1_AlwaysTrue),          std::make_pair(486, &L1_BPTX_AND_Ref1_VME),          std::make_pair(487, &L1_BPTX_AND_Ref3_VME),          std::make_pair(488, &L1_BPTX_AND_Ref4_VME),          std::make_pair(491, &L1_BPTX_BeamGas_B1_VME),          std::make_pair(492, &L1_BPTX_BeamGas_B2_VME),          std::make_pair(489, &L1_BPTX_BeamGas_Ref1_VME),          std::make_pair(490, &L1_BPTX_BeamGas_Ref2_VME),          std::make_pair(482, &L1_BPTX_NotOR_VME),          std::make_pair(483, &L1_BPTX_OR_Ref3_VME),          std::make_pair(484, &L1_BPTX_OR_Ref4_VME),          std::make_pair(485, &L1_BPTX_RefAND_VME),          std::make_pair(467, &L1_BptxMinus),          std::make_pair(464, &L1_BptxOR),          std::make_pair(466, &L1_BptxPlus),          std::make_pair(465, &L1_BptxXOR),          std::make_pair(494, &L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142),          std::make_pair(247, &L1_DoubleEG8er2p5_HTT260er),          std::make_pair(248, &L1_DoubleEG8er2p5_HTT280er),          std::make_pair(249, &L1_DoubleEG8er2p5_HTT300er),          std::make_pair(250, &L1_DoubleEG8er2p5_HTT320er),          std::make_pair(251, &L1_DoubleEG8er2p5_HTT340er),          std::make_pair(205, &L1_DoubleEG_15_10_er2p5),          std::make_pair(206, &L1_DoubleEG_20_10_er2p5),          std::make_pair(207, &L1_DoubleEG_22_10_er2p5),          std::make_pair(208, &L1_DoubleEG_25_12_er2p5),          std::make_pair(209, &L1_DoubleEG_25_14_er2p5),          std::make_pair(210, &L1_DoubleEG_27_14_er2p5),          std::make_pair(212, &L1_DoubleEG_LooseIso20_10_er2p5),          std::make_pair(213, &L1_DoubleEG_LooseIso22_10_er2p5),          std::make_pair(214, &L1_DoubleEG_LooseIso22_12_er2p5),          std::make_pair(215, &L1_DoubleEG_LooseIso25_12_er2p5),          std::make_pair(275, &L1_DoubleIsoTau32er2p1),          std::make_pair(276, &L1_DoubleIsoTau34er2p1),          std::make_pair(277, &L1_DoubleIsoTau36er2p1),          std::make_pair(345, &L1_DoubleJet100er2p3_dEta_Max1p6),          std::make_pair(341, &L1_DoubleJet100er2p5),          std::make_pair(346, &L1_DoubleJet112er2p3_dEta_Max1p6),          std::make_pair(342, &L1_DoubleJet120er2p5),          std::make_pair(343, &L1_DoubleJet150er2p5),          std::make_pair(348, &L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5),          std::make_pair(349, &L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5),          std::make_pair(350, &L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5),          std::make_pair(351, &L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5),          std::make_pair(352, &L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5),          std::make_pair(353, &L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5),          std::make_pair(363, &L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp),          std::make_pair(340, &L1_DoubleJet40er2p5),          std::make_pair(356, &L1_DoubleJet_100_30_DoubleJet30_Mass_Min620),          std::make_pair(357, &L1_DoubleJet_110_35_DoubleJet35_Mass_Min620),          std::make_pair(358, &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620),          std::make_pair(360, &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28),          std::make_pair(359, &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620),          std::make_pair(361, &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28),          std::make_pair(366, &L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ),          std::make_pair(364, &L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp),          std::make_pair(365, &L1_DoubleJet_80_30_Mass_Min420_Mu8),          std::make_pair(355, &L1_DoubleJet_90_30_DoubleJet30_Mass_Min620),          std::make_pair(217, &L1_DoubleLooseIsoEG22er2p1),          std::make_pair(218, &L1_DoubleLooseIsoEG24er2p1),          std::make_pair(40, &L1_DoubleMu0),          std::make_pair(43, &L1_DoubleMu0_Mass_Min1),          std::make_pair(39, &L1_DoubleMu0_OQ),          std::make_pair(41, &L1_DoubleMu0_SQ),          std::make_pair(42, &L1_DoubleMu0_SQ_OS),          std::make_pair(142, &L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair(59, &L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4),          std::make_pair(55, &L1_DoubleMu0er1p5_SQ),          std::make_pair(56, &L1_DoubleMu0er1p5_SQ_OS),          std::make_pair(58, &L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4),          std::make_pair(57, &L1_DoubleMu0er1p5_SQ_dR_Max1p4),          std::make_pair(54, &L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4),          std::make_pair(53, &L1_DoubleMu0er2p0_SQ_dR_Max1p4),          std::make_pair(45, &L1_DoubleMu10_SQ),          std::make_pair(51, &L1_DoubleMu18er2p1),          std::make_pair(112, &L1_DoubleMu3_OS_DoubleEG7p5Upsilon),          std::make_pair(145, &L1_DoubleMu3_SQ_ETMHF50_HTT60er),          std::make_pair(147, &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5),          std::make_pair(146, &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5),          std::make_pair(148, &L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5),          std::make_pair(150, &L1_DoubleMu3_SQ_HTT220er),          std::make_pair(151, &L1_DoubleMu3_SQ_HTT240er),          std::make_pair(152, &L1_DoubleMu3_SQ_HTT260er),          std::make_pair(143, &L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair(109, &L1_DoubleMu4_SQ_EG9er2p5),          std::make_pair(60, &L1_DoubleMu4_SQ_OS),          std::make_pair(61, &L1_DoubleMu4_SQ_OS_dR_Max1p2),          std::make_pair(62, &L1_DoubleMu4p5_SQ_OS),          std::make_pair(63, &L1_DoubleMu4p5_SQ_OS_dR_Max1p2),          std::make_pair(64, &L1_DoubleMu4p5er2p0_SQ_OS),          std::make_pair(65, &L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18),          std::make_pair(113, &L1_DoubleMu5Upsilon_OS_DoubleEG3),          std::make_pair(110, &L1_DoubleMu5_SQ_EG9er2p5),          std::make_pair(44, &L1_DoubleMu9_SQ),          std::make_pair(46, &L1_DoubleMu_12_5),          std::make_pair(47, &L1_DoubleMu_15_5_SQ),          std::make_pair(48, &L1_DoubleMu_15_7),          std::make_pair(50, &L1_DoubleMu_15_7_Mass_Min1),          std::make_pair(49, &L1_DoubleMu_15_7_SQ),          std::make_pair(273, &L1_DoubleTau70er2p1),          std::make_pair(416, &L1_ETM120),          std::make_pair(417, &L1_ETM150),          std::make_pair(421, &L1_ETMHF100),          std::make_pair(429, &L1_ETMHF100_HTT60er),          std::make_pair(422, &L1_ETMHF110),          std::make_pair(430, &L1_ETMHF110_HTT60er),          std::make_pair(444, &L1_ETMHF110_HTT60er_NotSecondBunchInTrain),          std::make_pair(423, &L1_ETMHF120),          std::make_pair(431, &L1_ETMHF120_HTT60er),          std::make_pair(443, &L1_ETMHF120_NotSecondBunchInTrain),          std::make_pair(424, &L1_ETMHF130),          std::make_pair(432, &L1_ETMHF130_HTT60er),          std::make_pair(425, &L1_ETMHF140),          std::make_pair(426, &L1_ETMHF150),          std::make_pair(428, &L1_ETMHF90_HTT60er),          std::make_pair(410, &L1_ETT1200),          std::make_pair(411, &L1_ETT1600),          std::make_pair(412, &L1_ETT2000),          std::make_pair(477, &L1_FirstBunchAfterTrain),          std::make_pair(472, &L1_FirstBunchBeforeTrain),          std::make_pair(473, &L1_FirstBunchInTrain),          std::make_pair(480, &L1_FirstCollisionInOrbit),          std::make_pair(479, &L1_FirstCollisionInTrain),          std::make_pair(500, &L1_HCAL_LaserMon_Trig),          std::make_pair(501, &L1_HCAL_LaserMon_Veto),          std::make_pair(398, &L1_HTT120er),          std::make_pair(399, &L1_HTT160er),          std::make_pair(400, &L1_HTT200er),          std::make_pair(401, &L1_HTT255er),          std::make_pair(402, &L1_HTT280er),          std::make_pair(384, &L1_HTT280er_QuadJet_70_55_40_35_er2p4),          std::make_pair(403, &L1_HTT320er),          std::make_pair(385, &L1_HTT320er_QuadJet_70_55_40_40_er2p4),          std::make_pair(386, &L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3),          std::make_pair(387, &L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3),          std::make_pair(404, &L1_HTT360er),          std::make_pair(405, &L1_HTT400er),          std::make_pair(406, &L1_HTT450er),          std::make_pair(197, &L1_IsoEG32er2p5_Mt40),          std::make_pair(198, &L1_IsoEG32er2p5_Mt44),          std::make_pair(199, &L1_IsoEG32er2p5_Mt48),          std::make_pair(294, &L1_IsoTau40er2p1_ETMHF100),          std::make_pair(295, &L1_IsoTau40er2p1_ETMHF110),          std::make_pair(296, &L1_IsoTau40er2p1_ETMHF120),          std::make_pair(293, &L1_IsoTau40er2p1_ETMHF90),          std::make_pair(471, &L1_IsolatedBunch),          std::make_pair(476, &L1_LastBunchInTrain),          std::make_pair(478, &L1_LastCollisionInTrain),          std::make_pair(257, &L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3),          std::make_pair(259, &L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3),          std::make_pair(238, &L1_LooseIsoEG24er2p1_HTT100er),          std::make_pair(258, &L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3),          std::make_pair(239, &L1_LooseIsoEG26er2p1_HTT100er),          std::make_pair(234, &L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair(240, &L1_LooseIsoEG28er2p1_HTT100er),          std::make_pair(235, &L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair(241, &L1_LooseIsoEG30er2p1_HTT100er),          std::make_pair(236, &L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair(461, &L1_MinimumBiasHF0_AND_BptxAND),          std::make_pair(134, &L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6),          std::make_pair(136, &L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6),          std::make_pair(135, &L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6),          std::make_pair(281, &L1_Mu18er2p1_Tau24er2p1),          std::make_pair(282, &L1_Mu18er2p1_Tau26er2p1),          std::make_pair(98, &L1_Mu20_EG10er2p5),          std::make_pair(284, &L1_Mu22er2p1_IsoTau32er2p1),          std::make_pair(285, &L1_Mu22er2p1_IsoTau34er2p1),          std::make_pair(286, &L1_Mu22er2p1_IsoTau36er2p1),          std::make_pair(287, &L1_Mu22er2p1_IsoTau40er2p1),          std::make_pair(289, &L1_Mu22er2p1_Tau70er2p1),          std::make_pair(126, &L1_Mu3_Jet120er2p5_dR_Max0p4),          std::make_pair(125, &L1_Mu3_Jet120er2p5_dR_Max0p8),          std::make_pair(121, &L1_Mu3_Jet16er2p5_dR_Max0p4),          std::make_pair(119, &L1_Mu3_Jet30er2p5),          std::make_pair(122, &L1_Mu3_Jet35er2p5_dR_Max0p4),          std::make_pair(123, &L1_Mu3_Jet60er2p5_dR_Max0p4),          std::make_pair(124, &L1_Mu3_Jet80er2p5_dR_Max0p4),          std::make_pair(128, &L1_Mu3er1p5_Jet100er2p5_ETMHF40),          std::make_pair(129, &L1_Mu3er1p5_Jet100er2p5_ETMHF50),          std::make_pair(96, &L1_Mu5_EG23er2p5),          std::make_pair(100, &L1_Mu5_LooseIsoEG20er2p5),          std::make_pair(104, &L1_Mu6_DoubleEG10er2p5),          std::make_pair(105, &L1_Mu6_DoubleEG12er2p5),          std::make_pair(106, &L1_Mu6_DoubleEG15er2p5),          std::make_pair(107, &L1_Mu6_DoubleEG17er2p5),          std::make_pair(131, &L1_Mu6_HTT240er),          std::make_pair(132, &L1_Mu6_HTT250er),          std::make_pair(97, &L1_Mu7_EG23er2p5),          std::make_pair(101, &L1_Mu7_LooseIsoEG20er2p5),          std::make_pair(102, &L1_Mu7_LooseIsoEG23er2p5),          std::make_pair(463, &L1_NotBptxOR),          std::make_pair(298, &L1_QuadJet36er2p5_IsoTau52er2p1),          std::make_pair(382, &L1_QuadJet60er2p5),          std::make_pair(376, &L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0),          std::make_pair(89, &L1_QuadMu0),          std::make_pair(88, &L1_QuadMu0_OQ),          std::make_pair(90, &L1_QuadMu0_SQ),          std::make_pair(474, &L1_SecondBunchInTrain),          std::make_pair(475, &L1_SecondLastBunchInTrain),          std::make_pair(164, &L1_SingleEG10er2p5),          std::make_pair(165, &L1_SingleEG15er2p5),          std::make_pair(166, &L1_SingleEG26er2p5),          std::make_pair(167, &L1_SingleEG34er2p5),          std::make_pair(168, &L1_SingleEG36er2p5),          std::make_pair(169, &L1_SingleEG38er2p5),          std::make_pair(170, &L1_SingleEG40er2p5),          std::make_pair(171, &L1_SingleEG42er2p5),          std::make_pair(172, &L1_SingleEG45er2p5),          std::make_pair(173, &L1_SingleEG50),          std::make_pair(174, &L1_SingleEG60),          std::make_pair(163, &L1_SingleEG8er2p5),          std::make_pair(184, &L1_SingleIsoEG24er1p5),          std::make_pair(183, &L1_SingleIsoEG24er2p1),          std::make_pair(187, &L1_SingleIsoEG26er1p5),          std::make_pair(186, &L1_SingleIsoEG26er2p1),          std::make_pair(185, &L1_SingleIsoEG26er2p5),          std::make_pair(190, &L1_SingleIsoEG28er1p5),          std::make_pair(189, &L1_SingleIsoEG28er2p1),          std::make_pair(188, &L1_SingleIsoEG28er2p5),          std::make_pair(192, &L1_SingleIsoEG30er2p1),          std::make_pair(191, &L1_SingleIsoEG30er2p5),          std::make_pair(194, &L1_SingleIsoEG32er2p1),          std::make_pair(193, &L1_SingleIsoEG32er2p5),          std::make_pair(195, &L1_SingleIsoEG34er2p5),          std::make_pair(330, &L1_SingleJet10erHE),          std::make_pair(312, &L1_SingleJet120),          std::make_pair(327, &L1_SingleJet120_FWD3p0),          std::make_pair(319, &L1_SingleJet120er2p5),          std::make_pair(331, &L1_SingleJet12erHE),          std::make_pair(320, &L1_SingleJet140er2p5),          std::make_pair(333, &L1_SingleJet140er2p5_ETMHF80),          std::make_pair(334, &L1_SingleJet140er2p5_ETMHF90),          std::make_pair(321, &L1_SingleJet160er2p5),          std::make_pair(313, &L1_SingleJet180),          std::make_pair(322, &L1_SingleJet180er2p5),          std::make_pair(314, &L1_SingleJet200),          std::make_pair(450, &L1_SingleJet20er2p5_NotBptxOR),          std::make_pair(451, &L1_SingleJet20er2p5_NotBptxOR_3BX),          std::make_pair(309, &L1_SingleJet35),          std::make_pair(324, &L1_SingleJet35_FWD3p0),          std::make_pair(316, &L1_SingleJet35er2p5),          std::make_pair(452, &L1_SingleJet43er2p5_NotBptxOR_3BX),          std::make_pair(454, &L1_SingleJet46er2p5_NotBptxOR_3BX),          std::make_pair(310, &L1_SingleJet60),          std::make_pair(325, &L1_SingleJet60_FWD3p0),          std::make_pair(317, &L1_SingleJet60er2p5),          std::make_pair(329, &L1_SingleJet8erHE),          std::make_pair(311, &L1_SingleJet90),          std::make_pair(326, &L1_SingleJet90_FWD3p0),          std::make_pair(318, &L1_SingleJet90er2p5),          std::make_pair(180, &L1_SingleLooseIsoEG28er1p5),          std::make_pair(181, &L1_SingleLooseIsoEG30er1p5),          std::make_pair(6, &L1_SingleMu0_BMTF),          std::make_pair(5, &L1_SingleMu0_DQ),          std::make_pair(8, &L1_SingleMu0_EMTF),          std::make_pair(7, &L1_SingleMu0_OMTF),          std::make_pair(29, &L1_SingleMu10er1p5),          std::make_pair(13, &L1_SingleMu12_DQ_BMTF),          std::make_pair(15, &L1_SingleMu12_DQ_EMTF),          std::make_pair(14, &L1_SingleMu12_DQ_OMTF),          std::make_pair(30, &L1_SingleMu12er1p5),          std::make_pair(31, &L1_SingleMu14er1p5),          std::make_pair(16, &L1_SingleMu15_DQ),          std::make_pair(32, &L1_SingleMu16er1p5),          std::make_pair(17, &L1_SingleMu18),          std::make_pair(33, &L1_SingleMu18er1p5),          std::make_pair(18, &L1_SingleMu20),          std::make_pair(19, &L1_SingleMu22),          std::make_pair(20, &L1_SingleMu22_BMTF),          std::make_pair(22, &L1_SingleMu22_EMTF),          std::make_pair(21, &L1_SingleMu22_OMTF),          std::make_pair(23, &L1_SingleMu25),          std::make_pair(9, &L1_SingleMu3),          std::make_pair(10, &L1_SingleMu5),          std::make_pair(25, &L1_SingleMu6er1p5),          std::make_pair(12, &L1_SingleMu7),          std::make_pair(11, &L1_SingleMu7_DQ),          std::make_pair(26, &L1_SingleMu7er1p5),          std::make_pair(27, &L1_SingleMu8er1p5),          std::make_pair(28, &L1_SingleMu9er1p5),          std::make_pair(0, &L1_SingleMuCosmics),          std::make_pair(1, &L1_SingleMuCosmics_BMTF),          std::make_pair(3, &L1_SingleMuCosmics_EMTF),          std::make_pair(2, &L1_SingleMuCosmics_OMTF),          std::make_pair(4, &L1_SingleMuOpen),          std::make_pair(446, &L1_SingleMuOpen_NotBptxOR),          std::make_pair(448, &L1_SingleMuOpen_er1p1_NotBptxOR_3BX),          std::make_pair(447, &L1_SingleMuOpen_er1p4_NotBptxOR_3BX),          std::make_pair(270, &L1_SingleTau120er2p1),          std::make_pair(271, &L1_SingleTau130er2p1),          std::make_pair(503, &L1_TOTEM_1),          std::make_pair(504, &L1_TOTEM_2),          std::make_pair(505, &L1_TOTEM_3),          std::make_pair(506, &L1_TOTEM_4),          std::make_pair(228, &L1_TripleEG16er2p5),          std::make_pair(224, &L1_TripleEG_16_12_8_er2p5),          std::make_pair(225, &L1_TripleEG_16_15_8_er2p5),          std::make_pair(226, &L1_TripleEG_18_17_8_er2p5),          std::make_pair(227, &L1_TripleEG_18_18_12_er2p5),          std::make_pair(373, &L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5),          std::make_pair(374, &L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5),          std::make_pair(372, &L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5),          std::make_pair(72, &L1_TripleMu0),          std::make_pair(71, &L1_TripleMu0_OQ),          std::make_pair(73, &L1_TripleMu0_SQ),          std::make_pair(74, &L1_TripleMu3),          std::make_pair(75, &L1_TripleMu3_SQ),          std::make_pair(76, &L1_TripleMu_5SQ_3SQ_0OQ),          std::make_pair(85, &L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair(86, &L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair(78, &L1_TripleMu_5_3_3),          std::make_pair(79, &L1_TripleMu_5_3_3_SQ),          std::make_pair(77, &L1_TripleMu_5_3p5_2p5),          std::make_pair(83, &L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair(82, &L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17),          std::make_pair(84, &L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair(80, &L1_TripleMu_5_5_3),          std::make_pair(469, &L1_UnpairedBunchBptxMinus),          std::make_pair(468, &L1_UnpairedBunchBptxPlus),          std::make_pair(459, &L1_ZeroBias),          std::make_pair(460, &L1_ZeroBias_copy)      };
+          std::make_pair(458, &L1_AlwaysTrue),          std::make_pair(486, &L1_BPTX_AND_Ref1_VME),          std::make_pair(487, &L1_BPTX_AND_Ref3_VME),          std::make_pair(488, &L1_BPTX_AND_Ref4_VME),          std::make_pair(491, &L1_BPTX_BeamGas_B1_VME),          std::make_pair(492, &L1_BPTX_BeamGas_B2_VME),          std::make_pair(489, &L1_BPTX_BeamGas_Ref1_VME),          std::make_pair(490, &L1_BPTX_BeamGas_Ref2_VME),          std::make_pair(482, &L1_BPTX_NotOR_VME),          std::make_pair(483, &L1_BPTX_OR_Ref3_VME),          std::make_pair(484, &L1_BPTX_OR_Ref4_VME),          std::make_pair(485, &L1_BPTX_RefAND_VME),          std::make_pair(467, &L1_BptxMinus),          std::make_pair(464, &L1_BptxOR),          std::make_pair(466, &L1_BptxPlus),          std::make_pair(465, &L1_BptxXOR),          std::make_pair(494, &L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142),          std::make_pair(247, &L1_DoubleEG8er2p5_HTT260er),          std::make_pair(248, &L1_DoubleEG8er2p5_HTT280er),          std::make_pair(249, &L1_DoubleEG8er2p5_HTT300er),          std::make_pair(250, &L1_DoubleEG8er2p5_HTT320er),          std::make_pair(251, &L1_DoubleEG8er2p5_HTT340er),          std::make_pair(205, &L1_DoubleEG_15_10_er2p5),          std::make_pair(206, &L1_DoubleEG_20_10_er2p5),          std::make_pair(207, &L1_DoubleEG_22_10_er2p5),          std::make_pair(208, &L1_DoubleEG_25_12_er2p5),          std::make_pair(209, &L1_DoubleEG_25_14_er2p5),          std::make_pair(210, &L1_DoubleEG_27_14_er2p5),          std::make_pair(212, &L1_DoubleEG_LooseIso20_10_er2p5),          std::make_pair(213, &L1_DoubleEG_LooseIso22_10_er2p5),          std::make_pair(214, &L1_DoubleEG_LooseIso22_12_er2p5),          std::make_pair(215, &L1_DoubleEG_LooseIso25_12_er2p5),          std::make_pair(279, &L1_DoubleIsoTau28er2p1_Mass_Max80),          std::make_pair(278, &L1_DoubleIsoTau28er2p1_Mass_Max90),          std::make_pair(275, &L1_DoubleIsoTau32er2p1),          std::make_pair(276, &L1_DoubleIsoTau34er2p1),          std::make_pair(277, &L1_DoubleIsoTau36er2p1),          std::make_pair(345, &L1_DoubleJet100er2p3_dEta_Max1p6),          std::make_pair(341, &L1_DoubleJet100er2p5),          std::make_pair(346, &L1_DoubleJet112er2p3_dEta_Max1p6),          std::make_pair(342, &L1_DoubleJet120er2p5),          std::make_pair(343, &L1_DoubleJet150er2p5),          std::make_pair(348, &L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5),          std::make_pair(349, &L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5),          std::make_pair(350, &L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5),          std::make_pair(351, &L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5),          std::make_pair(352, &L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5),          std::make_pair(353, &L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5),          std::make_pair(363, &L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp),          std::make_pair(340, &L1_DoubleJet40er2p5),          std::make_pair(356, &L1_DoubleJet_100_30_DoubleJet30_Mass_Min620),          std::make_pair(357, &L1_DoubleJet_110_35_DoubleJet35_Mass_Min620),          std::make_pair(358, &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620),          std::make_pair(360, &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28),          std::make_pair(359, &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620),          std::make_pair(361, &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28),          std::make_pair(366, &L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ),          std::make_pair(364, &L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp),          std::make_pair(365, &L1_DoubleJet_80_30_Mass_Min420_Mu8),          std::make_pair(355, &L1_DoubleJet_90_30_DoubleJet30_Mass_Min620),          std::make_pair(217, &L1_DoubleLooseIsoEG22er2p1),          std::make_pair(218, &L1_DoubleLooseIsoEG24er2p1),          std::make_pair(40, &L1_DoubleMu0),          std::make_pair(43, &L1_DoubleMu0_Mass_Min1),          std::make_pair(39, &L1_DoubleMu0_OQ),          std::make_pair(41, &L1_DoubleMu0_SQ),          std::make_pair(42, &L1_DoubleMu0_SQ_OS),          std::make_pair(142, &L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair(59, &L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4),          std::make_pair(55, &L1_DoubleMu0er1p5_SQ),          std::make_pair(56, &L1_DoubleMu0er1p5_SQ_OS),          std::make_pair(58, &L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4),          std::make_pair(57, &L1_DoubleMu0er1p5_SQ_dR_Max1p4),          std::make_pair(54, &L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4),          std::make_pair(53, &L1_DoubleMu0er2p0_SQ_dR_Max1p4),          std::make_pair(51, &L1_DoubleMu18er2p1),          std::make_pair(112, &L1_DoubleMu3_OS_DoubleEG7p5Upsilon),          std::make_pair(145, &L1_DoubleMu3_SQ_ETMHF50_HTT60er),          std::make_pair(147, &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5),          std::make_pair(146, &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5),          std::make_pair(148, &L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5),          std::make_pair(150, &L1_DoubleMu3_SQ_HTT220er),          std::make_pair(151, &L1_DoubleMu3_SQ_HTT240er),          std::make_pair(152, &L1_DoubleMu3_SQ_HTT260er),          std::make_pair(143, &L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair(109, &L1_DoubleMu4_SQ_EG9er2p5),          std::make_pair(60, &L1_DoubleMu4_SQ_OS),          std::make_pair(61, &L1_DoubleMu4_SQ_OS_dR_Max1p2),          std::make_pair(62, &L1_DoubleMu4p5_SQ_OS),          std::make_pair(63, &L1_DoubleMu4p5_SQ_OS_dR_Max1p2),          std::make_pair(64, &L1_DoubleMu4p5er2p0_SQ_OS),          std::make_pair(66, &L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18),          std::make_pair(65, &L1_DoubleMu4p5er2p0_SQ_OS_Mass_Min7),          std::make_pair(113, &L1_DoubleMu5Upsilon_OS_DoubleEG3),          std::make_pair(110, &L1_DoubleMu5_SQ_EG9er2p5),          std::make_pair(44, &L1_DoubleMu8_SQ),          std::make_pair(45, &L1_DoubleMu9_SQ),          std::make_pair(46, &L1_DoubleMu_12_5),          std::make_pair(47, &L1_DoubleMu_15_5_SQ),          std::make_pair(48, &L1_DoubleMu_15_7),          std::make_pair(50, &L1_DoubleMu_15_7_Mass_Min1),          std::make_pair(49, &L1_DoubleMu_15_7_SQ),          std::make_pair(273, &L1_DoubleTau70er2p1),          std::make_pair(416, &L1_ETM120),          std::make_pair(417, &L1_ETM150),          std::make_pair(421, &L1_ETMHF100),          std::make_pair(429, &L1_ETMHF100_HTT60er),          std::make_pair(422, &L1_ETMHF110),          std::make_pair(430, &L1_ETMHF110_HTT60er),          std::make_pair(444, &L1_ETMHF110_HTT60er_NotSecondBunchInTrain),          std::make_pair(423, &L1_ETMHF120),          std::make_pair(431, &L1_ETMHF120_HTT60er),          std::make_pair(443, &L1_ETMHF120_NotSecondBunchInTrain),          std::make_pair(424, &L1_ETMHF130),          std::make_pair(432, &L1_ETMHF130_HTT60er),          std::make_pair(425, &L1_ETMHF140),          std::make_pair(426, &L1_ETMHF150),          std::make_pair(428, &L1_ETMHF90_HTT60er),          std::make_pair(410, &L1_ETT1200),          std::make_pair(411, &L1_ETT1600),          std::make_pair(412, &L1_ETT2000),          std::make_pair(477, &L1_FirstBunchAfterTrain),          std::make_pair(472, &L1_FirstBunchBeforeTrain),          std::make_pair(473, &L1_FirstBunchInTrain),          std::make_pair(480, &L1_FirstCollisionInOrbit),          std::make_pair(479, &L1_FirstCollisionInTrain),          std::make_pair(500, &L1_HCAL_LaserMon_Trig),          std::make_pair(501, &L1_HCAL_LaserMon_Veto),          std::make_pair(398, &L1_HTT120er),          std::make_pair(399, &L1_HTT160er),          std::make_pair(400, &L1_HTT200er),          std::make_pair(401, &L1_HTT255er),          std::make_pair(402, &L1_HTT280er),          std::make_pair(384, &L1_HTT280er_QuadJet_70_55_40_35_er2p4),          std::make_pair(403, &L1_HTT320er),          std::make_pair(385, &L1_HTT320er_QuadJet_70_55_40_40_er2p4),          std::make_pair(386, &L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3),          std::make_pair(387, &L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3),          std::make_pair(404, &L1_HTT360er),          std::make_pair(405, &L1_HTT400er),          std::make_pair(406, &L1_HTT450er),          std::make_pair(197, &L1_IsoEG32er2p5_Mt40),          std::make_pair(198, &L1_IsoEG32er2p5_Mt44),          std::make_pair(199, &L1_IsoEG32er2p5_Mt48),          std::make_pair(293, &L1_IsoTau40er2p1_ETMHF100),          std::make_pair(294, &L1_IsoTau40er2p1_ETMHF110),          std::make_pair(291, &L1_IsoTau40er2p1_ETMHF80),          std::make_pair(292, &L1_IsoTau40er2p1_ETMHF90),          std::make_pair(471, &L1_IsolatedBunch),          std::make_pair(476, &L1_LastBunchInTrain),          std::make_pair(478, &L1_LastCollisionInTrain),          std::make_pair(257, &L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3),          std::make_pair(259, &L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3),          std::make_pair(238, &L1_LooseIsoEG24er2p1_HTT100er),          std::make_pair(258, &L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3),          std::make_pair(239, &L1_LooseIsoEG26er2p1_HTT100er),          std::make_pair(234, &L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair(240, &L1_LooseIsoEG28er2p1_HTT100er),          std::make_pair(235, &L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair(241, &L1_LooseIsoEG30er2p1_HTT100er),          std::make_pair(236, &L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair(461, &L1_MinimumBiasHF0_AND_BptxAND),          std::make_pair(134, &L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6),          std::make_pair(136, &L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6),          std::make_pair(135, &L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6),          std::make_pair(281, &L1_Mu18er2p1_Tau24er2p1),          std::make_pair(282, &L1_Mu18er2p1_Tau26er2p1),          std::make_pair(99, &L1_Mu20_EG10er2p5),          std::make_pair(284, &L1_Mu22er2p1_IsoTau32er2p1),          std::make_pair(285, &L1_Mu22er2p1_IsoTau34er2p1),          std::make_pair(286, &L1_Mu22er2p1_IsoTau36er2p1),          std::make_pair(287, &L1_Mu22er2p1_IsoTau40er2p1),          std::make_pair(289, &L1_Mu22er2p1_Tau70er2p1),          std::make_pair(126, &L1_Mu3_Jet120er2p5_dR_Max0p4),          std::make_pair(125, &L1_Mu3_Jet120er2p5_dR_Max0p8),          std::make_pair(121, &L1_Mu3_Jet16er2p5_dR_Max0p4),          std::make_pair(119, &L1_Mu3_Jet30er2p5),          std::make_pair(122, &L1_Mu3_Jet35er2p5_dR_Max0p4),          std::make_pair(123, &L1_Mu3_Jet60er2p5_dR_Max0p4),          std::make_pair(124, &L1_Mu3_Jet80er2p5_dR_Max0p4),          std::make_pair(128, &L1_Mu3er1p5_Jet100er2p5_ETMHF40),          std::make_pair(129, &L1_Mu3er1p5_Jet100er2p5_ETMHF50),          std::make_pair(96, &L1_Mu5_EG23er2p5),          std::make_pair(100, &L1_Mu5_LooseIsoEG20er2p5),          std::make_pair(104, &L1_Mu6_DoubleEG10er2p5),          std::make_pair(105, &L1_Mu6_DoubleEG12er2p5),          std::make_pair(106, &L1_Mu6_DoubleEG15er2p5),          std::make_pair(107, &L1_Mu6_DoubleEG17er2p5),          std::make_pair(131, &L1_Mu6_HTT240er),          std::make_pair(132, &L1_Mu6_HTT250er),          std::make_pair(97, &L1_Mu7_EG20er2p5),          std::make_pair(98, &L1_Mu7_EG23er2p5),          std::make_pair(101, &L1_Mu7_LooseIsoEG20er2p5),          std::make_pair(102, &L1_Mu7_LooseIsoEG23er2p5),          std::make_pair(463, &L1_NotBptxOR),          std::make_pair(298, &L1_QuadJet36er2p5_IsoTau52er2p1),          std::make_pair(382, &L1_QuadJet60er2p5),          std::make_pair(376, &L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0),          std::make_pair(89, &L1_QuadMu0),          std::make_pair(88, &L1_QuadMu0_OQ),          std::make_pair(90, &L1_QuadMu0_SQ),          std::make_pair(474, &L1_SecondBunchInTrain),          std::make_pair(475, &L1_SecondLastBunchInTrain),          std::make_pair(160, &L1_SingleEG10er2p5),          std::make_pair(161, &L1_SingleEG15er2p5),          std::make_pair(162, &L1_SingleEG26er2p5),          std::make_pair(163, &L1_SingleEG28_FWD2p5),          std::make_pair(166, &L1_SingleEG28er1p5),          std::make_pair(165, &L1_SingleEG28er2p1),          std::make_pair(164, &L1_SingleEG28er2p5),          std::make_pair(167, &L1_SingleEG34er2p5),          std::make_pair(168, &L1_SingleEG36er2p5),          std::make_pair(169, &L1_SingleEG38er2p5),          std::make_pair(170, &L1_SingleEG40er2p5),          std::make_pair(171, &L1_SingleEG42er2p5),          std::make_pair(172, &L1_SingleEG45er2p5),          std::make_pair(173, &L1_SingleEG50),          std::make_pair(174, &L1_SingleEG60),          std::make_pair(159, &L1_SingleEG8er2p5),          std::make_pair(184, &L1_SingleIsoEG24er1p5),          std::make_pair(183, &L1_SingleIsoEG24er2p1),          std::make_pair(187, &L1_SingleIsoEG26er1p5),          std::make_pair(186, &L1_SingleIsoEG26er2p1),          std::make_pair(185, &L1_SingleIsoEG26er2p5),          std::make_pair(188, &L1_SingleIsoEG28_FWD2p5),          std::make_pair(191, &L1_SingleIsoEG28er1p5),          std::make_pair(190, &L1_SingleIsoEG28er2p1),          std::make_pair(189, &L1_SingleIsoEG28er2p5),          std::make_pair(193, &L1_SingleIsoEG30er2p1),          std::make_pair(192, &L1_SingleIsoEG30er2p5),          std::make_pair(195, &L1_SingleIsoEG32er2p1),          std::make_pair(194, &L1_SingleIsoEG32er2p5),          std::make_pair(196, &L1_SingleIsoEG34er2p5),          std::make_pair(330, &L1_SingleJet10erHE),          std::make_pair(312, &L1_SingleJet120),          std::make_pair(327, &L1_SingleJet120_FWD3p0),          std::make_pair(319, &L1_SingleJet120er2p5),          std::make_pair(331, &L1_SingleJet12erHE),          std::make_pair(320, &L1_SingleJet140er2p5),          std::make_pair(332, &L1_SingleJet140er2p5_ETMHF70),          std::make_pair(333, &L1_SingleJet140er2p5_ETMHF80),          std::make_pair(334, &L1_SingleJet140er2p5_ETMHF90),          std::make_pair(321, &L1_SingleJet160er2p5),          std::make_pair(313, &L1_SingleJet180),          std::make_pair(322, &L1_SingleJet180er2p5),          std::make_pair(314, &L1_SingleJet200),          std::make_pair(450, &L1_SingleJet20er2p5_NotBptxOR),          std::make_pair(451, &L1_SingleJet20er2p5_NotBptxOR_3BX),          std::make_pair(309, &L1_SingleJet35),          std::make_pair(324, &L1_SingleJet35_FWD3p0),          std::make_pair(316, &L1_SingleJet35er2p5),          std::make_pair(452, &L1_SingleJet43er2p5_NotBptxOR_3BX),          std::make_pair(453, &L1_SingleJet46er2p5_NotBptxOR_3BX),          std::make_pair(310, &L1_SingleJet60),          std::make_pair(325, &L1_SingleJet60_FWD3p0),          std::make_pair(317, &L1_SingleJet60er2p5),          std::make_pair(329, &L1_SingleJet8erHE),          std::make_pair(311, &L1_SingleJet90),          std::make_pair(326, &L1_SingleJet90_FWD3p0),          std::make_pair(318, &L1_SingleJet90er2p5),          std::make_pair(176, &L1_SingleLooseIsoEG26er1p5),          std::make_pair(175, &L1_SingleLooseIsoEG26er2p5),          std::make_pair(177, &L1_SingleLooseIsoEG28_FWD2p5),          std::make_pair(180, &L1_SingleLooseIsoEG28er1p5),          std::make_pair(179, &L1_SingleLooseIsoEG28er2p1),          std::make_pair(178, &L1_SingleLooseIsoEG28er2p5),          std::make_pair(182, &L1_SingleLooseIsoEG30er1p5),          std::make_pair(181, &L1_SingleLooseIsoEG30er2p5),          std::make_pair(6, &L1_SingleMu0_BMTF),          std::make_pair(5, &L1_SingleMu0_DQ),          std::make_pair(8, &L1_SingleMu0_EMTF),          std::make_pair(7, &L1_SingleMu0_OMTF),          std::make_pair(29, &L1_SingleMu10er1p5),          std::make_pair(13, &L1_SingleMu12_DQ_BMTF),          std::make_pair(15, &L1_SingleMu12_DQ_EMTF),          std::make_pair(14, &L1_SingleMu12_DQ_OMTF),          std::make_pair(30, &L1_SingleMu12er1p5),          std::make_pair(31, &L1_SingleMu14er1p5),          std::make_pair(16, &L1_SingleMu15_DQ),          std::make_pair(32, &L1_SingleMu16er1p5),          std::make_pair(17, &L1_SingleMu18),          std::make_pair(33, &L1_SingleMu18er1p5),          std::make_pair(18, &L1_SingleMu20),          std::make_pair(19, &L1_SingleMu22),          std::make_pair(20, &L1_SingleMu22_BMTF),          std::make_pair(22, &L1_SingleMu22_EMTF),          std::make_pair(21, &L1_SingleMu22_OMTF),          std::make_pair(23, &L1_SingleMu25),          std::make_pair(9, &L1_SingleMu3),          std::make_pair(10, &L1_SingleMu5),          std::make_pair(25, &L1_SingleMu6er1p5),          std::make_pair(12, &L1_SingleMu7),          std::make_pair(11, &L1_SingleMu7_DQ),          std::make_pair(26, &L1_SingleMu7er1p5),          std::make_pair(27, &L1_SingleMu8er1p5),          std::make_pair(28, &L1_SingleMu9er1p5),          std::make_pair(0, &L1_SingleMuCosmics),          std::make_pair(1, &L1_SingleMuCosmics_BMTF),          std::make_pair(3, &L1_SingleMuCosmics_EMTF),          std::make_pair(2, &L1_SingleMuCosmics_OMTF),          std::make_pair(4, &L1_SingleMuOpen),          std::make_pair(446, &L1_SingleMuOpen_NotBptxOR),          std::make_pair(448, &L1_SingleMuOpen_er1p1_NotBptxOR_3BX),          std::make_pair(447, &L1_SingleMuOpen_er1p4_NotBptxOR_3BX),          std::make_pair(270, &L1_SingleTau120er2p1),          std::make_pair(271, &L1_SingleTau130er2p1),          std::make_pair(503, &L1_TOTEM_1),          std::make_pair(504, &L1_TOTEM_2),          std::make_pair(505, &L1_TOTEM_3),          std::make_pair(506, &L1_TOTEM_4),          std::make_pair(228, &L1_TripleEG16er2p5),          std::make_pair(224, &L1_TripleEG_16_12_8_er2p5),          std::make_pair(225, &L1_TripleEG_16_15_8_er2p5),          std::make_pair(226, &L1_TripleEG_18_17_8_er2p5),          std::make_pair(227, &L1_TripleEG_18_18_12_er2p5),          std::make_pair(373, &L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5),          std::make_pair(374, &L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5),          std::make_pair(372, &L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5),          std::make_pair(72, &L1_TripleMu0),          std::make_pair(71, &L1_TripleMu0_OQ),          std::make_pair(73, &L1_TripleMu0_SQ),          std::make_pair(74, &L1_TripleMu3),          std::make_pair(75, &L1_TripleMu3_SQ),          std::make_pair(76, &L1_TripleMu_5SQ_3SQ_0OQ),          std::make_pair(85, &L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair(86, &L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair(78, &L1_TripleMu_5_3_3),          std::make_pair(79, &L1_TripleMu_5_3_3_SQ),          std::make_pair(77, &L1_TripleMu_5_3p5_2p5),          std::make_pair(83, &L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair(82, &L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17),          std::make_pair(84, &L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair(80, &L1_TripleMu_5_5_3),          std::make_pair(469, &L1_UnpairedBunchBptxMinus),          std::make_pair(468, &L1_UnpairedBunchBptxPlus),          std::make_pair(459, &L1_ZeroBias),          std::make_pair(460, &L1_ZeroBias_copy)      };
 
   static const std::map<int, AlgorithmFunction> Id2Func(id2func, id2func + sizeof(id2func) / sizeof(id2func[0]));
   const std::map<int, AlgorithmFunction>::const_iterator rc = Id2Func.find(index);
@@ -20274,7 +21402,7 @@ AlgorithmFunction getFuncFromId(const int index)
 AlgorithmFunction getFuncFromName(const std::string& name)
 {
   static const std::pair<std::string, AlgorithmFunction> name2func[] = {
-          std::make_pair("L1_AlwaysTrue", &L1_AlwaysTrue),          std::make_pair("L1_BPTX_AND_Ref1_VME", &L1_BPTX_AND_Ref1_VME),          std::make_pair("L1_BPTX_AND_Ref3_VME", &L1_BPTX_AND_Ref3_VME),          std::make_pair("L1_BPTX_AND_Ref4_VME", &L1_BPTX_AND_Ref4_VME),          std::make_pair("L1_BPTX_BeamGas_B1_VME", &L1_BPTX_BeamGas_B1_VME),          std::make_pair("L1_BPTX_BeamGas_B2_VME", &L1_BPTX_BeamGas_B2_VME),          std::make_pair("L1_BPTX_BeamGas_Ref1_VME", &L1_BPTX_BeamGas_Ref1_VME),          std::make_pair("L1_BPTX_BeamGas_Ref2_VME", &L1_BPTX_BeamGas_Ref2_VME),          std::make_pair("L1_BPTX_NotOR_VME", &L1_BPTX_NotOR_VME),          std::make_pair("L1_BPTX_OR_Ref3_VME", &L1_BPTX_OR_Ref3_VME),          std::make_pair("L1_BPTX_OR_Ref4_VME", &L1_BPTX_OR_Ref4_VME),          std::make_pair("L1_BPTX_RefAND_VME", &L1_BPTX_RefAND_VME),          std::make_pair("L1_BptxMinus", &L1_BptxMinus),          std::make_pair("L1_BptxOR", &L1_BptxOR),          std::make_pair("L1_BptxPlus", &L1_BptxPlus),          std::make_pair("L1_BptxXOR", &L1_BptxXOR),          std::make_pair("L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142", &L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142),          std::make_pair("L1_DoubleEG8er2p5_HTT260er", &L1_DoubleEG8er2p5_HTT260er),          std::make_pair("L1_DoubleEG8er2p5_HTT280er", &L1_DoubleEG8er2p5_HTT280er),          std::make_pair("L1_DoubleEG8er2p5_HTT300er", &L1_DoubleEG8er2p5_HTT300er),          std::make_pair("L1_DoubleEG8er2p5_HTT320er", &L1_DoubleEG8er2p5_HTT320er),          std::make_pair("L1_DoubleEG8er2p5_HTT340er", &L1_DoubleEG8er2p5_HTT340er),          std::make_pair("L1_DoubleEG_15_10_er2p5", &L1_DoubleEG_15_10_er2p5),          std::make_pair("L1_DoubleEG_20_10_er2p5", &L1_DoubleEG_20_10_er2p5),          std::make_pair("L1_DoubleEG_22_10_er2p5", &L1_DoubleEG_22_10_er2p5),          std::make_pair("L1_DoubleEG_25_12_er2p5", &L1_DoubleEG_25_12_er2p5),          std::make_pair("L1_DoubleEG_25_14_er2p5", &L1_DoubleEG_25_14_er2p5),          std::make_pair("L1_DoubleEG_27_14_er2p5", &L1_DoubleEG_27_14_er2p5),          std::make_pair("L1_DoubleEG_LooseIso20_10_er2p5", &L1_DoubleEG_LooseIso20_10_er2p5),          std::make_pair("L1_DoubleEG_LooseIso22_10_er2p5", &L1_DoubleEG_LooseIso22_10_er2p5),          std::make_pair("L1_DoubleEG_LooseIso22_12_er2p5", &L1_DoubleEG_LooseIso22_12_er2p5),          std::make_pair("L1_DoubleEG_LooseIso25_12_er2p5", &L1_DoubleEG_LooseIso25_12_er2p5),          std::make_pair("L1_DoubleIsoTau32er2p1", &L1_DoubleIsoTau32er2p1),          std::make_pair("L1_DoubleIsoTau34er2p1", &L1_DoubleIsoTau34er2p1),          std::make_pair("L1_DoubleIsoTau36er2p1", &L1_DoubleIsoTau36er2p1),          std::make_pair("L1_DoubleJet100er2p3_dEta_Max1p6", &L1_DoubleJet100er2p3_dEta_Max1p6),          std::make_pair("L1_DoubleJet100er2p5", &L1_DoubleJet100er2p5),          std::make_pair("L1_DoubleJet112er2p3_dEta_Max1p6", &L1_DoubleJet112er2p3_dEta_Max1p6),          std::make_pair("L1_DoubleJet120er2p5", &L1_DoubleJet120er2p5),          std::make_pair("L1_DoubleJet150er2p5", &L1_DoubleJet150er2p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5),          std::make_pair("L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp", &L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp),          std::make_pair("L1_DoubleJet40er2p5", &L1_DoubleJet40er2p5),          std::make_pair("L1_DoubleJet_100_30_DoubleJet30_Mass_Min620", &L1_DoubleJet_100_30_DoubleJet30_Mass_Min620),          std::make_pair("L1_DoubleJet_110_35_DoubleJet35_Mass_Min620", &L1_DoubleJet_110_35_DoubleJet35_Mass_Min620),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620", &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28", &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620", &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28", &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ", &L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp", &L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_Mu8", &L1_DoubleJet_80_30_Mass_Min420_Mu8),          std::make_pair("L1_DoubleJet_90_30_DoubleJet30_Mass_Min620", &L1_DoubleJet_90_30_DoubleJet30_Mass_Min620),          std::make_pair("L1_DoubleLooseIsoEG22er2p1", &L1_DoubleLooseIsoEG22er2p1),          std::make_pair("L1_DoubleLooseIsoEG24er2p1", &L1_DoubleLooseIsoEG24er2p1),          std::make_pair("L1_DoubleMu0", &L1_DoubleMu0),          std::make_pair("L1_DoubleMu0_Mass_Min1", &L1_DoubleMu0_Mass_Min1),          std::make_pair("L1_DoubleMu0_OQ", &L1_DoubleMu0_OQ),          std::make_pair("L1_DoubleMu0_SQ", &L1_DoubleMu0_SQ),          std::make_pair("L1_DoubleMu0_SQ_OS", &L1_DoubleMu0_SQ_OS),          std::make_pair("L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8", &L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair("L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4", &L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er1p5_SQ", &L1_DoubleMu0er1p5_SQ),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS", &L1_DoubleMu0er1p5_SQ_OS),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4", &L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er1p5_SQ_dR_Max1p4", &L1_DoubleMu0er1p5_SQ_dR_Max1p4),          std::make_pair("L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4", &L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er2p0_SQ_dR_Max1p4", &L1_DoubleMu0er2p0_SQ_dR_Max1p4),          std::make_pair("L1_DoubleMu10_SQ", &L1_DoubleMu10_SQ),          std::make_pair("L1_DoubleMu18er2p1", &L1_DoubleMu18er2p1),          std::make_pair("L1_DoubleMu3_OS_DoubleEG7p5Upsilon", &L1_DoubleMu3_OS_DoubleEG7p5Upsilon),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_HTT60er", &L1_DoubleMu3_SQ_ETMHF50_HTT60er),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5", &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5", &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5),          std::make_pair("L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5", &L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5),          std::make_pair("L1_DoubleMu3_SQ_HTT220er", &L1_DoubleMu3_SQ_HTT220er),          std::make_pair("L1_DoubleMu3_SQ_HTT240er", &L1_DoubleMu3_SQ_HTT240er),          std::make_pair("L1_DoubleMu3_SQ_HTT260er", &L1_DoubleMu3_SQ_HTT260er),          std::make_pair("L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8", &L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair("L1_DoubleMu4_SQ_EG9er2p5", &L1_DoubleMu4_SQ_EG9er2p5),          std::make_pair("L1_DoubleMu4_SQ_OS", &L1_DoubleMu4_SQ_OS),          std::make_pair("L1_DoubleMu4_SQ_OS_dR_Max1p2", &L1_DoubleMu4_SQ_OS_dR_Max1p2),          std::make_pair("L1_DoubleMu4p5_SQ_OS", &L1_DoubleMu4p5_SQ_OS),          std::make_pair("L1_DoubleMu4p5_SQ_OS_dR_Max1p2", &L1_DoubleMu4p5_SQ_OS_dR_Max1p2),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS", &L1_DoubleMu4p5er2p0_SQ_OS),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18", &L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18),          std::make_pair("L1_DoubleMu5Upsilon_OS_DoubleEG3", &L1_DoubleMu5Upsilon_OS_DoubleEG3),          std::make_pair("L1_DoubleMu5_SQ_EG9er2p5", &L1_DoubleMu5_SQ_EG9er2p5),          std::make_pair("L1_DoubleMu9_SQ", &L1_DoubleMu9_SQ),          std::make_pair("L1_DoubleMu_12_5", &L1_DoubleMu_12_5),          std::make_pair("L1_DoubleMu_15_5_SQ", &L1_DoubleMu_15_5_SQ),          std::make_pair("L1_DoubleMu_15_7", &L1_DoubleMu_15_7),          std::make_pair("L1_DoubleMu_15_7_Mass_Min1", &L1_DoubleMu_15_7_Mass_Min1),          std::make_pair("L1_DoubleMu_15_7_SQ", &L1_DoubleMu_15_7_SQ),          std::make_pair("L1_DoubleTau70er2p1", &L1_DoubleTau70er2p1),          std::make_pair("L1_ETM120", &L1_ETM120),          std::make_pair("L1_ETM150", &L1_ETM150),          std::make_pair("L1_ETMHF100", &L1_ETMHF100),          std::make_pair("L1_ETMHF100_HTT60er", &L1_ETMHF100_HTT60er),          std::make_pair("L1_ETMHF110", &L1_ETMHF110),          std::make_pair("L1_ETMHF110_HTT60er", &L1_ETMHF110_HTT60er),          std::make_pair("L1_ETMHF110_HTT60er_NotSecondBunchInTrain", &L1_ETMHF110_HTT60er_NotSecondBunchInTrain),          std::make_pair("L1_ETMHF120", &L1_ETMHF120),          std::make_pair("L1_ETMHF120_HTT60er", &L1_ETMHF120_HTT60er),          std::make_pair("L1_ETMHF120_NotSecondBunchInTrain", &L1_ETMHF120_NotSecondBunchInTrain),          std::make_pair("L1_ETMHF130", &L1_ETMHF130),          std::make_pair("L1_ETMHF130_HTT60er", &L1_ETMHF130_HTT60er),          std::make_pair("L1_ETMHF140", &L1_ETMHF140),          std::make_pair("L1_ETMHF150", &L1_ETMHF150),          std::make_pair("L1_ETMHF90_HTT60er", &L1_ETMHF90_HTT60er),          std::make_pair("L1_ETT1200", &L1_ETT1200),          std::make_pair("L1_ETT1600", &L1_ETT1600),          std::make_pair("L1_ETT2000", &L1_ETT2000),          std::make_pair("L1_FirstBunchAfterTrain", &L1_FirstBunchAfterTrain),          std::make_pair("L1_FirstBunchBeforeTrain", &L1_FirstBunchBeforeTrain),          std::make_pair("L1_FirstBunchInTrain", &L1_FirstBunchInTrain),          std::make_pair("L1_FirstCollisionInOrbit", &L1_FirstCollisionInOrbit),          std::make_pair("L1_FirstCollisionInTrain", &L1_FirstCollisionInTrain),          std::make_pair("L1_HCAL_LaserMon_Trig", &L1_HCAL_LaserMon_Trig),          std::make_pair("L1_HCAL_LaserMon_Veto", &L1_HCAL_LaserMon_Veto),          std::make_pair("L1_HTT120er", &L1_HTT120er),          std::make_pair("L1_HTT160er", &L1_HTT160er),          std::make_pair("L1_HTT200er", &L1_HTT200er),          std::make_pair("L1_HTT255er", &L1_HTT255er),          std::make_pair("L1_HTT280er", &L1_HTT280er),          std::make_pair("L1_HTT280er_QuadJet_70_55_40_35_er2p4", &L1_HTT280er_QuadJet_70_55_40_35_er2p4),          std::make_pair("L1_HTT320er", &L1_HTT320er),          std::make_pair("L1_HTT320er_QuadJet_70_55_40_40_er2p4", &L1_HTT320er_QuadJet_70_55_40_40_er2p4),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3", &L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3", &L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3),          std::make_pair("L1_HTT360er", &L1_HTT360er),          std::make_pair("L1_HTT400er", &L1_HTT400er),          std::make_pair("L1_HTT450er", &L1_HTT450er),          std::make_pair("L1_IsoEG32er2p5_Mt40", &L1_IsoEG32er2p5_Mt40),          std::make_pair("L1_IsoEG32er2p5_Mt44", &L1_IsoEG32er2p5_Mt44),          std::make_pair("L1_IsoEG32er2p5_Mt48", &L1_IsoEG32er2p5_Mt48),          std::make_pair("L1_IsoTau40er2p1_ETMHF100", &L1_IsoTau40er2p1_ETMHF100),          std::make_pair("L1_IsoTau40er2p1_ETMHF110", &L1_IsoTau40er2p1_ETMHF110),          std::make_pair("L1_IsoTau40er2p1_ETMHF120", &L1_IsoTau40er2p1_ETMHF120),          std::make_pair("L1_IsoTau40er2p1_ETMHF90", &L1_IsoTau40er2p1_ETMHF90),          std::make_pair("L1_IsolatedBunch", &L1_IsolatedBunch),          std::make_pair("L1_LastBunchInTrain", &L1_LastBunchInTrain),          std::make_pair("L1_LastCollisionInTrain", &L1_LastCollisionInTrain),          std::make_pair("L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3", &L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3", &L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG24er2p1_HTT100er", &L1_LooseIsoEG24er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3", &L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG26er2p1_HTT100er", &L1_LooseIsoEG26er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_LooseIsoEG28er2p1_HTT100er", &L1_LooseIsoEG28er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_LooseIsoEG30er2p1_HTT100er", &L1_LooseIsoEG30er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_MinimumBiasHF0_AND_BptxAND", &L1_MinimumBiasHF0_AND_BptxAND),          std::make_pair("L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6", &L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6),          std::make_pair("L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6", &L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6),          std::make_pair("L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6", &L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6),          std::make_pair("L1_Mu18er2p1_Tau24er2p1", &L1_Mu18er2p1_Tau24er2p1),          std::make_pair("L1_Mu18er2p1_Tau26er2p1", &L1_Mu18er2p1_Tau26er2p1),          std::make_pair("L1_Mu20_EG10er2p5", &L1_Mu20_EG10er2p5),          std::make_pair("L1_Mu22er2p1_IsoTau32er2p1", &L1_Mu22er2p1_IsoTau32er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau34er2p1", &L1_Mu22er2p1_IsoTau34er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau36er2p1", &L1_Mu22er2p1_IsoTau36er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau40er2p1", &L1_Mu22er2p1_IsoTau40er2p1),          std::make_pair("L1_Mu22er2p1_Tau70er2p1", &L1_Mu22er2p1_Tau70er2p1),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p4", &L1_Mu3_Jet120er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p8", &L1_Mu3_Jet120er2p5_dR_Max0p8),          std::make_pair("L1_Mu3_Jet16er2p5_dR_Max0p4", &L1_Mu3_Jet16er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet30er2p5", &L1_Mu3_Jet30er2p5),          std::make_pair("L1_Mu3_Jet35er2p5_dR_Max0p4", &L1_Mu3_Jet35er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet60er2p5_dR_Max0p4", &L1_Mu3_Jet60er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet80er2p5_dR_Max0p4", &L1_Mu3_Jet80er2p5_dR_Max0p4),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF40", &L1_Mu3er1p5_Jet100er2p5_ETMHF40),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF50", &L1_Mu3er1p5_Jet100er2p5_ETMHF50),          std::make_pair("L1_Mu5_EG23er2p5", &L1_Mu5_EG23er2p5),          std::make_pair("L1_Mu5_LooseIsoEG20er2p5", &L1_Mu5_LooseIsoEG20er2p5),          std::make_pair("L1_Mu6_DoubleEG10er2p5", &L1_Mu6_DoubleEG10er2p5),          std::make_pair("L1_Mu6_DoubleEG12er2p5", &L1_Mu6_DoubleEG12er2p5),          std::make_pair("L1_Mu6_DoubleEG15er2p5", &L1_Mu6_DoubleEG15er2p5),          std::make_pair("L1_Mu6_DoubleEG17er2p5", &L1_Mu6_DoubleEG17er2p5),          std::make_pair("L1_Mu6_HTT240er", &L1_Mu6_HTT240er),          std::make_pair("L1_Mu6_HTT250er", &L1_Mu6_HTT250er),          std::make_pair("L1_Mu7_EG23er2p5", &L1_Mu7_EG23er2p5),          std::make_pair("L1_Mu7_LooseIsoEG20er2p5", &L1_Mu7_LooseIsoEG20er2p5),          std::make_pair("L1_Mu7_LooseIsoEG23er2p5", &L1_Mu7_LooseIsoEG23er2p5),          std::make_pair("L1_NotBptxOR", &L1_NotBptxOR),          std::make_pair("L1_QuadJet36er2p5_IsoTau52er2p1", &L1_QuadJet36er2p5_IsoTau52er2p1),          std::make_pair("L1_QuadJet60er2p5", &L1_QuadJet60er2p5),          std::make_pair("L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0", &L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0),          std::make_pair("L1_QuadMu0", &L1_QuadMu0),          std::make_pair("L1_QuadMu0_OQ", &L1_QuadMu0_OQ),          std::make_pair("L1_QuadMu0_SQ", &L1_QuadMu0_SQ),          std::make_pair("L1_SecondBunchInTrain", &L1_SecondBunchInTrain),          std::make_pair("L1_SecondLastBunchInTrain", &L1_SecondLastBunchInTrain),          std::make_pair("L1_SingleEG10er2p5", &L1_SingleEG10er2p5),          std::make_pair("L1_SingleEG15er2p5", &L1_SingleEG15er2p5),          std::make_pair("L1_SingleEG26er2p5", &L1_SingleEG26er2p5),          std::make_pair("L1_SingleEG34er2p5", &L1_SingleEG34er2p5),          std::make_pair("L1_SingleEG36er2p5", &L1_SingleEG36er2p5),          std::make_pair("L1_SingleEG38er2p5", &L1_SingleEG38er2p5),          std::make_pair("L1_SingleEG40er2p5", &L1_SingleEG40er2p5),          std::make_pair("L1_SingleEG42er2p5", &L1_SingleEG42er2p5),          std::make_pair("L1_SingleEG45er2p5", &L1_SingleEG45er2p5),          std::make_pair("L1_SingleEG50", &L1_SingleEG50),          std::make_pair("L1_SingleEG60", &L1_SingleEG60),          std::make_pair("L1_SingleEG8er2p5", &L1_SingleEG8er2p5),          std::make_pair("L1_SingleIsoEG24er1p5", &L1_SingleIsoEG24er1p5),          std::make_pair("L1_SingleIsoEG24er2p1", &L1_SingleIsoEG24er2p1),          std::make_pair("L1_SingleIsoEG26er1p5", &L1_SingleIsoEG26er1p5),          std::make_pair("L1_SingleIsoEG26er2p1", &L1_SingleIsoEG26er2p1),          std::make_pair("L1_SingleIsoEG26er2p5", &L1_SingleIsoEG26er2p5),          std::make_pair("L1_SingleIsoEG28er1p5", &L1_SingleIsoEG28er1p5),          std::make_pair("L1_SingleIsoEG28er2p1", &L1_SingleIsoEG28er2p1),          std::make_pair("L1_SingleIsoEG28er2p5", &L1_SingleIsoEG28er2p5),          std::make_pair("L1_SingleIsoEG30er2p1", &L1_SingleIsoEG30er2p1),          std::make_pair("L1_SingleIsoEG30er2p5", &L1_SingleIsoEG30er2p5),          std::make_pair("L1_SingleIsoEG32er2p1", &L1_SingleIsoEG32er2p1),          std::make_pair("L1_SingleIsoEG32er2p5", &L1_SingleIsoEG32er2p5),          std::make_pair("L1_SingleIsoEG34er2p5", &L1_SingleIsoEG34er2p5),          std::make_pair("L1_SingleJet10erHE", &L1_SingleJet10erHE),          std::make_pair("L1_SingleJet120", &L1_SingleJet120),          std::make_pair("L1_SingleJet120_FWD3p0", &L1_SingleJet120_FWD3p0),          std::make_pair("L1_SingleJet120er2p5", &L1_SingleJet120er2p5),          std::make_pair("L1_SingleJet12erHE", &L1_SingleJet12erHE),          std::make_pair("L1_SingleJet140er2p5", &L1_SingleJet140er2p5),          std::make_pair("L1_SingleJet140er2p5_ETMHF80", &L1_SingleJet140er2p5_ETMHF80),          std::make_pair("L1_SingleJet140er2p5_ETMHF90", &L1_SingleJet140er2p5_ETMHF90),          std::make_pair("L1_SingleJet160er2p5", &L1_SingleJet160er2p5),          std::make_pair("L1_SingleJet180", &L1_SingleJet180),          std::make_pair("L1_SingleJet180er2p5", &L1_SingleJet180er2p5),          std::make_pair("L1_SingleJet200", &L1_SingleJet200),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR", &L1_SingleJet20er2p5_NotBptxOR),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR_3BX", &L1_SingleJet20er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet35", &L1_SingleJet35),          std::make_pair("L1_SingleJet35_FWD3p0", &L1_SingleJet35_FWD3p0),          std::make_pair("L1_SingleJet35er2p5", &L1_SingleJet35er2p5),          std::make_pair("L1_SingleJet43er2p5_NotBptxOR_3BX", &L1_SingleJet43er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet46er2p5_NotBptxOR_3BX", &L1_SingleJet46er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet60", &L1_SingleJet60),          std::make_pair("L1_SingleJet60_FWD3p0", &L1_SingleJet60_FWD3p0),          std::make_pair("L1_SingleJet60er2p5", &L1_SingleJet60er2p5),          std::make_pair("L1_SingleJet8erHE", &L1_SingleJet8erHE),          std::make_pair("L1_SingleJet90", &L1_SingleJet90),          std::make_pair("L1_SingleJet90_FWD3p0", &L1_SingleJet90_FWD3p0),          std::make_pair("L1_SingleJet90er2p5", &L1_SingleJet90er2p5),          std::make_pair("L1_SingleLooseIsoEG28er1p5", &L1_SingleLooseIsoEG28er1p5),          std::make_pair("L1_SingleLooseIsoEG30er1p5", &L1_SingleLooseIsoEG30er1p5),          std::make_pair("L1_SingleMu0_BMTF", &L1_SingleMu0_BMTF),          std::make_pair("L1_SingleMu0_DQ", &L1_SingleMu0_DQ),          std::make_pair("L1_SingleMu0_EMTF", &L1_SingleMu0_EMTF),          std::make_pair("L1_SingleMu0_OMTF", &L1_SingleMu0_OMTF),          std::make_pair("L1_SingleMu10er1p5", &L1_SingleMu10er1p5),          std::make_pair("L1_SingleMu12_DQ_BMTF", &L1_SingleMu12_DQ_BMTF),          std::make_pair("L1_SingleMu12_DQ_EMTF", &L1_SingleMu12_DQ_EMTF),          std::make_pair("L1_SingleMu12_DQ_OMTF", &L1_SingleMu12_DQ_OMTF),          std::make_pair("L1_SingleMu12er1p5", &L1_SingleMu12er1p5),          std::make_pair("L1_SingleMu14er1p5", &L1_SingleMu14er1p5),          std::make_pair("L1_SingleMu15_DQ", &L1_SingleMu15_DQ),          std::make_pair("L1_SingleMu16er1p5", &L1_SingleMu16er1p5),          std::make_pair("L1_SingleMu18", &L1_SingleMu18),          std::make_pair("L1_SingleMu18er1p5", &L1_SingleMu18er1p5),          std::make_pair("L1_SingleMu20", &L1_SingleMu20),          std::make_pair("L1_SingleMu22", &L1_SingleMu22),          std::make_pair("L1_SingleMu22_BMTF", &L1_SingleMu22_BMTF),          std::make_pair("L1_SingleMu22_EMTF", &L1_SingleMu22_EMTF),          std::make_pair("L1_SingleMu22_OMTF", &L1_SingleMu22_OMTF),          std::make_pair("L1_SingleMu25", &L1_SingleMu25),          std::make_pair("L1_SingleMu3", &L1_SingleMu3),          std::make_pair("L1_SingleMu5", &L1_SingleMu5),          std::make_pair("L1_SingleMu6er1p5", &L1_SingleMu6er1p5),          std::make_pair("L1_SingleMu7", &L1_SingleMu7),          std::make_pair("L1_SingleMu7_DQ", &L1_SingleMu7_DQ),          std::make_pair("L1_SingleMu7er1p5", &L1_SingleMu7er1p5),          std::make_pair("L1_SingleMu8er1p5", &L1_SingleMu8er1p5),          std::make_pair("L1_SingleMu9er1p5", &L1_SingleMu9er1p5),          std::make_pair("L1_SingleMuCosmics", &L1_SingleMuCosmics),          std::make_pair("L1_SingleMuCosmics_BMTF", &L1_SingleMuCosmics_BMTF),          std::make_pair("L1_SingleMuCosmics_EMTF", &L1_SingleMuCosmics_EMTF),          std::make_pair("L1_SingleMuCosmics_OMTF", &L1_SingleMuCosmics_OMTF),          std::make_pair("L1_SingleMuOpen", &L1_SingleMuOpen),          std::make_pair("L1_SingleMuOpen_NotBptxOR", &L1_SingleMuOpen_NotBptxOR),          std::make_pair("L1_SingleMuOpen_er1p1_NotBptxOR_3BX", &L1_SingleMuOpen_er1p1_NotBptxOR_3BX),          std::make_pair("L1_SingleMuOpen_er1p4_NotBptxOR_3BX", &L1_SingleMuOpen_er1p4_NotBptxOR_3BX),          std::make_pair("L1_SingleTau120er2p1", &L1_SingleTau120er2p1),          std::make_pair("L1_SingleTau130er2p1", &L1_SingleTau130er2p1),          std::make_pair("L1_TOTEM_1", &L1_TOTEM_1),          std::make_pair("L1_TOTEM_2", &L1_TOTEM_2),          std::make_pair("L1_TOTEM_3", &L1_TOTEM_3),          std::make_pair("L1_TOTEM_4", &L1_TOTEM_4),          std::make_pair("L1_TripleEG16er2p5", &L1_TripleEG16er2p5),          std::make_pair("L1_TripleEG_16_12_8_er2p5", &L1_TripleEG_16_12_8_er2p5),          std::make_pair("L1_TripleEG_16_15_8_er2p5", &L1_TripleEG_16_15_8_er2p5),          std::make_pair("L1_TripleEG_18_17_8_er2p5", &L1_TripleEG_18_17_8_er2p5),          std::make_pair("L1_TripleEG_18_18_12_er2p5", &L1_TripleEG_18_18_12_er2p5),          std::make_pair("L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5", &L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5),          std::make_pair("L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5", &L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5),          std::make_pair("L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5", &L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5),          std::make_pair("L1_TripleMu0", &L1_TripleMu0),          std::make_pair("L1_TripleMu0_OQ", &L1_TripleMu0_OQ),          std::make_pair("L1_TripleMu0_SQ", &L1_TripleMu0_SQ),          std::make_pair("L1_TripleMu3", &L1_TripleMu3),          std::make_pair("L1_TripleMu3_SQ", &L1_TripleMu3_SQ),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ", &L1_TripleMu_5SQ_3SQ_0OQ),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9", &L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair("L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9", &L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair("L1_TripleMu_5_3_3", &L1_TripleMu_5_3_3),          std::make_pair("L1_TripleMu_5_3_3_SQ", &L1_TripleMu_5_3_3_SQ),          std::make_pair("L1_TripleMu_5_3p5_2p5", &L1_TripleMu_5_3p5_2p5),          std::make_pair("L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17", &L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17", &L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17", &L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_5_3", &L1_TripleMu_5_5_3),          std::make_pair("L1_UnpairedBunchBptxMinus", &L1_UnpairedBunchBptxMinus),          std::make_pair("L1_UnpairedBunchBptxPlus", &L1_UnpairedBunchBptxPlus),          std::make_pair("L1_ZeroBias", &L1_ZeroBias),          std::make_pair("L1_ZeroBias_copy", &L1_ZeroBias_copy)      };
+          std::make_pair("L1_AlwaysTrue", &L1_AlwaysTrue),          std::make_pair("L1_BPTX_AND_Ref1_VME", &L1_BPTX_AND_Ref1_VME),          std::make_pair("L1_BPTX_AND_Ref3_VME", &L1_BPTX_AND_Ref3_VME),          std::make_pair("L1_BPTX_AND_Ref4_VME", &L1_BPTX_AND_Ref4_VME),          std::make_pair("L1_BPTX_BeamGas_B1_VME", &L1_BPTX_BeamGas_B1_VME),          std::make_pair("L1_BPTX_BeamGas_B2_VME", &L1_BPTX_BeamGas_B2_VME),          std::make_pair("L1_BPTX_BeamGas_Ref1_VME", &L1_BPTX_BeamGas_Ref1_VME),          std::make_pair("L1_BPTX_BeamGas_Ref2_VME", &L1_BPTX_BeamGas_Ref2_VME),          std::make_pair("L1_BPTX_NotOR_VME", &L1_BPTX_NotOR_VME),          std::make_pair("L1_BPTX_OR_Ref3_VME", &L1_BPTX_OR_Ref3_VME),          std::make_pair("L1_BPTX_OR_Ref4_VME", &L1_BPTX_OR_Ref4_VME),          std::make_pair("L1_BPTX_RefAND_VME", &L1_BPTX_RefAND_VME),          std::make_pair("L1_BptxMinus", &L1_BptxMinus),          std::make_pair("L1_BptxOR", &L1_BptxOR),          std::make_pair("L1_BptxPlus", &L1_BptxPlus),          std::make_pair("L1_BptxXOR", &L1_BptxXOR),          std::make_pair("L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142", &L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142),          std::make_pair("L1_DoubleEG8er2p5_HTT260er", &L1_DoubleEG8er2p5_HTT260er),          std::make_pair("L1_DoubleEG8er2p5_HTT280er", &L1_DoubleEG8er2p5_HTT280er),          std::make_pair("L1_DoubleEG8er2p5_HTT300er", &L1_DoubleEG8er2p5_HTT300er),          std::make_pair("L1_DoubleEG8er2p5_HTT320er", &L1_DoubleEG8er2p5_HTT320er),          std::make_pair("L1_DoubleEG8er2p5_HTT340er", &L1_DoubleEG8er2p5_HTT340er),          std::make_pair("L1_DoubleEG_15_10_er2p5", &L1_DoubleEG_15_10_er2p5),          std::make_pair("L1_DoubleEG_20_10_er2p5", &L1_DoubleEG_20_10_er2p5),          std::make_pair("L1_DoubleEG_22_10_er2p5", &L1_DoubleEG_22_10_er2p5),          std::make_pair("L1_DoubleEG_25_12_er2p5", &L1_DoubleEG_25_12_er2p5),          std::make_pair("L1_DoubleEG_25_14_er2p5", &L1_DoubleEG_25_14_er2p5),          std::make_pair("L1_DoubleEG_27_14_er2p5", &L1_DoubleEG_27_14_er2p5),          std::make_pair("L1_DoubleEG_LooseIso20_10_er2p5", &L1_DoubleEG_LooseIso20_10_er2p5),          std::make_pair("L1_DoubleEG_LooseIso22_10_er2p5", &L1_DoubleEG_LooseIso22_10_er2p5),          std::make_pair("L1_DoubleEG_LooseIso22_12_er2p5", &L1_DoubleEG_LooseIso22_12_er2p5),          std::make_pair("L1_DoubleEG_LooseIso25_12_er2p5", &L1_DoubleEG_LooseIso25_12_er2p5),          std::make_pair("L1_DoubleIsoTau28er2p1_Mass_Max80", &L1_DoubleIsoTau28er2p1_Mass_Max80),          std::make_pair("L1_DoubleIsoTau28er2p1_Mass_Max90", &L1_DoubleIsoTau28er2p1_Mass_Max90),          std::make_pair("L1_DoubleIsoTau32er2p1", &L1_DoubleIsoTau32er2p1),          std::make_pair("L1_DoubleIsoTau34er2p1", &L1_DoubleIsoTau34er2p1),          std::make_pair("L1_DoubleIsoTau36er2p1", &L1_DoubleIsoTau36er2p1),          std::make_pair("L1_DoubleJet100er2p3_dEta_Max1p6", &L1_DoubleJet100er2p3_dEta_Max1p6),          std::make_pair("L1_DoubleJet100er2p5", &L1_DoubleJet100er2p5),          std::make_pair("L1_DoubleJet112er2p3_dEta_Max1p6", &L1_DoubleJet112er2p3_dEta_Max1p6),          std::make_pair("L1_DoubleJet120er2p5", &L1_DoubleJet120er2p5),          std::make_pair("L1_DoubleJet150er2p5", &L1_DoubleJet150er2p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5),          std::make_pair("L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp", &L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp),          std::make_pair("L1_DoubleJet40er2p5", &L1_DoubleJet40er2p5),          std::make_pair("L1_DoubleJet_100_30_DoubleJet30_Mass_Min620", &L1_DoubleJet_100_30_DoubleJet30_Mass_Min620),          std::make_pair("L1_DoubleJet_110_35_DoubleJet35_Mass_Min620", &L1_DoubleJet_110_35_DoubleJet35_Mass_Min620),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620", &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28", &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620", &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28", &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ", &L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp", &L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_Mu8", &L1_DoubleJet_80_30_Mass_Min420_Mu8),          std::make_pair("L1_DoubleJet_90_30_DoubleJet30_Mass_Min620", &L1_DoubleJet_90_30_DoubleJet30_Mass_Min620),          std::make_pair("L1_DoubleLooseIsoEG22er2p1", &L1_DoubleLooseIsoEG22er2p1),          std::make_pair("L1_DoubleLooseIsoEG24er2p1", &L1_DoubleLooseIsoEG24er2p1),          std::make_pair("L1_DoubleMu0", &L1_DoubleMu0),          std::make_pair("L1_DoubleMu0_Mass_Min1", &L1_DoubleMu0_Mass_Min1),          std::make_pair("L1_DoubleMu0_OQ", &L1_DoubleMu0_OQ),          std::make_pair("L1_DoubleMu0_SQ", &L1_DoubleMu0_SQ),          std::make_pair("L1_DoubleMu0_SQ_OS", &L1_DoubleMu0_SQ_OS),          std::make_pair("L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8", &L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair("L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4", &L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er1p5_SQ", &L1_DoubleMu0er1p5_SQ),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS", &L1_DoubleMu0er1p5_SQ_OS),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4", &L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er1p5_SQ_dR_Max1p4", &L1_DoubleMu0er1p5_SQ_dR_Max1p4),          std::make_pair("L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4", &L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er2p0_SQ_dR_Max1p4", &L1_DoubleMu0er2p0_SQ_dR_Max1p4),          std::make_pair("L1_DoubleMu18er2p1", &L1_DoubleMu18er2p1),          std::make_pair("L1_DoubleMu3_OS_DoubleEG7p5Upsilon", &L1_DoubleMu3_OS_DoubleEG7p5Upsilon),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_HTT60er", &L1_DoubleMu3_SQ_ETMHF50_HTT60er),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5", &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5", &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5),          std::make_pair("L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5", &L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5),          std::make_pair("L1_DoubleMu3_SQ_HTT220er", &L1_DoubleMu3_SQ_HTT220er),          std::make_pair("L1_DoubleMu3_SQ_HTT240er", &L1_DoubleMu3_SQ_HTT240er),          std::make_pair("L1_DoubleMu3_SQ_HTT260er", &L1_DoubleMu3_SQ_HTT260er),          std::make_pair("L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8", &L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair("L1_DoubleMu4_SQ_EG9er2p5", &L1_DoubleMu4_SQ_EG9er2p5),          std::make_pair("L1_DoubleMu4_SQ_OS", &L1_DoubleMu4_SQ_OS),          std::make_pair("L1_DoubleMu4_SQ_OS_dR_Max1p2", &L1_DoubleMu4_SQ_OS_dR_Max1p2),          std::make_pair("L1_DoubleMu4p5_SQ_OS", &L1_DoubleMu4p5_SQ_OS),          std::make_pair("L1_DoubleMu4p5_SQ_OS_dR_Max1p2", &L1_DoubleMu4p5_SQ_OS_dR_Max1p2),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS", &L1_DoubleMu4p5er2p0_SQ_OS),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18", &L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS_Mass_Min7", &L1_DoubleMu4p5er2p0_SQ_OS_Mass_Min7),          std::make_pair("L1_DoubleMu5Upsilon_OS_DoubleEG3", &L1_DoubleMu5Upsilon_OS_DoubleEG3),          std::make_pair("L1_DoubleMu5_SQ_EG9er2p5", &L1_DoubleMu5_SQ_EG9er2p5),          std::make_pair("L1_DoubleMu8_SQ", &L1_DoubleMu8_SQ),          std::make_pair("L1_DoubleMu9_SQ", &L1_DoubleMu9_SQ),          std::make_pair("L1_DoubleMu_12_5", &L1_DoubleMu_12_5),          std::make_pair("L1_DoubleMu_15_5_SQ", &L1_DoubleMu_15_5_SQ),          std::make_pair("L1_DoubleMu_15_7", &L1_DoubleMu_15_7),          std::make_pair("L1_DoubleMu_15_7_Mass_Min1", &L1_DoubleMu_15_7_Mass_Min1),          std::make_pair("L1_DoubleMu_15_7_SQ", &L1_DoubleMu_15_7_SQ),          std::make_pair("L1_DoubleTau70er2p1", &L1_DoubleTau70er2p1),          std::make_pair("L1_ETM120", &L1_ETM120),          std::make_pair("L1_ETM150", &L1_ETM150),          std::make_pair("L1_ETMHF100", &L1_ETMHF100),          std::make_pair("L1_ETMHF100_HTT60er", &L1_ETMHF100_HTT60er),          std::make_pair("L1_ETMHF110", &L1_ETMHF110),          std::make_pair("L1_ETMHF110_HTT60er", &L1_ETMHF110_HTT60er),          std::make_pair("L1_ETMHF110_HTT60er_NotSecondBunchInTrain", &L1_ETMHF110_HTT60er_NotSecondBunchInTrain),          std::make_pair("L1_ETMHF120", &L1_ETMHF120),          std::make_pair("L1_ETMHF120_HTT60er", &L1_ETMHF120_HTT60er),          std::make_pair("L1_ETMHF120_NotSecondBunchInTrain", &L1_ETMHF120_NotSecondBunchInTrain),          std::make_pair("L1_ETMHF130", &L1_ETMHF130),          std::make_pair("L1_ETMHF130_HTT60er", &L1_ETMHF130_HTT60er),          std::make_pair("L1_ETMHF140", &L1_ETMHF140),          std::make_pair("L1_ETMHF150", &L1_ETMHF150),          std::make_pair("L1_ETMHF90_HTT60er", &L1_ETMHF90_HTT60er),          std::make_pair("L1_ETT1200", &L1_ETT1200),          std::make_pair("L1_ETT1600", &L1_ETT1600),          std::make_pair("L1_ETT2000", &L1_ETT2000),          std::make_pair("L1_FirstBunchAfterTrain", &L1_FirstBunchAfterTrain),          std::make_pair("L1_FirstBunchBeforeTrain", &L1_FirstBunchBeforeTrain),          std::make_pair("L1_FirstBunchInTrain", &L1_FirstBunchInTrain),          std::make_pair("L1_FirstCollisionInOrbit", &L1_FirstCollisionInOrbit),          std::make_pair("L1_FirstCollisionInTrain", &L1_FirstCollisionInTrain),          std::make_pair("L1_HCAL_LaserMon_Trig", &L1_HCAL_LaserMon_Trig),          std::make_pair("L1_HCAL_LaserMon_Veto", &L1_HCAL_LaserMon_Veto),          std::make_pair("L1_HTT120er", &L1_HTT120er),          std::make_pair("L1_HTT160er", &L1_HTT160er),          std::make_pair("L1_HTT200er", &L1_HTT200er),          std::make_pair("L1_HTT255er", &L1_HTT255er),          std::make_pair("L1_HTT280er", &L1_HTT280er),          std::make_pair("L1_HTT280er_QuadJet_70_55_40_35_er2p4", &L1_HTT280er_QuadJet_70_55_40_35_er2p4),          std::make_pair("L1_HTT320er", &L1_HTT320er),          std::make_pair("L1_HTT320er_QuadJet_70_55_40_40_er2p4", &L1_HTT320er_QuadJet_70_55_40_40_er2p4),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3", &L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3", &L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3),          std::make_pair("L1_HTT360er", &L1_HTT360er),          std::make_pair("L1_HTT400er", &L1_HTT400er),          std::make_pair("L1_HTT450er", &L1_HTT450er),          std::make_pair("L1_IsoEG32er2p5_Mt40", &L1_IsoEG32er2p5_Mt40),          std::make_pair("L1_IsoEG32er2p5_Mt44", &L1_IsoEG32er2p5_Mt44),          std::make_pair("L1_IsoEG32er2p5_Mt48", &L1_IsoEG32er2p5_Mt48),          std::make_pair("L1_IsoTau40er2p1_ETMHF100", &L1_IsoTau40er2p1_ETMHF100),          std::make_pair("L1_IsoTau40er2p1_ETMHF110", &L1_IsoTau40er2p1_ETMHF110),          std::make_pair("L1_IsoTau40er2p1_ETMHF80", &L1_IsoTau40er2p1_ETMHF80),          std::make_pair("L1_IsoTau40er2p1_ETMHF90", &L1_IsoTau40er2p1_ETMHF90),          std::make_pair("L1_IsolatedBunch", &L1_IsolatedBunch),          std::make_pair("L1_LastBunchInTrain", &L1_LastBunchInTrain),          std::make_pair("L1_LastCollisionInTrain", &L1_LastCollisionInTrain),          std::make_pair("L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3", &L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3", &L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG24er2p1_HTT100er", &L1_LooseIsoEG24er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3", &L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG26er2p1_HTT100er", &L1_LooseIsoEG26er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_LooseIsoEG28er2p1_HTT100er", &L1_LooseIsoEG28er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_LooseIsoEG30er2p1_HTT100er", &L1_LooseIsoEG30er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_MinimumBiasHF0_AND_BptxAND", &L1_MinimumBiasHF0_AND_BptxAND),          std::make_pair("L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6", &L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6),          std::make_pair("L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6", &L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6),          std::make_pair("L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6", &L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6),          std::make_pair("L1_Mu18er2p1_Tau24er2p1", &L1_Mu18er2p1_Tau24er2p1),          std::make_pair("L1_Mu18er2p1_Tau26er2p1", &L1_Mu18er2p1_Tau26er2p1),          std::make_pair("L1_Mu20_EG10er2p5", &L1_Mu20_EG10er2p5),          std::make_pair("L1_Mu22er2p1_IsoTau32er2p1", &L1_Mu22er2p1_IsoTau32er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau34er2p1", &L1_Mu22er2p1_IsoTau34er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau36er2p1", &L1_Mu22er2p1_IsoTau36er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau40er2p1", &L1_Mu22er2p1_IsoTau40er2p1),          std::make_pair("L1_Mu22er2p1_Tau70er2p1", &L1_Mu22er2p1_Tau70er2p1),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p4", &L1_Mu3_Jet120er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p8", &L1_Mu3_Jet120er2p5_dR_Max0p8),          std::make_pair("L1_Mu3_Jet16er2p5_dR_Max0p4", &L1_Mu3_Jet16er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet30er2p5", &L1_Mu3_Jet30er2p5),          std::make_pair("L1_Mu3_Jet35er2p5_dR_Max0p4", &L1_Mu3_Jet35er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet60er2p5_dR_Max0p4", &L1_Mu3_Jet60er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet80er2p5_dR_Max0p4", &L1_Mu3_Jet80er2p5_dR_Max0p4),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF40", &L1_Mu3er1p5_Jet100er2p5_ETMHF40),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF50", &L1_Mu3er1p5_Jet100er2p5_ETMHF50),          std::make_pair("L1_Mu5_EG23er2p5", &L1_Mu5_EG23er2p5),          std::make_pair("L1_Mu5_LooseIsoEG20er2p5", &L1_Mu5_LooseIsoEG20er2p5),          std::make_pair("L1_Mu6_DoubleEG10er2p5", &L1_Mu6_DoubleEG10er2p5),          std::make_pair("L1_Mu6_DoubleEG12er2p5", &L1_Mu6_DoubleEG12er2p5),          std::make_pair("L1_Mu6_DoubleEG15er2p5", &L1_Mu6_DoubleEG15er2p5),          std::make_pair("L1_Mu6_DoubleEG17er2p5", &L1_Mu6_DoubleEG17er2p5),          std::make_pair("L1_Mu6_HTT240er", &L1_Mu6_HTT240er),          std::make_pair("L1_Mu6_HTT250er", &L1_Mu6_HTT250er),          std::make_pair("L1_Mu7_EG20er2p5", &L1_Mu7_EG20er2p5),          std::make_pair("L1_Mu7_EG23er2p5", &L1_Mu7_EG23er2p5),          std::make_pair("L1_Mu7_LooseIsoEG20er2p5", &L1_Mu7_LooseIsoEG20er2p5),          std::make_pair("L1_Mu7_LooseIsoEG23er2p5", &L1_Mu7_LooseIsoEG23er2p5),          std::make_pair("L1_NotBptxOR", &L1_NotBptxOR),          std::make_pair("L1_QuadJet36er2p5_IsoTau52er2p1", &L1_QuadJet36er2p5_IsoTau52er2p1),          std::make_pair("L1_QuadJet60er2p5", &L1_QuadJet60er2p5),          std::make_pair("L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0", &L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0),          std::make_pair("L1_QuadMu0", &L1_QuadMu0),          std::make_pair("L1_QuadMu0_OQ", &L1_QuadMu0_OQ),          std::make_pair("L1_QuadMu0_SQ", &L1_QuadMu0_SQ),          std::make_pair("L1_SecondBunchInTrain", &L1_SecondBunchInTrain),          std::make_pair("L1_SecondLastBunchInTrain", &L1_SecondLastBunchInTrain),          std::make_pair("L1_SingleEG10er2p5", &L1_SingleEG10er2p5),          std::make_pair("L1_SingleEG15er2p5", &L1_SingleEG15er2p5),          std::make_pair("L1_SingleEG26er2p5", &L1_SingleEG26er2p5),          std::make_pair("L1_SingleEG28_FWD2p5", &L1_SingleEG28_FWD2p5),          std::make_pair("L1_SingleEG28er1p5", &L1_SingleEG28er1p5),          std::make_pair("L1_SingleEG28er2p1", &L1_SingleEG28er2p1),          std::make_pair("L1_SingleEG28er2p5", &L1_SingleEG28er2p5),          std::make_pair("L1_SingleEG34er2p5", &L1_SingleEG34er2p5),          std::make_pair("L1_SingleEG36er2p5", &L1_SingleEG36er2p5),          std::make_pair("L1_SingleEG38er2p5", &L1_SingleEG38er2p5),          std::make_pair("L1_SingleEG40er2p5", &L1_SingleEG40er2p5),          std::make_pair("L1_SingleEG42er2p5", &L1_SingleEG42er2p5),          std::make_pair("L1_SingleEG45er2p5", &L1_SingleEG45er2p5),          std::make_pair("L1_SingleEG50", &L1_SingleEG50),          std::make_pair("L1_SingleEG60", &L1_SingleEG60),          std::make_pair("L1_SingleEG8er2p5", &L1_SingleEG8er2p5),          std::make_pair("L1_SingleIsoEG24er1p5", &L1_SingleIsoEG24er1p5),          std::make_pair("L1_SingleIsoEG24er2p1", &L1_SingleIsoEG24er2p1),          std::make_pair("L1_SingleIsoEG26er1p5", &L1_SingleIsoEG26er1p5),          std::make_pair("L1_SingleIsoEG26er2p1", &L1_SingleIsoEG26er2p1),          std::make_pair("L1_SingleIsoEG26er2p5", &L1_SingleIsoEG26er2p5),          std::make_pair("L1_SingleIsoEG28_FWD2p5", &L1_SingleIsoEG28_FWD2p5),          std::make_pair("L1_SingleIsoEG28er1p5", &L1_SingleIsoEG28er1p5),          std::make_pair("L1_SingleIsoEG28er2p1", &L1_SingleIsoEG28er2p1),          std::make_pair("L1_SingleIsoEG28er2p5", &L1_SingleIsoEG28er2p5),          std::make_pair("L1_SingleIsoEG30er2p1", &L1_SingleIsoEG30er2p1),          std::make_pair("L1_SingleIsoEG30er2p5", &L1_SingleIsoEG30er2p5),          std::make_pair("L1_SingleIsoEG32er2p1", &L1_SingleIsoEG32er2p1),          std::make_pair("L1_SingleIsoEG32er2p5", &L1_SingleIsoEG32er2p5),          std::make_pair("L1_SingleIsoEG34er2p5", &L1_SingleIsoEG34er2p5),          std::make_pair("L1_SingleJet10erHE", &L1_SingleJet10erHE),          std::make_pair("L1_SingleJet120", &L1_SingleJet120),          std::make_pair("L1_SingleJet120_FWD3p0", &L1_SingleJet120_FWD3p0),          std::make_pair("L1_SingleJet120er2p5", &L1_SingleJet120er2p5),          std::make_pair("L1_SingleJet12erHE", &L1_SingleJet12erHE),          std::make_pair("L1_SingleJet140er2p5", &L1_SingleJet140er2p5),          std::make_pair("L1_SingleJet140er2p5_ETMHF70", &L1_SingleJet140er2p5_ETMHF70),          std::make_pair("L1_SingleJet140er2p5_ETMHF80", &L1_SingleJet140er2p5_ETMHF80),          std::make_pair("L1_SingleJet140er2p5_ETMHF90", &L1_SingleJet140er2p5_ETMHF90),          std::make_pair("L1_SingleJet160er2p5", &L1_SingleJet160er2p5),          std::make_pair("L1_SingleJet180", &L1_SingleJet180),          std::make_pair("L1_SingleJet180er2p5", &L1_SingleJet180er2p5),          std::make_pair("L1_SingleJet200", &L1_SingleJet200),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR", &L1_SingleJet20er2p5_NotBptxOR),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR_3BX", &L1_SingleJet20er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet35", &L1_SingleJet35),          std::make_pair("L1_SingleJet35_FWD3p0", &L1_SingleJet35_FWD3p0),          std::make_pair("L1_SingleJet35er2p5", &L1_SingleJet35er2p5),          std::make_pair("L1_SingleJet43er2p5_NotBptxOR_3BX", &L1_SingleJet43er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet46er2p5_NotBptxOR_3BX", &L1_SingleJet46er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet60", &L1_SingleJet60),          std::make_pair("L1_SingleJet60_FWD3p0", &L1_SingleJet60_FWD3p0),          std::make_pair("L1_SingleJet60er2p5", &L1_SingleJet60er2p5),          std::make_pair("L1_SingleJet8erHE", &L1_SingleJet8erHE),          std::make_pair("L1_SingleJet90", &L1_SingleJet90),          std::make_pair("L1_SingleJet90_FWD3p0", &L1_SingleJet90_FWD3p0),          std::make_pair("L1_SingleJet90er2p5", &L1_SingleJet90er2p5),          std::make_pair("L1_SingleLooseIsoEG26er1p5", &L1_SingleLooseIsoEG26er1p5),          std::make_pair("L1_SingleLooseIsoEG26er2p5", &L1_SingleLooseIsoEG26er2p5),          std::make_pair("L1_SingleLooseIsoEG28_FWD2p5", &L1_SingleLooseIsoEG28_FWD2p5),          std::make_pair("L1_SingleLooseIsoEG28er1p5", &L1_SingleLooseIsoEG28er1p5),          std::make_pair("L1_SingleLooseIsoEG28er2p1", &L1_SingleLooseIsoEG28er2p1),          std::make_pair("L1_SingleLooseIsoEG28er2p5", &L1_SingleLooseIsoEG28er2p5),          std::make_pair("L1_SingleLooseIsoEG30er1p5", &L1_SingleLooseIsoEG30er1p5),          std::make_pair("L1_SingleLooseIsoEG30er2p5", &L1_SingleLooseIsoEG30er2p5),          std::make_pair("L1_SingleMu0_BMTF", &L1_SingleMu0_BMTF),          std::make_pair("L1_SingleMu0_DQ", &L1_SingleMu0_DQ),          std::make_pair("L1_SingleMu0_EMTF", &L1_SingleMu0_EMTF),          std::make_pair("L1_SingleMu0_OMTF", &L1_SingleMu0_OMTF),          std::make_pair("L1_SingleMu10er1p5", &L1_SingleMu10er1p5),          std::make_pair("L1_SingleMu12_DQ_BMTF", &L1_SingleMu12_DQ_BMTF),          std::make_pair("L1_SingleMu12_DQ_EMTF", &L1_SingleMu12_DQ_EMTF),          std::make_pair("L1_SingleMu12_DQ_OMTF", &L1_SingleMu12_DQ_OMTF),          std::make_pair("L1_SingleMu12er1p5", &L1_SingleMu12er1p5),          std::make_pair("L1_SingleMu14er1p5", &L1_SingleMu14er1p5),          std::make_pair("L1_SingleMu15_DQ", &L1_SingleMu15_DQ),          std::make_pair("L1_SingleMu16er1p5", &L1_SingleMu16er1p5),          std::make_pair("L1_SingleMu18", &L1_SingleMu18),          std::make_pair("L1_SingleMu18er1p5", &L1_SingleMu18er1p5),          std::make_pair("L1_SingleMu20", &L1_SingleMu20),          std::make_pair("L1_SingleMu22", &L1_SingleMu22),          std::make_pair("L1_SingleMu22_BMTF", &L1_SingleMu22_BMTF),          std::make_pair("L1_SingleMu22_EMTF", &L1_SingleMu22_EMTF),          std::make_pair("L1_SingleMu22_OMTF", &L1_SingleMu22_OMTF),          std::make_pair("L1_SingleMu25", &L1_SingleMu25),          std::make_pair("L1_SingleMu3", &L1_SingleMu3),          std::make_pair("L1_SingleMu5", &L1_SingleMu5),          std::make_pair("L1_SingleMu6er1p5", &L1_SingleMu6er1p5),          std::make_pair("L1_SingleMu7", &L1_SingleMu7),          std::make_pair("L1_SingleMu7_DQ", &L1_SingleMu7_DQ),          std::make_pair("L1_SingleMu7er1p5", &L1_SingleMu7er1p5),          std::make_pair("L1_SingleMu8er1p5", &L1_SingleMu8er1p5),          std::make_pair("L1_SingleMu9er1p5", &L1_SingleMu9er1p5),          std::make_pair("L1_SingleMuCosmics", &L1_SingleMuCosmics),          std::make_pair("L1_SingleMuCosmics_BMTF", &L1_SingleMuCosmics_BMTF),          std::make_pair("L1_SingleMuCosmics_EMTF", &L1_SingleMuCosmics_EMTF),          std::make_pair("L1_SingleMuCosmics_OMTF", &L1_SingleMuCosmics_OMTF),          std::make_pair("L1_SingleMuOpen", &L1_SingleMuOpen),          std::make_pair("L1_SingleMuOpen_NotBptxOR", &L1_SingleMuOpen_NotBptxOR),          std::make_pair("L1_SingleMuOpen_er1p1_NotBptxOR_3BX", &L1_SingleMuOpen_er1p1_NotBptxOR_3BX),          std::make_pair("L1_SingleMuOpen_er1p4_NotBptxOR_3BX", &L1_SingleMuOpen_er1p4_NotBptxOR_3BX),          std::make_pair("L1_SingleTau120er2p1", &L1_SingleTau120er2p1),          std::make_pair("L1_SingleTau130er2p1", &L1_SingleTau130er2p1),          std::make_pair("L1_TOTEM_1", &L1_TOTEM_1),          std::make_pair("L1_TOTEM_2", &L1_TOTEM_2),          std::make_pair("L1_TOTEM_3", &L1_TOTEM_3),          std::make_pair("L1_TOTEM_4", &L1_TOTEM_4),          std::make_pair("L1_TripleEG16er2p5", &L1_TripleEG16er2p5),          std::make_pair("L1_TripleEG_16_12_8_er2p5", &L1_TripleEG_16_12_8_er2p5),          std::make_pair("L1_TripleEG_16_15_8_er2p5", &L1_TripleEG_16_15_8_er2p5),          std::make_pair("L1_TripleEG_18_17_8_er2p5", &L1_TripleEG_18_17_8_er2p5),          std::make_pair("L1_TripleEG_18_18_12_er2p5", &L1_TripleEG_18_18_12_er2p5),          std::make_pair("L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5", &L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5),          std::make_pair("L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5", &L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5),          std::make_pair("L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5", &L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5),          std::make_pair("L1_TripleMu0", &L1_TripleMu0),          std::make_pair("L1_TripleMu0_OQ", &L1_TripleMu0_OQ),          std::make_pair("L1_TripleMu0_SQ", &L1_TripleMu0_SQ),          std::make_pair("L1_TripleMu3", &L1_TripleMu3),          std::make_pair("L1_TripleMu3_SQ", &L1_TripleMu3_SQ),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ", &L1_TripleMu_5SQ_3SQ_0OQ),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9", &L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair("L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9", &L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair("L1_TripleMu_5_3_3", &L1_TripleMu_5_3_3),          std::make_pair("L1_TripleMu_5_3_3_SQ", &L1_TripleMu_5_3_3_SQ),          std::make_pair("L1_TripleMu_5_3p5_2p5", &L1_TripleMu_5_3p5_2p5),          std::make_pair("L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17", &L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17", &L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17", &L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_5_3", &L1_TripleMu_5_5_3),          std::make_pair("L1_UnpairedBunchBptxMinus", &L1_UnpairedBunchBptxMinus),          std::make_pair("L1_UnpairedBunchBptxPlus", &L1_UnpairedBunchBptxPlus),          std::make_pair("L1_ZeroBias", &L1_ZeroBias),          std::make_pair("L1_ZeroBias_copy", &L1_ZeroBias_copy)      };
 
   static const std::map<std::string, AlgorithmFunction> Name2Func(name2func, name2func + sizeof(name2func) / sizeof(name2func[0]));
   const std::map<std::string, AlgorithmFunction>::const_iterator rc = Name2Func.find(name);
@@ -20283,7 +21411,7 @@ AlgorithmFunction getFuncFromName(const std::string& name)
   if (fp == 0)
   {
     std::stringstream ss;
-    ss << "fat> algorithm '" << name << "' is not defined in L1Menu_Collisions2018_v1_0_0\n";
+    ss << "fat> algorithm '" << name << "' is not defined in L1Menu_Collisions2018_v2_0_0\n";
     throw std::runtime_error(ss.str());
   }
   return fp;
@@ -20295,7 +21423,7 @@ bool addFuncFromName(std::map<std::string, std::function<bool()>> &L1SeedFun,
                      L1Analysis::L1AnalysisL1CaloTowerDataFormat* calo_tower)
 {
   static const std::pair<std::string, AlgorithmFunction> name2func[] = {
-          std::make_pair("L1_AlwaysTrue", &L1_AlwaysTrue),          std::make_pair("L1_BPTX_AND_Ref1_VME", &L1_BPTX_AND_Ref1_VME),          std::make_pair("L1_BPTX_AND_Ref3_VME", &L1_BPTX_AND_Ref3_VME),          std::make_pair("L1_BPTX_AND_Ref4_VME", &L1_BPTX_AND_Ref4_VME),          std::make_pair("L1_BPTX_BeamGas_B1_VME", &L1_BPTX_BeamGas_B1_VME),          std::make_pair("L1_BPTX_BeamGas_B2_VME", &L1_BPTX_BeamGas_B2_VME),          std::make_pair("L1_BPTX_BeamGas_Ref1_VME", &L1_BPTX_BeamGas_Ref1_VME),          std::make_pair("L1_BPTX_BeamGas_Ref2_VME", &L1_BPTX_BeamGas_Ref2_VME),          std::make_pair("L1_BPTX_NotOR_VME", &L1_BPTX_NotOR_VME),          std::make_pair("L1_BPTX_OR_Ref3_VME", &L1_BPTX_OR_Ref3_VME),          std::make_pair("L1_BPTX_OR_Ref4_VME", &L1_BPTX_OR_Ref4_VME),          std::make_pair("L1_BPTX_RefAND_VME", &L1_BPTX_RefAND_VME),          std::make_pair("L1_BptxMinus", &L1_BptxMinus),          std::make_pair("L1_BptxOR", &L1_BptxOR),          std::make_pair("L1_BptxPlus", &L1_BptxPlus),          std::make_pair("L1_BptxXOR", &L1_BptxXOR),          std::make_pair("L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142", &L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142),          std::make_pair("L1_DoubleEG8er2p5_HTT260er", &L1_DoubleEG8er2p5_HTT260er),          std::make_pair("L1_DoubleEG8er2p5_HTT280er", &L1_DoubleEG8er2p5_HTT280er),          std::make_pair("L1_DoubleEG8er2p5_HTT300er", &L1_DoubleEG8er2p5_HTT300er),          std::make_pair("L1_DoubleEG8er2p5_HTT320er", &L1_DoubleEG8er2p5_HTT320er),          std::make_pair("L1_DoubleEG8er2p5_HTT340er", &L1_DoubleEG8er2p5_HTT340er),          std::make_pair("L1_DoubleEG_15_10_er2p5", &L1_DoubleEG_15_10_er2p5),          std::make_pair("L1_DoubleEG_20_10_er2p5", &L1_DoubleEG_20_10_er2p5),          std::make_pair("L1_DoubleEG_22_10_er2p5", &L1_DoubleEG_22_10_er2p5),          std::make_pair("L1_DoubleEG_25_12_er2p5", &L1_DoubleEG_25_12_er2p5),          std::make_pair("L1_DoubleEG_25_14_er2p5", &L1_DoubleEG_25_14_er2p5),          std::make_pair("L1_DoubleEG_27_14_er2p5", &L1_DoubleEG_27_14_er2p5),          std::make_pair("L1_DoubleEG_LooseIso20_10_er2p5", &L1_DoubleEG_LooseIso20_10_er2p5),          std::make_pair("L1_DoubleEG_LooseIso22_10_er2p5", &L1_DoubleEG_LooseIso22_10_er2p5),          std::make_pair("L1_DoubleEG_LooseIso22_12_er2p5", &L1_DoubleEG_LooseIso22_12_er2p5),          std::make_pair("L1_DoubleEG_LooseIso25_12_er2p5", &L1_DoubleEG_LooseIso25_12_er2p5),          std::make_pair("L1_DoubleIsoTau32er2p1", &L1_DoubleIsoTau32er2p1),          std::make_pair("L1_DoubleIsoTau34er2p1", &L1_DoubleIsoTau34er2p1),          std::make_pair("L1_DoubleIsoTau36er2p1", &L1_DoubleIsoTau36er2p1),          std::make_pair("L1_DoubleJet100er2p3_dEta_Max1p6", &L1_DoubleJet100er2p3_dEta_Max1p6),          std::make_pair("L1_DoubleJet100er2p5", &L1_DoubleJet100er2p5),          std::make_pair("L1_DoubleJet112er2p3_dEta_Max1p6", &L1_DoubleJet112er2p3_dEta_Max1p6),          std::make_pair("L1_DoubleJet120er2p5", &L1_DoubleJet120er2p5),          std::make_pair("L1_DoubleJet150er2p5", &L1_DoubleJet150er2p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5),          std::make_pair("L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp", &L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp),          std::make_pair("L1_DoubleJet40er2p5", &L1_DoubleJet40er2p5),          std::make_pair("L1_DoubleJet_100_30_DoubleJet30_Mass_Min620", &L1_DoubleJet_100_30_DoubleJet30_Mass_Min620),          std::make_pair("L1_DoubleJet_110_35_DoubleJet35_Mass_Min620", &L1_DoubleJet_110_35_DoubleJet35_Mass_Min620),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620", &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28", &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620", &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28", &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ", &L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp", &L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_Mu8", &L1_DoubleJet_80_30_Mass_Min420_Mu8),          std::make_pair("L1_DoubleJet_90_30_DoubleJet30_Mass_Min620", &L1_DoubleJet_90_30_DoubleJet30_Mass_Min620),          std::make_pair("L1_DoubleLooseIsoEG22er2p1", &L1_DoubleLooseIsoEG22er2p1),          std::make_pair("L1_DoubleLooseIsoEG24er2p1", &L1_DoubleLooseIsoEG24er2p1),          std::make_pair("L1_DoubleMu0", &L1_DoubleMu0),          std::make_pair("L1_DoubleMu0_Mass_Min1", &L1_DoubleMu0_Mass_Min1),          std::make_pair("L1_DoubleMu0_OQ", &L1_DoubleMu0_OQ),          std::make_pair("L1_DoubleMu0_SQ", &L1_DoubleMu0_SQ),          std::make_pair("L1_DoubleMu0_SQ_OS", &L1_DoubleMu0_SQ_OS),          std::make_pair("L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8", &L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair("L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4", &L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er1p5_SQ", &L1_DoubleMu0er1p5_SQ),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS", &L1_DoubleMu0er1p5_SQ_OS),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4", &L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er1p5_SQ_dR_Max1p4", &L1_DoubleMu0er1p5_SQ_dR_Max1p4),          std::make_pair("L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4", &L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er2p0_SQ_dR_Max1p4", &L1_DoubleMu0er2p0_SQ_dR_Max1p4),          std::make_pair("L1_DoubleMu10_SQ", &L1_DoubleMu10_SQ),          std::make_pair("L1_DoubleMu18er2p1", &L1_DoubleMu18er2p1),          std::make_pair("L1_DoubleMu3_OS_DoubleEG7p5Upsilon", &L1_DoubleMu3_OS_DoubleEG7p5Upsilon),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_HTT60er", &L1_DoubleMu3_SQ_ETMHF50_HTT60er),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5", &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5", &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5),          std::make_pair("L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5", &L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5),          std::make_pair("L1_DoubleMu3_SQ_HTT220er", &L1_DoubleMu3_SQ_HTT220er),          std::make_pair("L1_DoubleMu3_SQ_HTT240er", &L1_DoubleMu3_SQ_HTT240er),          std::make_pair("L1_DoubleMu3_SQ_HTT260er", &L1_DoubleMu3_SQ_HTT260er),          std::make_pair("L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8", &L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair("L1_DoubleMu4_SQ_EG9er2p5", &L1_DoubleMu4_SQ_EG9er2p5),          std::make_pair("L1_DoubleMu4_SQ_OS", &L1_DoubleMu4_SQ_OS),          std::make_pair("L1_DoubleMu4_SQ_OS_dR_Max1p2", &L1_DoubleMu4_SQ_OS_dR_Max1p2),          std::make_pair("L1_DoubleMu4p5_SQ_OS", &L1_DoubleMu4p5_SQ_OS),          std::make_pair("L1_DoubleMu4p5_SQ_OS_dR_Max1p2", &L1_DoubleMu4p5_SQ_OS_dR_Max1p2),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS", &L1_DoubleMu4p5er2p0_SQ_OS),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18", &L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18),          std::make_pair("L1_DoubleMu5Upsilon_OS_DoubleEG3", &L1_DoubleMu5Upsilon_OS_DoubleEG3),          std::make_pair("L1_DoubleMu5_SQ_EG9er2p5", &L1_DoubleMu5_SQ_EG9er2p5),          std::make_pair("L1_DoubleMu9_SQ", &L1_DoubleMu9_SQ),          std::make_pair("L1_DoubleMu_12_5", &L1_DoubleMu_12_5),          std::make_pair("L1_DoubleMu_15_5_SQ", &L1_DoubleMu_15_5_SQ),          std::make_pair("L1_DoubleMu_15_7", &L1_DoubleMu_15_7),          std::make_pair("L1_DoubleMu_15_7_Mass_Min1", &L1_DoubleMu_15_7_Mass_Min1),          std::make_pair("L1_DoubleMu_15_7_SQ", &L1_DoubleMu_15_7_SQ),          std::make_pair("L1_DoubleTau70er2p1", &L1_DoubleTau70er2p1),          std::make_pair("L1_ETM120", &L1_ETM120),          std::make_pair("L1_ETM150", &L1_ETM150),          std::make_pair("L1_ETMHF100", &L1_ETMHF100),          std::make_pair("L1_ETMHF100_HTT60er", &L1_ETMHF100_HTT60er),          std::make_pair("L1_ETMHF110", &L1_ETMHF110),          std::make_pair("L1_ETMHF110_HTT60er", &L1_ETMHF110_HTT60er),          std::make_pair("L1_ETMHF110_HTT60er_NotSecondBunchInTrain", &L1_ETMHF110_HTT60er_NotSecondBunchInTrain),          std::make_pair("L1_ETMHF120", &L1_ETMHF120),          std::make_pair("L1_ETMHF120_HTT60er", &L1_ETMHF120_HTT60er),          std::make_pair("L1_ETMHF120_NotSecondBunchInTrain", &L1_ETMHF120_NotSecondBunchInTrain),          std::make_pair("L1_ETMHF130", &L1_ETMHF130),          std::make_pair("L1_ETMHF130_HTT60er", &L1_ETMHF130_HTT60er),          std::make_pair("L1_ETMHF140", &L1_ETMHF140),          std::make_pair("L1_ETMHF150", &L1_ETMHF150),          std::make_pair("L1_ETMHF90_HTT60er", &L1_ETMHF90_HTT60er),          std::make_pair("L1_ETT1200", &L1_ETT1200),          std::make_pair("L1_ETT1600", &L1_ETT1600),          std::make_pair("L1_ETT2000", &L1_ETT2000),          std::make_pair("L1_FirstBunchAfterTrain", &L1_FirstBunchAfterTrain),          std::make_pair("L1_FirstBunchBeforeTrain", &L1_FirstBunchBeforeTrain),          std::make_pair("L1_FirstBunchInTrain", &L1_FirstBunchInTrain),          std::make_pair("L1_FirstCollisionInOrbit", &L1_FirstCollisionInOrbit),          std::make_pair("L1_FirstCollisionInTrain", &L1_FirstCollisionInTrain),          std::make_pair("L1_HCAL_LaserMon_Trig", &L1_HCAL_LaserMon_Trig),          std::make_pair("L1_HCAL_LaserMon_Veto", &L1_HCAL_LaserMon_Veto),          std::make_pair("L1_HTT120er", &L1_HTT120er),          std::make_pair("L1_HTT160er", &L1_HTT160er),          std::make_pair("L1_HTT200er", &L1_HTT200er),          std::make_pair("L1_HTT255er", &L1_HTT255er),          std::make_pair("L1_HTT280er", &L1_HTT280er),          std::make_pair("L1_HTT280er_QuadJet_70_55_40_35_er2p4", &L1_HTT280er_QuadJet_70_55_40_35_er2p4),          std::make_pair("L1_HTT320er", &L1_HTT320er),          std::make_pair("L1_HTT320er_QuadJet_70_55_40_40_er2p4", &L1_HTT320er_QuadJet_70_55_40_40_er2p4),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3", &L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3", &L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3),          std::make_pair("L1_HTT360er", &L1_HTT360er),          std::make_pair("L1_HTT400er", &L1_HTT400er),          std::make_pair("L1_HTT450er", &L1_HTT450er),          std::make_pair("L1_IsoEG32er2p5_Mt40", &L1_IsoEG32er2p5_Mt40),          std::make_pair("L1_IsoEG32er2p5_Mt44", &L1_IsoEG32er2p5_Mt44),          std::make_pair("L1_IsoEG32er2p5_Mt48", &L1_IsoEG32er2p5_Mt48),          std::make_pair("L1_IsoTau40er2p1_ETMHF100", &L1_IsoTau40er2p1_ETMHF100),          std::make_pair("L1_IsoTau40er2p1_ETMHF110", &L1_IsoTau40er2p1_ETMHF110),          std::make_pair("L1_IsoTau40er2p1_ETMHF120", &L1_IsoTau40er2p1_ETMHF120),          std::make_pair("L1_IsoTau40er2p1_ETMHF90", &L1_IsoTau40er2p1_ETMHF90),          std::make_pair("L1_IsolatedBunch", &L1_IsolatedBunch),          std::make_pair("L1_LastBunchInTrain", &L1_LastBunchInTrain),          std::make_pair("L1_LastCollisionInTrain", &L1_LastCollisionInTrain),          std::make_pair("L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3", &L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3", &L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG24er2p1_HTT100er", &L1_LooseIsoEG24er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3", &L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG26er2p1_HTT100er", &L1_LooseIsoEG26er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_LooseIsoEG28er2p1_HTT100er", &L1_LooseIsoEG28er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_LooseIsoEG30er2p1_HTT100er", &L1_LooseIsoEG30er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_MinimumBiasHF0_AND_BptxAND", &L1_MinimumBiasHF0_AND_BptxAND),          std::make_pair("L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6", &L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6),          std::make_pair("L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6", &L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6),          std::make_pair("L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6", &L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6),          std::make_pair("L1_Mu18er2p1_Tau24er2p1", &L1_Mu18er2p1_Tau24er2p1),          std::make_pair("L1_Mu18er2p1_Tau26er2p1", &L1_Mu18er2p1_Tau26er2p1),          std::make_pair("L1_Mu20_EG10er2p5", &L1_Mu20_EG10er2p5),          std::make_pair("L1_Mu22er2p1_IsoTau32er2p1", &L1_Mu22er2p1_IsoTau32er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau34er2p1", &L1_Mu22er2p1_IsoTau34er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau36er2p1", &L1_Mu22er2p1_IsoTau36er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau40er2p1", &L1_Mu22er2p1_IsoTau40er2p1),          std::make_pair("L1_Mu22er2p1_Tau70er2p1", &L1_Mu22er2p1_Tau70er2p1),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p4", &L1_Mu3_Jet120er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p8", &L1_Mu3_Jet120er2p5_dR_Max0p8),          std::make_pair("L1_Mu3_Jet16er2p5_dR_Max0p4", &L1_Mu3_Jet16er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet30er2p5", &L1_Mu3_Jet30er2p5),          std::make_pair("L1_Mu3_Jet35er2p5_dR_Max0p4", &L1_Mu3_Jet35er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet60er2p5_dR_Max0p4", &L1_Mu3_Jet60er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet80er2p5_dR_Max0p4", &L1_Mu3_Jet80er2p5_dR_Max0p4),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF40", &L1_Mu3er1p5_Jet100er2p5_ETMHF40),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF50", &L1_Mu3er1p5_Jet100er2p5_ETMHF50),          std::make_pair("L1_Mu5_EG23er2p5", &L1_Mu5_EG23er2p5),          std::make_pair("L1_Mu5_LooseIsoEG20er2p5", &L1_Mu5_LooseIsoEG20er2p5),          std::make_pair("L1_Mu6_DoubleEG10er2p5", &L1_Mu6_DoubleEG10er2p5),          std::make_pair("L1_Mu6_DoubleEG12er2p5", &L1_Mu6_DoubleEG12er2p5),          std::make_pair("L1_Mu6_DoubleEG15er2p5", &L1_Mu6_DoubleEG15er2p5),          std::make_pair("L1_Mu6_DoubleEG17er2p5", &L1_Mu6_DoubleEG17er2p5),          std::make_pair("L1_Mu6_HTT240er", &L1_Mu6_HTT240er),          std::make_pair("L1_Mu6_HTT250er", &L1_Mu6_HTT250er),          std::make_pair("L1_Mu7_EG23er2p5", &L1_Mu7_EG23er2p5),          std::make_pair("L1_Mu7_LooseIsoEG20er2p5", &L1_Mu7_LooseIsoEG20er2p5),          std::make_pair("L1_Mu7_LooseIsoEG23er2p5", &L1_Mu7_LooseIsoEG23er2p5),          std::make_pair("L1_NotBptxOR", &L1_NotBptxOR),          std::make_pair("L1_QuadJet36er2p5_IsoTau52er2p1", &L1_QuadJet36er2p5_IsoTau52er2p1),          std::make_pair("L1_QuadJet60er2p5", &L1_QuadJet60er2p5),          std::make_pair("L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0", &L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0),          std::make_pair("L1_QuadMu0", &L1_QuadMu0),          std::make_pair("L1_QuadMu0_OQ", &L1_QuadMu0_OQ),          std::make_pair("L1_QuadMu0_SQ", &L1_QuadMu0_SQ),          std::make_pair("L1_SecondBunchInTrain", &L1_SecondBunchInTrain),          std::make_pair("L1_SecondLastBunchInTrain", &L1_SecondLastBunchInTrain),          std::make_pair("L1_SingleEG10er2p5", &L1_SingleEG10er2p5),          std::make_pair("L1_SingleEG15er2p5", &L1_SingleEG15er2p5),          std::make_pair("L1_SingleEG26er2p5", &L1_SingleEG26er2p5),          std::make_pair("L1_SingleEG34er2p5", &L1_SingleEG34er2p5),          std::make_pair("L1_SingleEG36er2p5", &L1_SingleEG36er2p5),          std::make_pair("L1_SingleEG38er2p5", &L1_SingleEG38er2p5),          std::make_pair("L1_SingleEG40er2p5", &L1_SingleEG40er2p5),          std::make_pair("L1_SingleEG42er2p5", &L1_SingleEG42er2p5),          std::make_pair("L1_SingleEG45er2p5", &L1_SingleEG45er2p5),          std::make_pair("L1_SingleEG50", &L1_SingleEG50),          std::make_pair("L1_SingleEG60", &L1_SingleEG60),          std::make_pair("L1_SingleEG8er2p5", &L1_SingleEG8er2p5),          std::make_pair("L1_SingleIsoEG24er1p5", &L1_SingleIsoEG24er1p5),          std::make_pair("L1_SingleIsoEG24er2p1", &L1_SingleIsoEG24er2p1),          std::make_pair("L1_SingleIsoEG26er1p5", &L1_SingleIsoEG26er1p5),          std::make_pair("L1_SingleIsoEG26er2p1", &L1_SingleIsoEG26er2p1),          std::make_pair("L1_SingleIsoEG26er2p5", &L1_SingleIsoEG26er2p5),          std::make_pair("L1_SingleIsoEG28er1p5", &L1_SingleIsoEG28er1p5),          std::make_pair("L1_SingleIsoEG28er2p1", &L1_SingleIsoEG28er2p1),          std::make_pair("L1_SingleIsoEG28er2p5", &L1_SingleIsoEG28er2p5),          std::make_pair("L1_SingleIsoEG30er2p1", &L1_SingleIsoEG30er2p1),          std::make_pair("L1_SingleIsoEG30er2p5", &L1_SingleIsoEG30er2p5),          std::make_pair("L1_SingleIsoEG32er2p1", &L1_SingleIsoEG32er2p1),          std::make_pair("L1_SingleIsoEG32er2p5", &L1_SingleIsoEG32er2p5),          std::make_pair("L1_SingleIsoEG34er2p5", &L1_SingleIsoEG34er2p5),          std::make_pair("L1_SingleJet10erHE", &L1_SingleJet10erHE),          std::make_pair("L1_SingleJet120", &L1_SingleJet120),          std::make_pair("L1_SingleJet120_FWD3p0", &L1_SingleJet120_FWD3p0),          std::make_pair("L1_SingleJet120er2p5", &L1_SingleJet120er2p5),          std::make_pair("L1_SingleJet12erHE", &L1_SingleJet12erHE),          std::make_pair("L1_SingleJet140er2p5", &L1_SingleJet140er2p5),          std::make_pair("L1_SingleJet140er2p5_ETMHF80", &L1_SingleJet140er2p5_ETMHF80),          std::make_pair("L1_SingleJet140er2p5_ETMHF90", &L1_SingleJet140er2p5_ETMHF90),          std::make_pair("L1_SingleJet160er2p5", &L1_SingleJet160er2p5),          std::make_pair("L1_SingleJet180", &L1_SingleJet180),          std::make_pair("L1_SingleJet180er2p5", &L1_SingleJet180er2p5),          std::make_pair("L1_SingleJet200", &L1_SingleJet200),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR", &L1_SingleJet20er2p5_NotBptxOR),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR_3BX", &L1_SingleJet20er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet35", &L1_SingleJet35),          std::make_pair("L1_SingleJet35_FWD3p0", &L1_SingleJet35_FWD3p0),          std::make_pair("L1_SingleJet35er2p5", &L1_SingleJet35er2p5),          std::make_pair("L1_SingleJet43er2p5_NotBptxOR_3BX", &L1_SingleJet43er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet46er2p5_NotBptxOR_3BX", &L1_SingleJet46er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet60", &L1_SingleJet60),          std::make_pair("L1_SingleJet60_FWD3p0", &L1_SingleJet60_FWD3p0),          std::make_pair("L1_SingleJet60er2p5", &L1_SingleJet60er2p5),          std::make_pair("L1_SingleJet8erHE", &L1_SingleJet8erHE),          std::make_pair("L1_SingleJet90", &L1_SingleJet90),          std::make_pair("L1_SingleJet90_FWD3p0", &L1_SingleJet90_FWD3p0),          std::make_pair("L1_SingleJet90er2p5", &L1_SingleJet90er2p5),          std::make_pair("L1_SingleLooseIsoEG28er1p5", &L1_SingleLooseIsoEG28er1p5),          std::make_pair("L1_SingleLooseIsoEG30er1p5", &L1_SingleLooseIsoEG30er1p5),          std::make_pair("L1_SingleMu0_BMTF", &L1_SingleMu0_BMTF),          std::make_pair("L1_SingleMu0_DQ", &L1_SingleMu0_DQ),          std::make_pair("L1_SingleMu0_EMTF", &L1_SingleMu0_EMTF),          std::make_pair("L1_SingleMu0_OMTF", &L1_SingleMu0_OMTF),          std::make_pair("L1_SingleMu10er1p5", &L1_SingleMu10er1p5),          std::make_pair("L1_SingleMu12_DQ_BMTF", &L1_SingleMu12_DQ_BMTF),          std::make_pair("L1_SingleMu12_DQ_EMTF", &L1_SingleMu12_DQ_EMTF),          std::make_pair("L1_SingleMu12_DQ_OMTF", &L1_SingleMu12_DQ_OMTF),          std::make_pair("L1_SingleMu12er1p5", &L1_SingleMu12er1p5),          std::make_pair("L1_SingleMu14er1p5", &L1_SingleMu14er1p5),          std::make_pair("L1_SingleMu15_DQ", &L1_SingleMu15_DQ),          std::make_pair("L1_SingleMu16er1p5", &L1_SingleMu16er1p5),          std::make_pair("L1_SingleMu18", &L1_SingleMu18),          std::make_pair("L1_SingleMu18er1p5", &L1_SingleMu18er1p5),          std::make_pair("L1_SingleMu20", &L1_SingleMu20),          std::make_pair("L1_SingleMu22", &L1_SingleMu22),          std::make_pair("L1_SingleMu22_BMTF", &L1_SingleMu22_BMTF),          std::make_pair("L1_SingleMu22_EMTF", &L1_SingleMu22_EMTF),          std::make_pair("L1_SingleMu22_OMTF", &L1_SingleMu22_OMTF),          std::make_pair("L1_SingleMu25", &L1_SingleMu25),          std::make_pair("L1_SingleMu3", &L1_SingleMu3),          std::make_pair("L1_SingleMu5", &L1_SingleMu5),          std::make_pair("L1_SingleMu6er1p5", &L1_SingleMu6er1p5),          std::make_pair("L1_SingleMu7", &L1_SingleMu7),          std::make_pair("L1_SingleMu7_DQ", &L1_SingleMu7_DQ),          std::make_pair("L1_SingleMu7er1p5", &L1_SingleMu7er1p5),          std::make_pair("L1_SingleMu8er1p5", &L1_SingleMu8er1p5),          std::make_pair("L1_SingleMu9er1p5", &L1_SingleMu9er1p5),          std::make_pair("L1_SingleMuCosmics", &L1_SingleMuCosmics),          std::make_pair("L1_SingleMuCosmics_BMTF", &L1_SingleMuCosmics_BMTF),          std::make_pair("L1_SingleMuCosmics_EMTF", &L1_SingleMuCosmics_EMTF),          std::make_pair("L1_SingleMuCosmics_OMTF", &L1_SingleMuCosmics_OMTF),          std::make_pair("L1_SingleMuOpen", &L1_SingleMuOpen),          std::make_pair("L1_SingleMuOpen_NotBptxOR", &L1_SingleMuOpen_NotBptxOR),          std::make_pair("L1_SingleMuOpen_er1p1_NotBptxOR_3BX", &L1_SingleMuOpen_er1p1_NotBptxOR_3BX),          std::make_pair("L1_SingleMuOpen_er1p4_NotBptxOR_3BX", &L1_SingleMuOpen_er1p4_NotBptxOR_3BX),          std::make_pair("L1_SingleTau120er2p1", &L1_SingleTau120er2p1),          std::make_pair("L1_SingleTau130er2p1", &L1_SingleTau130er2p1),          std::make_pair("L1_TOTEM_1", &L1_TOTEM_1),          std::make_pair("L1_TOTEM_2", &L1_TOTEM_2),          std::make_pair("L1_TOTEM_3", &L1_TOTEM_3),          std::make_pair("L1_TOTEM_4", &L1_TOTEM_4),          std::make_pair("L1_TripleEG16er2p5", &L1_TripleEG16er2p5),          std::make_pair("L1_TripleEG_16_12_8_er2p5", &L1_TripleEG_16_12_8_er2p5),          std::make_pair("L1_TripleEG_16_15_8_er2p5", &L1_TripleEG_16_15_8_er2p5),          std::make_pair("L1_TripleEG_18_17_8_er2p5", &L1_TripleEG_18_17_8_er2p5),          std::make_pair("L1_TripleEG_18_18_12_er2p5", &L1_TripleEG_18_18_12_er2p5),          std::make_pair("L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5", &L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5),          std::make_pair("L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5", &L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5),          std::make_pair("L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5", &L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5),          std::make_pair("L1_TripleMu0", &L1_TripleMu0),          std::make_pair("L1_TripleMu0_OQ", &L1_TripleMu0_OQ),          std::make_pair("L1_TripleMu0_SQ", &L1_TripleMu0_SQ),          std::make_pair("L1_TripleMu3", &L1_TripleMu3),          std::make_pair("L1_TripleMu3_SQ", &L1_TripleMu3_SQ),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ", &L1_TripleMu_5SQ_3SQ_0OQ),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9", &L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair("L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9", &L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair("L1_TripleMu_5_3_3", &L1_TripleMu_5_3_3),          std::make_pair("L1_TripleMu_5_3_3_SQ", &L1_TripleMu_5_3_3_SQ),          std::make_pair("L1_TripleMu_5_3p5_2p5", &L1_TripleMu_5_3p5_2p5),          std::make_pair("L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17", &L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17", &L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17", &L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_5_3", &L1_TripleMu_5_5_3),          std::make_pair("L1_UnpairedBunchBptxMinus", &L1_UnpairedBunchBptxMinus),          std::make_pair("L1_UnpairedBunchBptxPlus", &L1_UnpairedBunchBptxPlus),          std::make_pair("L1_ZeroBias", &L1_ZeroBias),          std::make_pair("L1_ZeroBias_copy", &L1_ZeroBias_copy)      };
+          std::make_pair("L1_AlwaysTrue", &L1_AlwaysTrue),          std::make_pair("L1_BPTX_AND_Ref1_VME", &L1_BPTX_AND_Ref1_VME),          std::make_pair("L1_BPTX_AND_Ref3_VME", &L1_BPTX_AND_Ref3_VME),          std::make_pair("L1_BPTX_AND_Ref4_VME", &L1_BPTX_AND_Ref4_VME),          std::make_pair("L1_BPTX_BeamGas_B1_VME", &L1_BPTX_BeamGas_B1_VME),          std::make_pair("L1_BPTX_BeamGas_B2_VME", &L1_BPTX_BeamGas_B2_VME),          std::make_pair("L1_BPTX_BeamGas_Ref1_VME", &L1_BPTX_BeamGas_Ref1_VME),          std::make_pair("L1_BPTX_BeamGas_Ref2_VME", &L1_BPTX_BeamGas_Ref2_VME),          std::make_pair("L1_BPTX_NotOR_VME", &L1_BPTX_NotOR_VME),          std::make_pair("L1_BPTX_OR_Ref3_VME", &L1_BPTX_OR_Ref3_VME),          std::make_pair("L1_BPTX_OR_Ref4_VME", &L1_BPTX_OR_Ref4_VME),          std::make_pair("L1_BPTX_RefAND_VME", &L1_BPTX_RefAND_VME),          std::make_pair("L1_BptxMinus", &L1_BptxMinus),          std::make_pair("L1_BptxOR", &L1_BptxOR),          std::make_pair("L1_BptxPlus", &L1_BptxPlus),          std::make_pair("L1_BptxXOR", &L1_BptxXOR),          std::make_pair("L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142", &L1_CDC_SingleMu_3_er1p2_TOP120_DPHI2p618_3p142),          std::make_pair("L1_DoubleEG8er2p5_HTT260er", &L1_DoubleEG8er2p5_HTT260er),          std::make_pair("L1_DoubleEG8er2p5_HTT280er", &L1_DoubleEG8er2p5_HTT280er),          std::make_pair("L1_DoubleEG8er2p5_HTT300er", &L1_DoubleEG8er2p5_HTT300er),          std::make_pair("L1_DoubleEG8er2p5_HTT320er", &L1_DoubleEG8er2p5_HTT320er),          std::make_pair("L1_DoubleEG8er2p5_HTT340er", &L1_DoubleEG8er2p5_HTT340er),          std::make_pair("L1_DoubleEG_15_10_er2p5", &L1_DoubleEG_15_10_er2p5),          std::make_pair("L1_DoubleEG_20_10_er2p5", &L1_DoubleEG_20_10_er2p5),          std::make_pair("L1_DoubleEG_22_10_er2p5", &L1_DoubleEG_22_10_er2p5),          std::make_pair("L1_DoubleEG_25_12_er2p5", &L1_DoubleEG_25_12_er2p5),          std::make_pair("L1_DoubleEG_25_14_er2p5", &L1_DoubleEG_25_14_er2p5),          std::make_pair("L1_DoubleEG_27_14_er2p5", &L1_DoubleEG_27_14_er2p5),          std::make_pair("L1_DoubleEG_LooseIso20_10_er2p5", &L1_DoubleEG_LooseIso20_10_er2p5),          std::make_pair("L1_DoubleEG_LooseIso22_10_er2p5", &L1_DoubleEG_LooseIso22_10_er2p5),          std::make_pair("L1_DoubleEG_LooseIso22_12_er2p5", &L1_DoubleEG_LooseIso22_12_er2p5),          std::make_pair("L1_DoubleEG_LooseIso25_12_er2p5", &L1_DoubleEG_LooseIso25_12_er2p5),          std::make_pair("L1_DoubleIsoTau28er2p1_Mass_Max80", &L1_DoubleIsoTau28er2p1_Mass_Max80),          std::make_pair("L1_DoubleIsoTau28er2p1_Mass_Max90", &L1_DoubleIsoTau28er2p1_Mass_Max90),          std::make_pair("L1_DoubleIsoTau32er2p1", &L1_DoubleIsoTau32er2p1),          std::make_pair("L1_DoubleIsoTau34er2p1", &L1_DoubleIsoTau34er2p1),          std::make_pair("L1_DoubleIsoTau36er2p1", &L1_DoubleIsoTau36er2p1),          std::make_pair("L1_DoubleJet100er2p3_dEta_Max1p6", &L1_DoubleJet100er2p3_dEta_Max1p6),          std::make_pair("L1_DoubleJet100er2p5", &L1_DoubleJet100er2p5),          std::make_pair("L1_DoubleJet112er2p3_dEta_Max1p6", &L1_DoubleJet112er2p3_dEta_Max1p6),          std::make_pair("L1_DoubleJet120er2p5", &L1_DoubleJet120er2p5),          std::make_pair("L1_DoubleJet150er2p5", &L1_DoubleJet150er2p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min150_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min200_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min250_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min300_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min330_dEta_Max1p5),          std::make_pair("L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5", &L1_DoubleJet30er2p5_Mass_Min360_dEta_Max1p5),          std::make_pair("L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp", &L1_DoubleJet35_Mass_Min450_IsoTau45_RmOvlp),          std::make_pair("L1_DoubleJet40er2p5", &L1_DoubleJet40er2p5),          std::make_pair("L1_DoubleJet_100_30_DoubleJet30_Mass_Min620", &L1_DoubleJet_100_30_DoubleJet30_Mass_Min620),          std::make_pair("L1_DoubleJet_110_35_DoubleJet35_Mass_Min620", &L1_DoubleJet_110_35_DoubleJet35_Mass_Min620),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620", &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620),          std::make_pair("L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28", &L1_DoubleJet_115_40_DoubleJet40_Mass_Min620_Jet60TT28),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620", &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620),          std::make_pair("L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28", &L1_DoubleJet_120_45_DoubleJet45_Mass_Min620_Jet60TT28),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ", &L1_DoubleJet_80_30_Mass_Min420_DoubleMu0_SQ),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp", &L1_DoubleJet_80_30_Mass_Min420_IsoTau40_RmOvlp),          std::make_pair("L1_DoubleJet_80_30_Mass_Min420_Mu8", &L1_DoubleJet_80_30_Mass_Min420_Mu8),          std::make_pair("L1_DoubleJet_90_30_DoubleJet30_Mass_Min620", &L1_DoubleJet_90_30_DoubleJet30_Mass_Min620),          std::make_pair("L1_DoubleLooseIsoEG22er2p1", &L1_DoubleLooseIsoEG22er2p1),          std::make_pair("L1_DoubleLooseIsoEG24er2p1", &L1_DoubleLooseIsoEG24er2p1),          std::make_pair("L1_DoubleMu0", &L1_DoubleMu0),          std::make_pair("L1_DoubleMu0_Mass_Min1", &L1_DoubleMu0_Mass_Min1),          std::make_pair("L1_DoubleMu0_OQ", &L1_DoubleMu0_OQ),          std::make_pair("L1_DoubleMu0_SQ", &L1_DoubleMu0_SQ),          std::make_pair("L1_DoubleMu0_SQ_OS", &L1_DoubleMu0_SQ_OS),          std::make_pair("L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8", &L1_DoubleMu0_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair("L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4", &L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er1p5_SQ", &L1_DoubleMu0er1p5_SQ),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS", &L1_DoubleMu0er1p5_SQ_OS),          std::make_pair("L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4", &L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er1p5_SQ_dR_Max1p4", &L1_DoubleMu0er1p5_SQ_dR_Max1p4),          std::make_pair("L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4", &L1_DoubleMu0er2p0_SQ_OS_dR_Max1p4),          std::make_pair("L1_DoubleMu0er2p0_SQ_dR_Max1p4", &L1_DoubleMu0er2p0_SQ_dR_Max1p4),          std::make_pair("L1_DoubleMu18er2p1", &L1_DoubleMu18er2p1),          std::make_pair("L1_DoubleMu3_OS_DoubleEG7p5Upsilon", &L1_DoubleMu3_OS_DoubleEG7p5Upsilon),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_HTT60er", &L1_DoubleMu3_SQ_ETMHF50_HTT60er),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5", &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5),          std::make_pair("L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5", &L1_DoubleMu3_SQ_ETMHF50_Jet60er2p5_OR_DoubleJet40er2p5),          std::make_pair("L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5", &L1_DoubleMu3_SQ_ETMHF60_Jet60er2p5),          std::make_pair("L1_DoubleMu3_SQ_HTT220er", &L1_DoubleMu3_SQ_HTT220er),          std::make_pair("L1_DoubleMu3_SQ_HTT240er", &L1_DoubleMu3_SQ_HTT240er),          std::make_pair("L1_DoubleMu3_SQ_HTT260er", &L1_DoubleMu3_SQ_HTT260er),          std::make_pair("L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8", &L1_DoubleMu3_dR_Max1p6_Jet90er2p5_dR_Max0p8),          std::make_pair("L1_DoubleMu4_SQ_EG9er2p5", &L1_DoubleMu4_SQ_EG9er2p5),          std::make_pair("L1_DoubleMu4_SQ_OS", &L1_DoubleMu4_SQ_OS),          std::make_pair("L1_DoubleMu4_SQ_OS_dR_Max1p2", &L1_DoubleMu4_SQ_OS_dR_Max1p2),          std::make_pair("L1_DoubleMu4p5_SQ_OS", &L1_DoubleMu4p5_SQ_OS),          std::make_pair("L1_DoubleMu4p5_SQ_OS_dR_Max1p2", &L1_DoubleMu4p5_SQ_OS_dR_Max1p2),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS", &L1_DoubleMu4p5er2p0_SQ_OS),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18", &L1_DoubleMu4p5er2p0_SQ_OS_Mass7to18),          std::make_pair("L1_DoubleMu4p5er2p0_SQ_OS_Mass_Min7", &L1_DoubleMu4p5er2p0_SQ_OS_Mass_Min7),          std::make_pair("L1_DoubleMu5Upsilon_OS_DoubleEG3", &L1_DoubleMu5Upsilon_OS_DoubleEG3),          std::make_pair("L1_DoubleMu5_SQ_EG9er2p5", &L1_DoubleMu5_SQ_EG9er2p5),          std::make_pair("L1_DoubleMu8_SQ", &L1_DoubleMu8_SQ),          std::make_pair("L1_DoubleMu9_SQ", &L1_DoubleMu9_SQ),          std::make_pair("L1_DoubleMu_12_5", &L1_DoubleMu_12_5),          std::make_pair("L1_DoubleMu_15_5_SQ", &L1_DoubleMu_15_5_SQ),          std::make_pair("L1_DoubleMu_15_7", &L1_DoubleMu_15_7),          std::make_pair("L1_DoubleMu_15_7_Mass_Min1", &L1_DoubleMu_15_7_Mass_Min1),          std::make_pair("L1_DoubleMu_15_7_SQ", &L1_DoubleMu_15_7_SQ),          std::make_pair("L1_DoubleTau70er2p1", &L1_DoubleTau70er2p1),          std::make_pair("L1_ETM120", &L1_ETM120),          std::make_pair("L1_ETM150", &L1_ETM150),          std::make_pair("L1_ETMHF100", &L1_ETMHF100),          std::make_pair("L1_ETMHF100_HTT60er", &L1_ETMHF100_HTT60er),          std::make_pair("L1_ETMHF110", &L1_ETMHF110),          std::make_pair("L1_ETMHF110_HTT60er", &L1_ETMHF110_HTT60er),          std::make_pair("L1_ETMHF110_HTT60er_NotSecondBunchInTrain", &L1_ETMHF110_HTT60er_NotSecondBunchInTrain),          std::make_pair("L1_ETMHF120", &L1_ETMHF120),          std::make_pair("L1_ETMHF120_HTT60er", &L1_ETMHF120_HTT60er),          std::make_pair("L1_ETMHF120_NotSecondBunchInTrain", &L1_ETMHF120_NotSecondBunchInTrain),          std::make_pair("L1_ETMHF130", &L1_ETMHF130),          std::make_pair("L1_ETMHF130_HTT60er", &L1_ETMHF130_HTT60er),          std::make_pair("L1_ETMHF140", &L1_ETMHF140),          std::make_pair("L1_ETMHF150", &L1_ETMHF150),          std::make_pair("L1_ETMHF90_HTT60er", &L1_ETMHF90_HTT60er),          std::make_pair("L1_ETT1200", &L1_ETT1200),          std::make_pair("L1_ETT1600", &L1_ETT1600),          std::make_pair("L1_ETT2000", &L1_ETT2000),          std::make_pair("L1_FirstBunchAfterTrain", &L1_FirstBunchAfterTrain),          std::make_pair("L1_FirstBunchBeforeTrain", &L1_FirstBunchBeforeTrain),          std::make_pair("L1_FirstBunchInTrain", &L1_FirstBunchInTrain),          std::make_pair("L1_FirstCollisionInOrbit", &L1_FirstCollisionInOrbit),          std::make_pair("L1_FirstCollisionInTrain", &L1_FirstCollisionInTrain),          std::make_pair("L1_HCAL_LaserMon_Trig", &L1_HCAL_LaserMon_Trig),          std::make_pair("L1_HCAL_LaserMon_Veto", &L1_HCAL_LaserMon_Veto),          std::make_pair("L1_HTT120er", &L1_HTT120er),          std::make_pair("L1_HTT160er", &L1_HTT160er),          std::make_pair("L1_HTT200er", &L1_HTT200er),          std::make_pair("L1_HTT255er", &L1_HTT255er),          std::make_pair("L1_HTT280er", &L1_HTT280er),          std::make_pair("L1_HTT280er_QuadJet_70_55_40_35_er2p4", &L1_HTT280er_QuadJet_70_55_40_35_er2p4),          std::make_pair("L1_HTT320er", &L1_HTT320er),          std::make_pair("L1_HTT320er_QuadJet_70_55_40_40_er2p4", &L1_HTT320er_QuadJet_70_55_40_40_er2p4),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3", &L1_HTT320er_QuadJet_80_60_er2p1_45_40_er2p3),          std::make_pair("L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3", &L1_HTT320er_QuadJet_80_60_er2p1_50_45_er2p3),          std::make_pair("L1_HTT360er", &L1_HTT360er),          std::make_pair("L1_HTT400er", &L1_HTT400er),          std::make_pair("L1_HTT450er", &L1_HTT450er),          std::make_pair("L1_IsoEG32er2p5_Mt40", &L1_IsoEG32er2p5_Mt40),          std::make_pair("L1_IsoEG32er2p5_Mt44", &L1_IsoEG32er2p5_Mt44),          std::make_pair("L1_IsoEG32er2p5_Mt48", &L1_IsoEG32er2p5_Mt48),          std::make_pair("L1_IsoTau40er2p1_ETMHF100", &L1_IsoTau40er2p1_ETMHF100),          std::make_pair("L1_IsoTau40er2p1_ETMHF110", &L1_IsoTau40er2p1_ETMHF110),          std::make_pair("L1_IsoTau40er2p1_ETMHF80", &L1_IsoTau40er2p1_ETMHF80),          std::make_pair("L1_IsoTau40er2p1_ETMHF90", &L1_IsoTau40er2p1_ETMHF90),          std::make_pair("L1_IsolatedBunch", &L1_IsolatedBunch),          std::make_pair("L1_LastBunchInTrain", &L1_LastBunchInTrain),          std::make_pair("L1_LastCollisionInTrain", &L1_LastCollisionInTrain),          std::make_pair("L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3", &L1_LooseIsoEG22er2p1_IsoTau26er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3", &L1_LooseIsoEG22er2p1_Tau70er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG24er2p1_HTT100er", &L1_LooseIsoEG24er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3", &L1_LooseIsoEG24er2p1_IsoTau27er2p1_dR_Min0p3),          std::make_pair("L1_LooseIsoEG26er2p1_HTT100er", &L1_LooseIsoEG26er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG26er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_LooseIsoEG28er2p1_HTT100er", &L1_LooseIsoEG28er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG28er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_LooseIsoEG30er2p1_HTT100er", &L1_LooseIsoEG30er2p1_HTT100er),          std::make_pair("L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3", &L1_LooseIsoEG30er2p1_Jet34er2p5_dR_Min0p3),          std::make_pair("L1_MinimumBiasHF0_AND_BptxAND", &L1_MinimumBiasHF0_AND_BptxAND),          std::make_pair("L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6", &L1_Mu10er2p3_Jet32er2p3_dR_Max0p4_DoubleJet32er2p3_dEta_Max1p6),          std::make_pair("L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6", &L1_Mu12er2p3_Jet40er2p1_dR_Max0p4_DoubleJet40er2p1_dEta_Max1p6),          std::make_pair("L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6", &L1_Mu12er2p3_Jet40er2p3_dR_Max0p4_DoubleJet40er2p3_dEta_Max1p6),          std::make_pair("L1_Mu18er2p1_Tau24er2p1", &L1_Mu18er2p1_Tau24er2p1),          std::make_pair("L1_Mu18er2p1_Tau26er2p1", &L1_Mu18er2p1_Tau26er2p1),          std::make_pair("L1_Mu20_EG10er2p5", &L1_Mu20_EG10er2p5),          std::make_pair("L1_Mu22er2p1_IsoTau32er2p1", &L1_Mu22er2p1_IsoTau32er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau34er2p1", &L1_Mu22er2p1_IsoTau34er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau36er2p1", &L1_Mu22er2p1_IsoTau36er2p1),          std::make_pair("L1_Mu22er2p1_IsoTau40er2p1", &L1_Mu22er2p1_IsoTau40er2p1),          std::make_pair("L1_Mu22er2p1_Tau70er2p1", &L1_Mu22er2p1_Tau70er2p1),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p4", &L1_Mu3_Jet120er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet120er2p5_dR_Max0p8", &L1_Mu3_Jet120er2p5_dR_Max0p8),          std::make_pair("L1_Mu3_Jet16er2p5_dR_Max0p4", &L1_Mu3_Jet16er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet30er2p5", &L1_Mu3_Jet30er2p5),          std::make_pair("L1_Mu3_Jet35er2p5_dR_Max0p4", &L1_Mu3_Jet35er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet60er2p5_dR_Max0p4", &L1_Mu3_Jet60er2p5_dR_Max0p4),          std::make_pair("L1_Mu3_Jet80er2p5_dR_Max0p4", &L1_Mu3_Jet80er2p5_dR_Max0p4),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF40", &L1_Mu3er1p5_Jet100er2p5_ETMHF40),          std::make_pair("L1_Mu3er1p5_Jet100er2p5_ETMHF50", &L1_Mu3er1p5_Jet100er2p5_ETMHF50),          std::make_pair("L1_Mu5_EG23er2p5", &L1_Mu5_EG23er2p5),          std::make_pair("L1_Mu5_LooseIsoEG20er2p5", &L1_Mu5_LooseIsoEG20er2p5),          std::make_pair("L1_Mu6_DoubleEG10er2p5", &L1_Mu6_DoubleEG10er2p5),          std::make_pair("L1_Mu6_DoubleEG12er2p5", &L1_Mu6_DoubleEG12er2p5),          std::make_pair("L1_Mu6_DoubleEG15er2p5", &L1_Mu6_DoubleEG15er2p5),          std::make_pair("L1_Mu6_DoubleEG17er2p5", &L1_Mu6_DoubleEG17er2p5),          std::make_pair("L1_Mu6_HTT240er", &L1_Mu6_HTT240er),          std::make_pair("L1_Mu6_HTT250er", &L1_Mu6_HTT250er),          std::make_pair("L1_Mu7_EG20er2p5", &L1_Mu7_EG20er2p5),          std::make_pair("L1_Mu7_EG23er2p5", &L1_Mu7_EG23er2p5),          std::make_pair("L1_Mu7_LooseIsoEG20er2p5", &L1_Mu7_LooseIsoEG20er2p5),          std::make_pair("L1_Mu7_LooseIsoEG23er2p5", &L1_Mu7_LooseIsoEG23er2p5),          std::make_pair("L1_NotBptxOR", &L1_NotBptxOR),          std::make_pair("L1_QuadJet36er2p5_IsoTau52er2p1", &L1_QuadJet36er2p5_IsoTau52er2p1),          std::make_pair("L1_QuadJet60er2p5", &L1_QuadJet60er2p5),          std::make_pair("L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0", &L1_QuadJet_95_75_65_20_DoubleJet_75_65_er2p5_Jet20_FWD3p0),          std::make_pair("L1_QuadMu0", &L1_QuadMu0),          std::make_pair("L1_QuadMu0_OQ", &L1_QuadMu0_OQ),          std::make_pair("L1_QuadMu0_SQ", &L1_QuadMu0_SQ),          std::make_pair("L1_SecondBunchInTrain", &L1_SecondBunchInTrain),          std::make_pair("L1_SecondLastBunchInTrain", &L1_SecondLastBunchInTrain),          std::make_pair("L1_SingleEG10er2p5", &L1_SingleEG10er2p5),          std::make_pair("L1_SingleEG15er2p5", &L1_SingleEG15er2p5),          std::make_pair("L1_SingleEG26er2p5", &L1_SingleEG26er2p5),          std::make_pair("L1_SingleEG28_FWD2p5", &L1_SingleEG28_FWD2p5),          std::make_pair("L1_SingleEG28er1p5", &L1_SingleEG28er1p5),          std::make_pair("L1_SingleEG28er2p1", &L1_SingleEG28er2p1),          std::make_pair("L1_SingleEG28er2p5", &L1_SingleEG28er2p5),          std::make_pair("L1_SingleEG34er2p5", &L1_SingleEG34er2p5),          std::make_pair("L1_SingleEG36er2p5", &L1_SingleEG36er2p5),          std::make_pair("L1_SingleEG38er2p5", &L1_SingleEG38er2p5),          std::make_pair("L1_SingleEG40er2p5", &L1_SingleEG40er2p5),          std::make_pair("L1_SingleEG42er2p5", &L1_SingleEG42er2p5),          std::make_pair("L1_SingleEG45er2p5", &L1_SingleEG45er2p5),          std::make_pair("L1_SingleEG50", &L1_SingleEG50),          std::make_pair("L1_SingleEG60", &L1_SingleEG60),          std::make_pair("L1_SingleEG8er2p5", &L1_SingleEG8er2p5),          std::make_pair("L1_SingleIsoEG24er1p5", &L1_SingleIsoEG24er1p5),          std::make_pair("L1_SingleIsoEG24er2p1", &L1_SingleIsoEG24er2p1),          std::make_pair("L1_SingleIsoEG26er1p5", &L1_SingleIsoEG26er1p5),          std::make_pair("L1_SingleIsoEG26er2p1", &L1_SingleIsoEG26er2p1),          std::make_pair("L1_SingleIsoEG26er2p5", &L1_SingleIsoEG26er2p5),          std::make_pair("L1_SingleIsoEG28_FWD2p5", &L1_SingleIsoEG28_FWD2p5),          std::make_pair("L1_SingleIsoEG28er1p5", &L1_SingleIsoEG28er1p5),          std::make_pair("L1_SingleIsoEG28er2p1", &L1_SingleIsoEG28er2p1),          std::make_pair("L1_SingleIsoEG28er2p5", &L1_SingleIsoEG28er2p5),          std::make_pair("L1_SingleIsoEG30er2p1", &L1_SingleIsoEG30er2p1),          std::make_pair("L1_SingleIsoEG30er2p5", &L1_SingleIsoEG30er2p5),          std::make_pair("L1_SingleIsoEG32er2p1", &L1_SingleIsoEG32er2p1),          std::make_pair("L1_SingleIsoEG32er2p5", &L1_SingleIsoEG32er2p5),          std::make_pair("L1_SingleIsoEG34er2p5", &L1_SingleIsoEG34er2p5),          std::make_pair("L1_SingleJet10erHE", &L1_SingleJet10erHE),          std::make_pair("L1_SingleJet120", &L1_SingleJet120),          std::make_pair("L1_SingleJet120_FWD3p0", &L1_SingleJet120_FWD3p0),          std::make_pair("L1_SingleJet120er2p5", &L1_SingleJet120er2p5),          std::make_pair("L1_SingleJet12erHE", &L1_SingleJet12erHE),          std::make_pair("L1_SingleJet140er2p5", &L1_SingleJet140er2p5),          std::make_pair("L1_SingleJet140er2p5_ETMHF70", &L1_SingleJet140er2p5_ETMHF70),          std::make_pair("L1_SingleJet140er2p5_ETMHF80", &L1_SingleJet140er2p5_ETMHF80),          std::make_pair("L1_SingleJet140er2p5_ETMHF90", &L1_SingleJet140er2p5_ETMHF90),          std::make_pair("L1_SingleJet160er2p5", &L1_SingleJet160er2p5),          std::make_pair("L1_SingleJet180", &L1_SingleJet180),          std::make_pair("L1_SingleJet180er2p5", &L1_SingleJet180er2p5),          std::make_pair("L1_SingleJet200", &L1_SingleJet200),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR", &L1_SingleJet20er2p5_NotBptxOR),          std::make_pair("L1_SingleJet20er2p5_NotBptxOR_3BX", &L1_SingleJet20er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet35", &L1_SingleJet35),          std::make_pair("L1_SingleJet35_FWD3p0", &L1_SingleJet35_FWD3p0),          std::make_pair("L1_SingleJet35er2p5", &L1_SingleJet35er2p5),          std::make_pair("L1_SingleJet43er2p5_NotBptxOR_3BX", &L1_SingleJet43er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet46er2p5_NotBptxOR_3BX", &L1_SingleJet46er2p5_NotBptxOR_3BX),          std::make_pair("L1_SingleJet60", &L1_SingleJet60),          std::make_pair("L1_SingleJet60_FWD3p0", &L1_SingleJet60_FWD3p0),          std::make_pair("L1_SingleJet60er2p5", &L1_SingleJet60er2p5),          std::make_pair("L1_SingleJet8erHE", &L1_SingleJet8erHE),          std::make_pair("L1_SingleJet90", &L1_SingleJet90),          std::make_pair("L1_SingleJet90_FWD3p0", &L1_SingleJet90_FWD3p0),          std::make_pair("L1_SingleJet90er2p5", &L1_SingleJet90er2p5),          std::make_pair("L1_SingleLooseIsoEG26er1p5", &L1_SingleLooseIsoEG26er1p5),          std::make_pair("L1_SingleLooseIsoEG26er2p5", &L1_SingleLooseIsoEG26er2p5),          std::make_pair("L1_SingleLooseIsoEG28_FWD2p5", &L1_SingleLooseIsoEG28_FWD2p5),          std::make_pair("L1_SingleLooseIsoEG28er1p5", &L1_SingleLooseIsoEG28er1p5),          std::make_pair("L1_SingleLooseIsoEG28er2p1", &L1_SingleLooseIsoEG28er2p1),          std::make_pair("L1_SingleLooseIsoEG28er2p5", &L1_SingleLooseIsoEG28er2p5),          std::make_pair("L1_SingleLooseIsoEG30er1p5", &L1_SingleLooseIsoEG30er1p5),          std::make_pair("L1_SingleLooseIsoEG30er2p5", &L1_SingleLooseIsoEG30er2p5),          std::make_pair("L1_SingleMu0_BMTF", &L1_SingleMu0_BMTF),          std::make_pair("L1_SingleMu0_DQ", &L1_SingleMu0_DQ),          std::make_pair("L1_SingleMu0_EMTF", &L1_SingleMu0_EMTF),          std::make_pair("L1_SingleMu0_OMTF", &L1_SingleMu0_OMTF),          std::make_pair("L1_SingleMu10er1p5", &L1_SingleMu10er1p5),          std::make_pair("L1_SingleMu12_DQ_BMTF", &L1_SingleMu12_DQ_BMTF),          std::make_pair("L1_SingleMu12_DQ_EMTF", &L1_SingleMu12_DQ_EMTF),          std::make_pair("L1_SingleMu12_DQ_OMTF", &L1_SingleMu12_DQ_OMTF),          std::make_pair("L1_SingleMu12er1p5", &L1_SingleMu12er1p5),          std::make_pair("L1_SingleMu14er1p5", &L1_SingleMu14er1p5),          std::make_pair("L1_SingleMu15_DQ", &L1_SingleMu15_DQ),          std::make_pair("L1_SingleMu16er1p5", &L1_SingleMu16er1p5),          std::make_pair("L1_SingleMu18", &L1_SingleMu18),          std::make_pair("L1_SingleMu18er1p5", &L1_SingleMu18er1p5),          std::make_pair("L1_SingleMu20", &L1_SingleMu20),          std::make_pair("L1_SingleMu22", &L1_SingleMu22),          std::make_pair("L1_SingleMu22_BMTF", &L1_SingleMu22_BMTF),          std::make_pair("L1_SingleMu22_EMTF", &L1_SingleMu22_EMTF),          std::make_pair("L1_SingleMu22_OMTF", &L1_SingleMu22_OMTF),          std::make_pair("L1_SingleMu25", &L1_SingleMu25),          std::make_pair("L1_SingleMu3", &L1_SingleMu3),          std::make_pair("L1_SingleMu5", &L1_SingleMu5),          std::make_pair("L1_SingleMu6er1p5", &L1_SingleMu6er1p5),          std::make_pair("L1_SingleMu7", &L1_SingleMu7),          std::make_pair("L1_SingleMu7_DQ", &L1_SingleMu7_DQ),          std::make_pair("L1_SingleMu7er1p5", &L1_SingleMu7er1p5),          std::make_pair("L1_SingleMu8er1p5", &L1_SingleMu8er1p5),          std::make_pair("L1_SingleMu9er1p5", &L1_SingleMu9er1p5),          std::make_pair("L1_SingleMuCosmics", &L1_SingleMuCosmics),          std::make_pair("L1_SingleMuCosmics_BMTF", &L1_SingleMuCosmics_BMTF),          std::make_pair("L1_SingleMuCosmics_EMTF", &L1_SingleMuCosmics_EMTF),          std::make_pair("L1_SingleMuCosmics_OMTF", &L1_SingleMuCosmics_OMTF),          std::make_pair("L1_SingleMuOpen", &L1_SingleMuOpen),          std::make_pair("L1_SingleMuOpen_NotBptxOR", &L1_SingleMuOpen_NotBptxOR),          std::make_pair("L1_SingleMuOpen_er1p1_NotBptxOR_3BX", &L1_SingleMuOpen_er1p1_NotBptxOR_3BX),          std::make_pair("L1_SingleMuOpen_er1p4_NotBptxOR_3BX", &L1_SingleMuOpen_er1p4_NotBptxOR_3BX),          std::make_pair("L1_SingleTau120er2p1", &L1_SingleTau120er2p1),          std::make_pair("L1_SingleTau130er2p1", &L1_SingleTau130er2p1),          std::make_pair("L1_TOTEM_1", &L1_TOTEM_1),          std::make_pair("L1_TOTEM_2", &L1_TOTEM_2),          std::make_pair("L1_TOTEM_3", &L1_TOTEM_3),          std::make_pair("L1_TOTEM_4", &L1_TOTEM_4),          std::make_pair("L1_TripleEG16er2p5", &L1_TripleEG16er2p5),          std::make_pair("L1_TripleEG_16_12_8_er2p5", &L1_TripleEG_16_12_8_er2p5),          std::make_pair("L1_TripleEG_16_15_8_er2p5", &L1_TripleEG_16_15_8_er2p5),          std::make_pair("L1_TripleEG_18_17_8_er2p5", &L1_TripleEG_18_17_8_er2p5),          std::make_pair("L1_TripleEG_18_18_12_er2p5", &L1_TripleEG_18_18_12_er2p5),          std::make_pair("L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5", &L1_TripleJet_100_80_70_DoubleJet_80_70_er2p5),          std::make_pair("L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5", &L1_TripleJet_105_85_75_DoubleJet_85_75_er2p5),          std::make_pair("L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5", &L1_TripleJet_95_75_65_DoubleJet_75_65_er2p5),          std::make_pair("L1_TripleMu0", &L1_TripleMu0),          std::make_pair("L1_TripleMu0_OQ", &L1_TripleMu0_OQ),          std::make_pair("L1_TripleMu0_SQ", &L1_TripleMu0_SQ),          std::make_pair("L1_TripleMu3", &L1_TripleMu3),          std::make_pair("L1_TripleMu3_SQ", &L1_TripleMu3_SQ),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ", &L1_TripleMu_5SQ_3SQ_0OQ),          std::make_pair("L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9", &L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair("L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9", &L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9),          std::make_pair("L1_TripleMu_5_3_3", &L1_TripleMu_5_3_3),          std::make_pair("L1_TripleMu_5_3_3_SQ", &L1_TripleMu_5_3_3_SQ),          std::make_pair("L1_TripleMu_5_3p5_2p5", &L1_TripleMu_5_3p5_2p5),          std::make_pair("L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17", &L1_TripleMu_5_3p5_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17", &L1_TripleMu_5_3p5_2p5_OQ_DoubleMu_5_2p5_OQ_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17", &L1_TripleMu_5_4_2p5_DoubleMu_5_2p5_OS_Mass_5to17),          std::make_pair("L1_TripleMu_5_5_3", &L1_TripleMu_5_5_3),          std::make_pair("L1_UnpairedBunchBptxMinus", &L1_UnpairedBunchBptxMinus),          std::make_pair("L1_UnpairedBunchBptxPlus", &L1_UnpairedBunchBptxPlus),          std::make_pair("L1_ZeroBias", &L1_ZeroBias),          std::make_pair("L1_ZeroBias_copy", &L1_ZeroBias_copy)      };
 
   for (auto pair : name2func)
   {
