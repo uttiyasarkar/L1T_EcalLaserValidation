@@ -10,6 +10,7 @@ ARCH=slc6_amd64_gcc700
 CMSREL=CMSSW_10_2_1
 L1TTag=l1t-integration-v100.1
 GT=102X_dataRun2_Prompt_v4
+Prescale=Prescale_2018_v2_0_0_Col_2.0.txt
 nproc=`nproc`
 sqlite1=$1 ##ref
 sqlite2=$2
@@ -111,12 +112,12 @@ printf "Execution time to L1T checkout: %.6f seconds" $dur
 #                          Running the TP emulation                          #
 #----------------------------------------------------------------------------#
 echo running $GT
-cmsDriver.py l1Ntuple -s RAW2DIGI --era=Run2_2017  \
+cmsDriver.py l1Ntuple -s RAW2DIGI --era=Run2_2018  \
   --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
   --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWsimEcalTP \
   --conditions=$GT -n -1 --data --no_exec --no_output  \
   --filein=inputFiles \
-  --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloStage2Params_2017_v1_8_2_updateHFSF_v6MET \
+  --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParams_2018_v1_2 \
   --python_filename=l1Ntuple_${GT}.py
 
 Nsq=`echo $sqs | awk -F ' ' '{print NF}'`
@@ -155,7 +156,7 @@ cd L1TriggerDPG/L1Menu/macros
 cp $curdir/CompL1Rate.py  .
 cp $curdir/menulib.cc .
 cp $curdir/menulib.hh .
-cp $curdir/Prescale_2018_v1_0_0_Col_2.0.txt menu/
+cp $curdir/$Prescale menu/
 cp $curdir/Selected_Seed.txt menu/
 make -j ${nproc}
 make comparePlots
@@ -167,7 +168,7 @@ printf "Execution time to checkout and compile code: %.6f minutes" $dur
 #----------------------------------------------------------------------------#
 
 for sq in $sqs; do
-  ./testMenu2016 -m menu/Prescale_2018_v1_0_0_Col_2.0.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.list -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
+  ./testMenu2016 -m menu/$Prescale -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.list -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
   pids="$pids $!"
   ./testMenu2016 --doPlotRate -m menu/Selected_Seed.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.list -o L1Seed_${GT}_${sq}_emu >& L1Seed_${GT}_${sq}_emu.log &
   pids="$pids $!"
