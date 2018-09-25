@@ -70,6 +70,10 @@ filelist=('/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Ra
 '/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/F6CFB58A-5FAF-E811-AC9B-02163E00C918.root'
 '/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/FC8F3F23-5EAF-E811-8D65-02163E019F3A.root')
 
+if [ -z "$WORKSPACE" ]
+then
+  WORKSPACE=${curdir}
+fi
 #----------------------------------------------------------------------------#
 #                            Getting the reference                           #
 #----------------------------------------------------------------------------#
@@ -144,7 +148,9 @@ printf "Execution time to L1Ntuple production: %.6f minutes" $dur
 
 for sq in $sqs; do
   ls $PWD/L1Ntuple_${GT}_${sq}_*.root > L1Ntuple_${GT}_${sq}.list
+  cp $PWD/L1Ntuple_${GT}_${sq}_*.log ${WORKSPACE}/upload/${2}/
 done
+
 ################################
 
 
@@ -177,6 +183,8 @@ echo "Waiting for menu rate estimation to finish......"
 wait $pids
 dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
 printf "Execution time to L1Ntuple production: %.6f minutes" $dur
+cp L1Menu_${GT}_*_emu.log ${WORKSPACE}/upload/${2}/
+cp L1Seed_${GT}_*_emu.log ${WORKSPACE}/upload/${2}/
 
 #----------------------------------------------------------------------------#
 #                                Compare rate                                #
@@ -192,11 +200,6 @@ python CompL1Rate.py --globalTag $GT --sqlite1 $sqlite1 --sqlite2 $sqlite2  | te
 #----------------------------------------------------------------------------#
 #                                 Upload Ref                                 #
 #----------------------------------------------------------------------------#
-if [ -z "$WORKSPACE" ]
-then
-  WORKSPACE=${curdir}
-fi
-
 if [ -f ${WORKSPACE}/upload/$2 ]
 then
   echo "dir is already existing"
