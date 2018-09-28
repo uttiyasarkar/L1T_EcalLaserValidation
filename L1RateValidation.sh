@@ -70,9 +70,21 @@ filelist=('/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Ra
 '/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/F6CFB58A-5FAF-E811-AC9B-02163E00C918.root'
 '/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/FC8F3F23-5EAF-E811-8D65-02163E019F3A.root')
 
+#----------------------------------------------------------------------------#
+#                                 Upload Ref                                 #
+#----------------------------------------------------------------------------#
 if [ -z "$WORKSPACE" ]
 then
   WORKSPACE=${curdir}
+fi
+
+if [ -f ${WORKSPACE}/upload/$2 ]
+then
+  echo "dir is already existing"
+  touch ${WORKSPACE}/upload/$2/.jenkins-upload
+else
+  mkdir -p ${WORKSPACE}/upload/$2
+  touch ${WORKSPACE}/upload/$2/.jenkins-upload
 fi
 #----------------------------------------------------------------------------#
 #                            Getting the reference                           #
@@ -194,20 +206,14 @@ if $hasref; then
   tar -xzvf $curdir/L1TEcalValidation_${year}_${week}_${sqlite1}.tgz -C results/
 fi
 
+ls results/
+
 python CompL1Rate.py --globalTag $GT --sqlite1 $sqlite1 --sqlite2 $sqlite2  | tee ${sqlite2}.log
 ./comparePlots results/L1Seed*root
 
 #----------------------------------------------------------------------------#
 #                                 Upload Ref                                 #
 #----------------------------------------------------------------------------#
-if [ -f ${WORKSPACE}/upload/$2 ]
-then
-  echo "dir is already existing"
-  touch ${WORKSPACE}/upload/$2/.jenkins-upload
-else
-  mkdir -p ${WORKSPACE}/upload/$2
-  touch ${WORKSPACE}/upload/$2/.jenkins-upload
-fi
 
 #we need to make a tar gz of this one
 cp results/L1Menu_${GT}_${sqlite2}_emu.csv ${WORKSPACE}/upload/${2}/
