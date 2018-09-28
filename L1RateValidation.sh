@@ -92,13 +92,14 @@ fi
 #it may be gzipped infact ...
 ## prevent exit from failed wget
 set +e 
-wget --no-check-certificate https://cmssdt.cern.ch/SDT/public/EcalLaserValidation/L1T_EcalLaserValidation/${sqlite1}/L1TEcalValidation_${year}_${week}_${sqlite1}.tgz 
-if [ $? -ne 0 ]; then
-  sqs="$sqlite1 $sqlite2"
-else
-  sqs=$sqlite2
-  hasref=true
-fi
+#wget --no-check-certificate https://cmssdt.cern.ch/SDT/public/EcalLaserValidation/L1T_EcalLaserValidation/${sqlite1}/L1TEcalValidation_${year}_${week}_${sqlite1}.tgz 
+#if [ $? -ne 0 ]; then
+  #sqs="$sqlite1 $sqlite2"
+#else
+  #sqs=$sqlite2
+  #hasref=true
+#fi
+sqs="$sqlite1 $sqlite2"
 echo "Running ECal validtion with ", $sqs
 
 #----------------------------------------------------------------------------#
