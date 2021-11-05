@@ -7,10 +7,10 @@ echo " "
 ###############################
 starttime=$(date +%s.%N)
 ARCH=slc6_amd64_gcc700
-CMSREL=CMSSW_10_2_1
-L1TTag=l1t-integration-v100.1
-GT=102X_dataRun2_Prompt_v4
-Prescale=Prescale_2018_v2_0_0_Col_2.0.txt
+CMSREL=CMSSW_11_0_2
+L1TTag=l1t-integration-v104.5
+GT=112X_dataRun2_v9
+Prescale=Prescale_2018_v2_1_0_Col_2.0.txt
 nproc=`nproc`
 sqlite1=$1 ##ref
 sqlite2=$2
@@ -20,55 +20,148 @@ curdir=$PWD
 username=$USER
 pids=""
 hasref=false
-## ZeroBias Raw, Run Run322079, LS1-141
-filelist=('/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/0034CBFE-5DAF-E811-B9F8-FA163E94E4CF.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/04A298EC-5DAF-E811-AD1D-FA163E3ECB15.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/0CD3CD19-5EAF-E811-882E-FA163E61340F.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/127E4AAF-5EAF-E811-9586-02163E0176DA.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/1C0B6639-5EAF-E811-97C4-02163E0149E7.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/1CDDDE20-5EAF-E811-852B-FA163EF8848D.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/1EB214F1-5DAF-E811-91B0-FA163E9E0180.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/200DADC3-5EAF-E811-A0BD-02163E01305C.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/2A8B954E-A5AE-E811-87A6-FA163E28CFAA.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/2EB57257-5EAF-E811-8787-02163E01A048.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/3CC3A0EF-5DAF-E811-9059-A4BF012CBE43.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/3E452302-5EAF-E811-9C92-FA163E66FF50.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/4601D346-5FAF-E811-99ED-02163E01763A.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/48EAF8F5-5DAF-E811-B2BB-FA163EA222CE.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/4EF8D5D5-5FAF-E811-9333-FA163EF8E861.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/5401C114-5EAF-E811-8CE0-FA163E204525.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/563635A5-5EAF-E811-8EF3-02163E014A17.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/5E527B09-5EAF-E811-BEA6-FA163E841855.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/66E3EAF1-5DAF-E811-A9F5-FA163EE723F8.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/6E5C5312-5EAF-E811-B160-FA163E65DEE3.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/72718F53-A5AE-E811-ADDC-FA163EF225E6.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/72D370F7-5DAF-E811-B2D5-FA163EE59243.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/74E087F4-5DAF-E811-9CAD-FA163E9423DA.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/7696F3FD-5DAF-E811-8681-FA163EE10A6B.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/7A7E56FA-5DAF-E811-AFCF-FA163E841855.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/7C4826F0-5DAF-E811-82D3-A4BF0112DB74.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/8092B8F1-5DAF-E811-B018-FA163EF6AA30.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/88BFD5C6-5EAF-E811-9479-02163E00F6C4.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/9CAF7E05-5FAF-E811-B3D1-02163E014E4F.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/A6A551ED-5DAF-E811-80EC-FA163ED7F3BC.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/AEFF53ED-5DAF-E811-8C3F-FA163EB2605F.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/B2B03EA2-5EAF-E811-8E7F-FA163E55495F.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/B82DEEF2-5DAF-E811-ACF7-FA163E86F14F.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/BA313FF1-5DAF-E811-A018-FA163E08DA61.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/BC0FF162-5FAF-E811-9FB4-02163E00F7AA.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/C653D946-5EAF-E811-BD17-02163E010F0D.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/CE11AB0E-5EAF-E811-8C4C-FA163E0DF5F2.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/D47E06F5-5DAF-E811-B420-FA163E9666C9.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/D8BB2AF4-5DAF-E811-B69F-FA163E804F61.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/DAF8B51F-5EAF-E811-ABD1-FA163E23298B.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/DEA94AFE-5DAF-E811-A5D3-FA163E0512AE.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/DEA94AFE-5DAF-E811-A9E5-FA163E0512AE.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/E0C706F0-5DAF-E811-8811-A4BF01277567.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/E2245A15-5EAF-E811-B4E6-FA163E28EA0E.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/EC2E09FD-5DAF-E811-AF7F-FA163E816F3E.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/EC88081B-5FAF-E811-96CF-02163E017654.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/F6CFB58A-5FAF-E811-AC9B-02163E00C918.root'
-'/store/group/dpg_trigger/comm_trigger/L1Trigger/L1T_EcalValidation/Raw_Run322079_LS1_100/FC8F3F23-5EAF-E811-8D65-02163E019F3A.root')
+## ZeroBias Raw, Fill#6961 Run320065, LS1-225.6
+filelist=('/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/1262EAC6-FD8D-E811-86BB-FA163E7FEBB7.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/064/00000/9C3780D2-FC8D-E811-B965-FA163EDBE182.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/92EB0BE7-FD8D-E811-BDEC-FA163E17A15F.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/5E19E964-FE8D-E811-9D38-FA163E7D9AFE.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/26A77465-FE8D-E811-B971-FA163E4200C7.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/2A857540-FF8D-E811-82C4-FA163E6011FE.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/185AD6BE-FD8D-E811-97D1-FA163E6AF4C5.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/54F0E73C-008E-E811-AAFA-FA163EBDCF4F.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/181C7B47-FF8D-E811-B626-02163E017F0F.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/C05C3D5B-FF8D-E811-8230-FA163EAE1B00.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/5E96232B-FE8D-E811-BE39-FA163EB3D34C.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/08AE8301-018E-E811-8793-FA163E17F3DA.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/201B654B-008E-E811-9422-02163E019EEA.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/064/00000/84E11DE2-F98D-E811-8F1C-FA163EFC52FB.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/94AD4962-FE8D-E811-94D6-02163E016CF8.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/9E6A1951-008E-E811-B29C-02163E01A04A.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/AE22FCF5-008E-E811-90C4-FA163E2C1E9E.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/10A0979D-018E-E811-B4B2-FA163E17A15F.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/008F1E66-008E-E811-8DCF-02163E010C36.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/F2F1445E-008E-E811-9E90-FA163E780F6E.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/C2C70E61-018E-E811-A6A4-FA163E06D84E.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/D43AB599-018E-E811-B24C-FA163E792AF4.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/EE166C90-038E-E811-AFBE-FA163E17F3DA.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/D47736E9-028E-E811-9913-FA163E31E513.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/12575FE9-028E-E811-820D-FA163EDA17B6.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/98625626-018E-E811-A48D-FA163E41C7B0.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/2E6A0D44-028E-E811-864D-FA163EABC162.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/C0A28D6C-028E-E811-BEE5-FA163E96DBF1.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/4450E207-048E-E811-9AC8-FA163EF250BA.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/2082E028-048E-E811-B3EF-FA163E254513.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/3C9C9177-058E-E811-8EE4-02163E017EB4.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/DA4EE943-048E-E811-968A-FA163E3B3CC6.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/680BB85F-068E-E811-B16B-FA163E3F1FDB.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/F0BC4E2C-058E-E811-A0D5-FA163E071249.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/6609EED8-058E-E811-8544-02163E010CFD.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/CCC49B3A-078E-E811-99C5-FA163EDC261A.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/588B001F-078E-E811-A25A-FA163EBD447D.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/80F1A88A-058E-E811-8F98-FA163E74976F.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/7CFA3727-078E-E811-895B-FA163E5CA922.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/44789C42-058E-E811-A789-02163E017F18.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/7ED5543C-078E-E811-B0EC-FA163E5193D5.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/6243C8AF-058E-E811-B3EB-FA163E1DC155.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/90EF3657-068E-E811-A473-02163E014D9D.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/0680DDF3-028E-E811-88C2-FA163E82CF22.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/EA95C67E-088E-E811-A8F5-FA163ED3058C.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/B0196D1B-088E-E811-A262-02163E017EEE.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/5E14504F-078E-E811-991A-FA163E8103B1.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/ACBBA428-078E-E811-8C81-FA163E733247.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/E6BB9037-098E-E811-AD51-FA163E6AE23B.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/4861F63D-098E-E811-A5D9-FA163E5B6746.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/EEABAB4C-098E-E811-BE1E-FA163E836BB3.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/04948A79-098E-E811-BEBC-FA163EA375DF.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/7AA6E404-0A8E-E811-9DA4-FA163E229782.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/0CB1B807-008E-E811-A9BD-FA163E8D7B5B.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/8095D777-098E-E811-A174-02163E01A0F8.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/086D114D-098E-E811-B1CD-02163E01800D.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/5A4D471B-0A8E-E811-A2FD-FA163EA70EE0.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/E6FFF613-0A8E-E811-A397-FA163E3F1FDB.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/94663FB1-0A8E-E811-A930-FA163E3BB583.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/88949DC2-0A8E-E811-A6C4-02163E019F56.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/725D1C32-0A8E-E811-A043-FA163E95ED85.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/56B25898-0B8E-E811-B8DB-FA163EE92492.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/52648233-0C8E-E811-A941-FA163E6FB005.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/A8057F26-0C8E-E811-A9E7-FA163E5DEA72.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/E6AE3F7A-0B8E-E811-9484-FA163E6F4C2E.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/6A1E2050-0C8E-E811-B6A4-FA163E3B8B97.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/54878731-0C8E-E811-9A40-FA163EE7E719.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/7A97134C-0C8E-E811-93E5-02163E01A03B.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/620308A3-0D8E-E811-9BAC-FA163E8F29FC.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/981AFAFE-088E-E811-BB3E-FA163EB7F77E.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/347275C2-0D8E-E811-9403-FA163EE7A04A.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/96B563DD-048E-E811-AAD9-02163E00B8DC.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/9C1FEEBF-0E8E-E811-AFC1-FA163E34F1D6.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/B6BF70D8-0E8E-E811-93B5-FA163E838299.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/2242FED4-0E8E-E811-9768-FA163ED24770.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/DAB74636-0F8E-E811-AC7A-FA163E5DEA72.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/C4350BE2-0E8E-E811-A05A-FA163EDFA1F1.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/28FAD4C2-0E8E-E811-AF2C-FA163E302745.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/1A1C15C1-0C8E-E811-A947-FA163E9A9A14.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/6C821B0E-108E-E811-B740-FA163E6CDF89.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/D093DFF2-0F8E-E811-A281-A4BF0114D040.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/20AA7316-108E-E811-98E3-FA163EAD1C70.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/4CB3C62E-108E-E811-9E32-FA163EBEB6D5.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/A8258709-108E-E811-B127-FA163EC648D9.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/107FD16F-118E-E811-995D-FA163E0EA436.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/38A7786E-118E-E811-B464-FA163E2B0A7A.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/12650447-108E-E811-A2DA-FA163E59D09E.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/1E7FBDF0-0E8E-E811-9B11-FA163E4F1151.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/123C7481-118E-E811-86C2-FA163E91FAAB.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/0ED5F44E-108E-E811-A33F-FA163E8E607A.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/A0DBBC09-138E-E811-A18B-FA163E27069D.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/E0D865C8-0E8E-E811-AB26-FA163ECA1847.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/52184C6F-118E-E811-A105-FA163E2C1E9E.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/7CB98C02-138E-E811-94EE-FA163E5F0A23.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/CCB36A39-138E-E811-BA6B-FA163E2D4503.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/48E2731C-138E-E811-81B6-FA163E3DDA6C.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/8AB241D2-138E-E811-9B24-FA163E1ED478.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/5A37C121-138E-E811-B8E1-FA163E792AF4.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/7063828D-128E-E811-A3E6-FA163E48F925.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/7A1BC243-148E-E811-8269-FA163E1190B1.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/1438B617-138E-E811-B190-FA163E6B9C65.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/B236E5B3-148E-E811-8F73-FA163E617795.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/BE2FB18C-158E-E811-BBCE-FA163E68CA49.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/080FE4BE-138E-E811-9D97-FA163E5043E5.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/10E03B5B-148E-E811-AEC9-FA163E75B351.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/80BEDB66-158E-E811-9CCC-02163E012FC0.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/024/00000/9AAEC00D-208E-E811-9B32-FA163EC2D411.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/026/00000/2464F512-338E-E811-BFCE-FA163E3B5CA1.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/F0BE7017-328E-E811-BE23-FA163E1C56E0.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/883CDB14-328E-E811-952A-FA163EB2DCAF.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/E8F0B714-328E-E811-96E6-FA163E4F129E.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/02DD7A19-328E-E811-8DA8-FA163ED07727.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/C41C181B-328E-E811-B164-02163E019F93.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/FE5C701B-328E-E811-A5A2-FA163E166081.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/F6A37338-328E-E811-93B9-FA163E335778.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/306E8117-328E-E811-861A-FA163E8CA0FA.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/E8034637-328E-E811-A399-FA163EAD2729.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/68869D46-328E-E811-A6F7-FA163E9D3E3D.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/50ED1F1B-328E-E811-A9DC-FA163EECEDCF.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/C2B6E519-328E-E811-9F9B-FA163E4C86A6.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/6A7C0118-328E-E811-8EBB-FA163E0B9045.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/54B3F115-328E-E811-A361-FA163E0CEA25.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/0A7D2017-328E-E811-AA9F-FA163ED1A85C.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/1ADA9822-328E-E811-8392-02163E017FBB.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/301EFD13-328E-E811-BDA5-02163E01A00B.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/20532837-328E-E811-B8D7-FA163EEB9FC0.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/C4589615-328E-E811-8E4C-FA163EF7D5EC.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/6C521621-328E-E811-9F7E-02163E01A169.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/DAA6A434-328E-E811-9505-FA163E1455BD.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/9C55BE18-328E-E811-8ADE-FA163E2B77C9.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/FC7CC63D-328E-E811-8C30-FA163EED9E90.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/B2460E21-328E-E811-B80B-FA163E34934D.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/9A73591B-328E-E811-86A2-FA163E95D929.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/F098952C-328E-E811-B642-FA163EA563F7.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/AA0ECC25-328E-E811-A570-A4BF01277792.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/C285111A-328E-E811-9019-FA163E57B9C0.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/E0C33E18-328E-E811-ADB2-FA163EDAABC0.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/54178D20-328E-E811-A2CF-FA163E50B603.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/CE265C18-328E-E811-9240-FA163E6298DE.root',
+'/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/F6DB0C30-328E-E811-871E-FA163E17976B.root',
+)
 
 #----------------------------------------------------------------------------#
 #                                 Upload Ref                                 #
@@ -113,13 +206,15 @@ cd $CMSREL/src
 eval `scramv1 runtime -sh`
 git-cms-init
 git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
-git fetch cms-l1t-offline
+git fetch cms-l1t-offline l1t-integration-CMSSW_11_0_2
 git cms-merge-topic -u cms-l1t-offline:$L1TTag
 git cms-addpkg L1Trigger/L1TCommon
 git cms-addpkg L1Trigger/L1TMuon
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TMuon.git L1Trigger/L1TMuon/data
 git cms-addpkg L1Trigger/L1TCalorimeter
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
+
+git cms-checkdeps -A -a
 
 scram b -j ${nproc}
 
@@ -129,7 +224,7 @@ printf "Execution time to L1T checkout: %.6f seconds" $dur
 #                          Running the TP emulation                          #
 #----------------------------------------------------------------------------#
 echo running $GT
-cmsDriver.py l1Ntuple -s RAW2DIGI --era=Run2_2018  \
+cmsDriver.py l1NtupleAWEMU_2018 -s RAW2DIGI --era=Run2_2018  \
   --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
   --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWsimEcalTP \
   --conditions=$GT -n -1 --data --no_exec --no_output  \
@@ -170,15 +265,39 @@ done
 #----------------------------------------------------------------------------#
 #                            Check out L1Menu code                           #
 #----------------------------------------------------------------------------#
-git clone -b EcalVal_940 https://github.com/cms-l1-dpg/L1Menu.git L1TriggerDPG/L1Menu
-cd L1TriggerDPG/L1Menu/macros
+git clone -b Run2Legacy --depth 1 https://github.com/cms-l1-dpg/L1MenuTools.git
+cd L1MenuTools/rate-estimation/
 cp $curdir/CompL1Rate.py  .
 cp $curdir/menulib.cc .
 cp $curdir/menulib.hh .
 cp $curdir/$Prescale menu/
 cp $curdir/Selected_Seed.txt menu/
+cd menu2lib/
+eval `scram unsetenv -sh` 
+python3.6 -m venv utm-env
+source utm-env/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install git+https://github.com/cms-l1-globaltrigger/tm-python.git@0.7.5
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1Menu2018/master/official/XMLs/L1Menu_Collisions2018_v2_1_0.xml
+python menu2lib.py --menu L1Menu_Collisions2018_v2_1_0.xml
+mv menulib.cc menulib.hh ../
+deactivate 
+cd ..
+cmsenv
+mkdir -p objs/include
 make -j ${nproc}
-make comparePlots
+#make comparePlots
+
+#----------------------------------------------------------------------------#
+#                                 Lumi Table                                 #
+#----------------------------------------------------------------------------#
+export PATH=$HOME/.local/bin:/cvmfs/cms-bril.cern.ch/brilconda/bin:$PATH
+pip install --user --upgrade brilws
+cd menu
+source GetLumi_setup.sh
+./GetLumi.py
+cd ..
 
 dur=$(echo "($(date +%s.%N) - $starttime)/60" | bc)
 printf "Execution time to checkout and compile code: %.6f minutes" $dur
@@ -187,9 +306,9 @@ printf "Execution time to checkout and compile code: %.6f minutes" $dur
 #----------------------------------------------------------------------------#
 
 for sq in $sqs; do
-  ./testMenu2016 -m menu/$Prescale -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.list -o L1Menu_${GT}_${sq}_emu >& L1Menu_${GT}_${sq}_emu.log &
+  ./testMenu2016 -u menu/run_lumi.csv -m menu/$Prescale -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.list -o L1Menu_${GT}_${sq}_emu -b 2544 --doPlotRate --doPlotEff >& L1Menu_${GT}_${sq}_emu.log &
   pids="$pids $!"
-  ./testMenu2016 --doPlotRate -m menu/Selected_Seed.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.list -o L1Seed_${GT}_${sq}_emu >& L1Seed_${GT}_${sq}_emu.log &
+#  ./testMenu2016 --doPlotRate -m menu/Selected_Seed.txt -l ${CMSSW_BASE}/src/L1Ntuple_${GT}_${sq}.list -o L1Seed_${GT}_${sq}_emu >& L1Seed_${GT}_${sq}_emu.log &
   pids="$pids $!"
 done
 echo "Waiting for menu rate estimation to finish......"
