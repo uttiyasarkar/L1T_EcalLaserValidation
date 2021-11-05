@@ -6,7 +6,7 @@ echo " "
 
 ###############################
 starttime=$(date +%s.%N)
-ARCH=slc6_amd64_gcc700
+ARCH=slc7_amd64_gcc900
 CMSREL=CMSSW_11_0_2
 L1TTag=l1t-integration-v104.5
 GT=112X_dataRun2_v9
