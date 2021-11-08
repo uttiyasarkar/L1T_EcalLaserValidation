@@ -224,7 +224,7 @@ printf "Execution time to L1T checkout: %.6f seconds" $dur
 #                          Running the TP emulation                          #
 #----------------------------------------------------------------------------#
 echo running $GT
-cmsDriver.py l1NtupleAWEMU_2018 -s RAW2DIGI --era=Run2_2018  \
+cmsDriver.py l1NtupleRAWEMU_2018 -s RAW2DIGI --era=Run2_2018  \
   --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
   --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWsimEcalTP \
   --conditions=$GT -n -1 --data --no_exec --no_output  \
