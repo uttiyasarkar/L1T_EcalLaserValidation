@@ -282,9 +282,11 @@ wget https://raw.githubusercontent.com/cms-l1-dpg/L1Menu2018/master/official/XML
 python menu2lib.py --menu L1Menu_Collisions2018_v2_1_0.xml
 mv menulib.cc menulib.hh ../
 deactivate 
-cd ..
+cd ../../..
 cmsenv
+cd L1MenuTools/rate-estimation/
 mkdir -p objs/include
+mkdir -p results
 make -j ${nproc}
 #make comparePlots
 
