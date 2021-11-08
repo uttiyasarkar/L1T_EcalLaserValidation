@@ -228,9 +228,7 @@ cmsDriver.py l1NtupleRAWEMU_2018 -s RAW2DIGI --era=Run2_2018  \
   --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU \
   --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAWsimEcalTP \
   --conditions=$GT -n -1 --data --no_exec --no_output  \
-  --filein=inputFiles \
-  --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParams_2018_v1_2 \
-  --python_filename=l1Ntuple_${GT}.py
+  --filein=inputFiles 
 
 Nsq=`echo $sqs | awk -F ' ' '{print NF}'`
 Nfiles=${#filelist[@]}
